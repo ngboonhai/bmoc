@@ -11,3 +11,26 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+## Configure Proxies to Docker Enviroment
+sudo mkdir /etc/systemd/system/docker.service.d
+sudo vi /etc/systemd/system/docker.service.d/proxy.conf
+
+[Service]
+Environment="http_proxy=http://proxy-dmz.intel.com:911/"
+Environment="https_proxy=http://proxy-dmz.intel.com:912/"
+Environment="no_proxy=localhost,127.0.0.0/8,10.0.0.0/8,intel.com,.intel.com"
+ 
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+##  Set DNS to Docker Engine
+vi /etc/docker/daemon.json
+ 
+# Paste the below lines into daemon.json file and save it. 
+{
+    "dns" : [ "10.248.2.1","172.30.90.4","10.223.45.36" ]
+}
+ 
+# Restart docker services on Docker host
+$ sudo service docker restart
