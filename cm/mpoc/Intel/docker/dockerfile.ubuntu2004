@@ -7,8 +7,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install apt-utils and locales. Generate en_US.UTF-8 locale.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        apt-utils=2.0.2ubuntu0.1 \
-        locales=2.31-0ubuntu9.1 && \
+        apt-utils\
+        locales && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     locale-gen "en_US.UTF-8"
@@ -24,10 +24,17 @@ RUN apt-get update && \
 	sudo \
 	wget \
 	curl \
+	gnupg \
 	apt-utils && \
 	apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     locale-gen "en_US.UTF-8"
+
+# Install intel Certificate
+RUN curl http://certificates.intel.com/repository/certificates/IntelSHA2RootChain-Base64.zip > /tmp/IntelSHA2RootChain-Base64.zip && \
+    sudo unzip /tmp/IntelSHA2RootChain-Base64.zip -d /usr/local/share/ca-certificates && \
+	rm /tmp/IntelSHA2RootChain-Base64.zip && \
+	sudo update-ca-certificates
 
 # Configuration, run bash interpreter by default 
 CMD ["/bin/bash"]
