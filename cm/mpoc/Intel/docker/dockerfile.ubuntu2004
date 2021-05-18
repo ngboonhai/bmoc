@@ -40,5 +40,10 @@ RUN http_proxy='' && curl http://certificates.intel.com/repository/certificates/
 	rm /tmp/IntelSHA2RootChain-Base64.zip && \
 	update-ca-certificates
 
+# Add proxies to apt.conf
+RUN echo 'Acquire::http::Proxy "http://proxy-dmz.intel.com:911"' > /etc/apt/apt.conf && \
+    echo 'Acquire::https::Proxy "http://proxy-dmz.intel.com:912"' >> /etc/apt/apt.conf && \
+	echo 'Acquire::ftp::Proxy "http://proxy-dmz.intel.com:911"' >> /etc/apt/apt.conf
+
 # Configuration, run bash interpreter by default 
 CMD ["/bin/bash"]

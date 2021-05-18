@@ -19,3 +19,6 @@ RUN cd /tmp && \
 # Install OpenVino Dependencies
 RUN cd /opt/intel/openvino_2021/install_dependencies && \
     sudo -E ./install_openvino_dependencies.sh -y
+
+# Remove OpenVino APT Source List
+RUN rm /etc/apt/sources.list.d/intel-openvino-2021.list
