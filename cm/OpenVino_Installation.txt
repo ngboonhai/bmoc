@@ -48,8 +48,10 @@ mkdir -p mlperf
 git clone https://github.com/mlperf/inference_results_v0.7.git
 cd inference_results_v0.7/closed/intel/
 
-##  Download APT Key foe OpenVino packages
-https://apt.repos.intel.com/openvino/2021/GPG-PUB-KEY-INTEL-OPENVINO-2021?elq_cid=7184096_ts1621229192649&erpm_id=10327173_ts1621229192649&elq_cid=7184096_ts1621229195227&erpm_id=10327173_ts1621229195227
+##  Download APT Key for OpenVino packages
+cd /tmp 
+wget https://apt.repos.intel.com/openvino/2021/GPG-PUB-KEY-INTEL-OPENVINO-2021
+apt-key add /tmp/GPG-PUB-KEY-INTEL-OPENVINO-2021
 apt-key list
 echo "deb https://apt.repos.intel.com/openvino/2021 all main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2021.list
 apt update
