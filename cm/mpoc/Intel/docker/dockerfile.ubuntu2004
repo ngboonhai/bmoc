@@ -25,16 +25,20 @@ RUN apt-get update && \
 	wget \
 	curl \
 	gnupg \
+	unzip \
+	ca-certificates \
 	apt-utils && \
 	apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     locale-gen "en_US.UTF-8"
 
+SHELL ["/bin/bash","-o", "pipefail", "-c"]
+
 # Install intel Certificate
-RUN curl http://certificates.intel.com/repository/certificates/IntelSHA2RootChain-Base64.zip > /tmp/IntelSHA2RootChain-Base64.zip && \
-    sudo unzip /tmp/IntelSHA2RootChain-Base64.zip -d /usr/local/share/ca-certificates && \
+RUN http_proxy='' && curl http://certificates.intel.com/repository/certificates/IntelSHA2RootChain-Base64.zip > /tmp/IntelSHA2RootChain-Base64.zip && \
+	unzip /tmp/IntelSHA2RootChain-Base64.zip -d /usr/local/share/ca-certificates/ && \
 	rm /tmp/IntelSHA2RootChain-Base64.zip && \
-	sudo update-ca-certificates
+	update-ca-certificates
 
 # Configuration, run bash interpreter by default 
 CMD ["/bin/bash"]

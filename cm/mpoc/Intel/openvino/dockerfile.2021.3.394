@@ -5,14 +5,17 @@ ARG IMAGE
 # Build from the passed in image
 FROM $IMAGE
 
+ENV DEBIAN_FRONTEND=noninteractive
+ 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Download and Install OpenVino Toolkit
 RUN cd /tmp && \ 
     wget https://apt.repos.intel.com/openvino/2021/GPG-PUB-KEY-INTEL-OPENVINO-2021 && \
 	apt-key add /tmp/GPG-PUB-KEY-INTEL-OPENVINO-2021 && \
-	echo "deb https://apt.repos.intel.com/openvino/2021 all main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2021.list && \
+	echo "deb https://apt.repos.intel.com/openvino/2021 all main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2021.list && \
 	apt-get update && \
-	apt-get install intel-openvino-runtime-ubuntu20-2021.3.394
+	apt-get install -y intel-openvino-runtime-ubuntu20-2021.3.394
 
 # Install OpenVino Dependencies
-RUN cd /opt/intel/openvino/install_dependencies && \
-    sudo -E ./install_openvino_dependencies.sh
+RUN cd /opt/intel/openvino_2021/install_dependencies && \
+    sudo -E ./install_openvino_dependencies.sh -y
