@@ -2,4 +2,4 @@
 - goto docker directory and run docker build command line
 
 # To install OpenVino Toolkits on top of any of container images
-- goto OpenVino directory
+- goto openvino directory
