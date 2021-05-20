@@ -1,6 +1,6 @@
-## OS Version: Ubuntu 20.04
+# OS Version: Ubuntu 20.04
 
-## Build dependencies: 
+# Build dependencies: 
 ## GCC 7.5
 apt-get install -y gcc-7-base
 
@@ -62,6 +62,6 @@ apt-get install libglib2.0-dev python-pip python3-pip
 pip2 install absl-py numpy
 pip3 install absl-py numpy
 
-# Download OpenVino Optimizer models to /opt/intel/openvino_<version>/ directory
+## Download OpenVino Optimizer models to /opt/intel/openvino_<version>/ directory
 git clone https://github.com/openvinotoolkit/openvino
 cp -r openvino/model-optimzer /opt/intel/openvino_<version>
