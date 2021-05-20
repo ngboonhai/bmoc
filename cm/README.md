@@ -40,48 +40,43 @@ sudo service docker restart
 apt-get install -y gcc-7-base
 
 ## CMake 3.17.2
-apt-get install build-essential libssl-dev
-cd /tmp && wget https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2.tar.gz
-tar -zxvf cmake-3.20.0.tar.gz && cd cmake-3.17.2
+apt-get install build-essential libssl-dev \
+cd /tmp && wget https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2.tar.gz \
+tar -zxvf cmake-3.20.0.tar.gz && cd cmake-3.17.2 \
 ./bootstrap && make && make install && cmake --version
 
 ## Python 3.6
-add-apt-repository ppa:deadsnakes/ppa
-apt-get update
+add-apt-repository ppa:deadsnakes/ppa \
+apt-get update \
 apt-get install python3.6 -y
 
 ## OpenVino Dependencies
-apt install -y g++ clang make ninja-build wget unzip git
-cd /tmp 
-git clone https://github.com/opencv/opencv.git
-git -C opencv checkout master
-cd opencv
-mkdir -p build && cd build
-cmake ../../opencv
-make -j4
-ls bin
-ls lib
-ls OpenCVConfig*.cmake
-ls OpenCVModules.cmake
-make install
+apt install -y g++ clang make ninja-build wget unzip git \
+cd /tmp \
+git clone https://github.com/opencv/opencv.git \
+git -C opencv checkout master \
+cd opencv \
+mkdir -p build && cd build \
+cmake ../../opencv \
+make -j4 \
+make install \
 
 
-git clone https://github.com/gflags/gflags.git
-cd gflags
-mkdir build && cd build
-cmake ..
-make
+git clone https://github.com/gflags/gflags.git \
+cd gflags \
+mkdir build && cd build \
+cmake .. \
+make \
 
-cd /tmp 
-wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
-tar -xzvf boost_1_72_0.tar.gz
-cd boost_1_72_0
+cd /tmp \
+wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz \
+tar -xzvf boost_1_72_0.tar.gz \
+cd boost_1_72_0 \
 ./bootstrap --with-libraries=filesystem && ./b2 --with-filesystem
 
-cd /
-mkdir -p mlperf
-git clone https://github.com/mlperf/inference_results_v0.7.git
-cd inference_results_v0.7/closed/intel/
+mkdir -p mlperf \
+git clone https://github.com/mlperf/inference_results_v0.7.git \
+cd inference_results_v0.7/closed/intel/ \
 
 ##  Download APT Key for OpenVino packages
 cd /tmp 
