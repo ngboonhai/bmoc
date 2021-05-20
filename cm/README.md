@@ -79,19 +79,18 @@ git clone https://github.com/mlperf/inference_results_v0.7.git \
 cd inference_results_v0.7/closed/intel/ \
 
 ##  Download APT Key for OpenVino packages
-cd /tmp 
-wget https://apt.repos.intel.com/openvino/2021/GPG-PUB-KEY-INTEL-OPENVINO-2021
-apt-key add /tmp/GPG-PUB-KEY-INTEL-OPENVINO-2021
-apt-key list
-echo "deb https://apt.repos.intel.com/openvino/2021 all main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2021.list
-apt update
+cd /tmp \
+wget https://apt.repos.intel.com/openvino/2021/GPG-PUB-KEY-INTEL-OPENVINO-2021 \
+apt-key add /tmp/GPG-PUB-KEY-INTEL-OPENVINO-2021 \
+apt-key list \
+echo "deb https://apt.repos.intel.com/openvino/2021 all main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2021.list \
+apt update \
 sudo apt install intel-openvino-runtime-ubuntu20-2021.1.105
 
 ## Building the LoadGen
-apt-get install libglib2.0-dev python-pip python3-pip
+apt-get install libglib2.0-dev python-pip python3-pip \
 pip2 install absl-py numpy
-pip3 install absl-py numpy
 
 ## Download OpenVino Optimizer models to /opt/intel/openvino_<version>/ directory
-git clone https://github.com/openvinotoolkit/openvino
+git clone https://github.com/openvinotoolkit/openvino \
 cp -r openvino/model-optimzer /opt/intel/openvino_<version>
