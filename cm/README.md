@@ -89,7 +89,7 @@ sudo apt install intel-openvino-runtime-ubuntu20-2021.1.105
 
 ## Building the LoadGen
 apt-get install libglib2.0-dev python-pip python3-pip \
-pip2 install absl-py numpy
+pip install absl-py numpy
 
 ## Download OpenVino Optimizer models to /opt/intel/openvino_<version>/ directory
 git clone https://github.com/openvinotoolkit/openvino \
