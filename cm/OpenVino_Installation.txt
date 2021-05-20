@@ -62,5 +62,6 @@ apt-get install libglib2.0-dev python-pip python3-pip
 pip2 install absl-py numpy
 pip3 install absl-py numpy
 
-
-https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
+# Download OpenVino Optimizer models to /opt/intel/openvino_<version>/ directory
+git clone https://github.com/openvinotoolkit/openvino
+cp -r openvino/model-optimzer /opt/intel/openvino_<version>
