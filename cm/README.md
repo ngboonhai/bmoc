@@ -28,8 +28,8 @@ sudo systemctl restart docker
 ##  Set DNS to Docker Engine 
 sudo touch /etc/docker/daemon.json
 ### Paste the below lines into daemon.json file and save it. 
-ehco '{' >> /etc/docker/daemon.json
-echo '    "dns" : [ "10.248.2.1","10.223.45.36" ]' >> /etc/docker/daemon.json
+ehco '{' >> /etc/docker/daemon.json \
+echo '    "dns" : [ "10.248.2.1","10.223.45.36" ]' >> /etc/docker/daemon.json \
 echo '}' >> /etc/docker/daemon.json
 
 
