@@ -34,12 +34,6 @@ RUN apt-get update && \
 
 SHELL ["/bin/bash","-o", "pipefail", "-c"]
 
-# Install intel Certificate
-RUN http_proxy='' && curl http://certificates.intel.com/repository/certificates/IntelSHA2RootChain-Base64.zip > /tmp/IntelSHA2RootChain-Base64.zip && \
-	unzip /tmp/IntelSHA2RootChain-Base64.zip -d /usr/local/share/ca-certificates/ && \
-	rm /tmp/IntelSHA2RootChain-Base64.zip && \
-	update-ca-certificates
-
 # Add proxies to apt.conf
 RUN echo 'Acquire::http::Proxy "http://proxy-dmz.intel.com:911"' > /etc/apt/apt.conf && \
     echo 'Acquire::https::Proxy "http://proxy-dmz.intel.com:912"' >> /etc/apt/apt.conf && \
