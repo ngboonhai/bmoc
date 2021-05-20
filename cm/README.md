@@ -14,7 +14,7 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-## Configure Proxies to Docker Enviroment
+## Configure Proxies to Docker Enviroment on system
 sudo mkdir /etc/systemd/system/docker.service.d
 sudo touch /etc/systemd/system/docker.service.d/proxy.conf
 
@@ -26,12 +26,11 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 ##  Set DNS to Docker Engine 
+- run below command below command lines to create daemon.json file for DNS configured
 sudo touch /etc/docker/daemon.json
-### Paste the below lines into daemon.json file and save it. 
 ehco '{' >> /etc/docker/daemon.json \
 echo '    "dns" : [ "10.248.2.1","10.223.45.36" ]' >> /etc/docker/daemon.json \
 echo '}' >> /etc/docker/daemon.json
-
 
 ## Restart docker services on Docker host
 sudo service docker restart
