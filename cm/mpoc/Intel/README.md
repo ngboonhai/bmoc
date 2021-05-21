@@ -7,7 +7,7 @@
 - goto docker directory and run docker build command line
 
 ## To use Anaconda python virtual environment for benchmarking
-- Please install Anaconda Tools to system with script: bash -x Anaconda_install.sh
+- Please install Anaconda Tools to system with script: bash Anaconda_install.sh
 - Re-source session envrionment to enable Conda utility: source /etc/environment.
 
 ## To install OpenVino Toolkits on top of any of container images
