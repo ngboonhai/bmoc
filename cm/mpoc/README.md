@@ -1,9 +1,9 @@
 # Importants Notes need to read before you start you MLperf Benchmarking activiy
 
-# Below is dataset use for Vision Models benchmarking.
-## Resnet50
-## 3D-Unet
-## SSD-Resnet34
+## Below is dataset use for Vision Models benchmarking.
+### Resnet50
+### 3D-Unet
+### SSD-Resnet34
 ## How to Access to image-net org portal
 - Request to register/sign-up an account from the portal - https://image-net.org/signup.php
 - "Organization" name must more than 6 characters.
