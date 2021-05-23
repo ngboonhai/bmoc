@@ -1,5 +1,5 @@
-# Importants Notes need to read before you start you MLperf Benchmarking activities
-
+# **Importants Notes** 
+# Read before start MLperf Benchmarking activities
 
 ## Below is dataset use for Vision Models benchmarking.
 ### Resnet50
