@@ -5,5 +5,7 @@
 - pip3 install networkx tensorflow requests numpy
   
 ## Download OpenVino Model Optimizer to /opt/intel/openvino_<version>/ directory
-git clone https://github.com/openvinotoolkit/openvino.git \
-cp -r openvino/model-optimzer /opt/intel/openvino_\<version>
+- git clone https://github.com/openvinotoolkit/openvino.git \
+- cp -r openvino/model-optimzer /opt/intel/openvino_\<version>
+- Install other re-requisites components needed to OpenVino Model Optimizer utility, run <model-optimizer-repo>/install_prerequisites/install_prerequisites.sh
+  
