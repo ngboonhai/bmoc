@@ -8,6 +8,7 @@
 
 ## To use Anaconda python virtual environment for benchmarking
 - Please install Anaconda Tools to system with script: bash Anaconda_install.sh
+- Anaconda_install.sh file can get from <this-repo>/cm/mpoc/Intel directory
 - Re-source session envrionment to enable Conda utility: source /etc/environment.
 
 ## To install OpenVino Toolkits on top of any of container images
