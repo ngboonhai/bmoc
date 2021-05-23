@@ -12,4 +12,4 @@
 - Re-source session envrionment to enable Conda utility: source /etc/environment.
 
 ## To install OpenVino Toolkits on top of any of container images
-- goto openvino directory; <this-repo>/cm/mpoc/Intel/openvino
+- goto openvino directory: <this-repo>/cm/mpoc/Intel/openvino
