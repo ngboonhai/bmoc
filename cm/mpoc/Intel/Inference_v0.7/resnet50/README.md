@@ -55,5 +55,5 @@ git submodule sync && git submodule update --init --recursive \
 cd loadgen && CFLAGS="-std=c++14" python setup.py install
 
 ## Download OpenVino Model Optimizer to /opt/intel/openvino_<version>/ directory
-git clone https://github.com/openvinotoolkit/openvino \
+git clone https://github.com/openvinotoolkit/openvino.git \
 cp -r openvino/model-optimzer /opt/intel/openvino_'<version>'
