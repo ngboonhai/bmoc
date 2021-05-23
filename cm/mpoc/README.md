@@ -1,9 +1,8 @@
 # **Importants Notes** 
-# Read before start MLperf Benchmarking activities
+### Read before start MLperf Benchmarking activities
 
-## Below is dataset use for Vision Models benchmarking.
+## Dataset use for Vision Models benchmarking.
 ### Resnet50
-### 3D-Unet
 ### SSD-Resnet34
 
 ## How to Access to image-net.org portal
