@@ -11,4 +11,5 @@
 - Click on below URL and request submission is needed. You will be able to download the dataset once request approved.
 
 ### Dataset link
-- https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
+- https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar (< 50K images files)
+- Or use dataset images from dataset directory.
