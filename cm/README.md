@@ -11,7 +11,7 @@
 
 ## Configure Proxies to Docker Enviroment on system
 sudo mkdir /etc/systemd/system/docker.service.d \
-sudo vi /etc/systemd/system/docker.service.d/proxy.conf
+sudo touch /etc/systemd/system/docker.service.d/proxy.conf
 
 echo "[Service]" >> /etc/systemd/system/docker.service.d/proxy.conf \
 echo 'Environment="http_proxy=http://proxy-dmz.intel.com:911/"' >> /etc/systemd/system/docker.service.d/proxy.conf \
