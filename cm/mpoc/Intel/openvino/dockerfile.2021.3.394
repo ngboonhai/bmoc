@@ -28,5 +28,4 @@ RUN rm /etc/apt/sources.list.d/intel-openvino-2021.list
 RUN cd /opt/intel/openvino_2021 && \
     git clone https://github.com/openvinotoolkit/openvino.git &&\
     cp -r openvino/model-optimizer deployment_tools/ && \
-    ./deployment_tools/model-optimzer/install_prerequisites/install_prerequisites.sh
-    
+    ./deployment_tools/model-optimizer/install_prerequisites/install_prerequisites.sh
