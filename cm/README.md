@@ -11,21 +11,21 @@
 
 ## Configure Proxies to Docker Enviroment on system
 sudo mkdir /etc/systemd/system/docker.service.d \
-sudo touch /etc/systemd/system/docker.service.d/proxy.conf
+sudo vi /etc/systemd/system/docker.service.d/proxy.conf
 
-echo "[Service] \n" >> /etc/systemd/system/docker.service.d/proxy.conf \
-echo 'Environment="http_proxy=http://proxy-dmz.intel.com:911/\n"' >> /etc/systemd/system/docker.service.d/proxy.conf \
-echo 'Environment="https_proxy=http://proxy-dmz.intel.com:912/\n"' >> /etc/systemd/system/docker.service.d/proxy.conf 
+[Service] \
+Environment="http_proxy=http://proxy-dmz.intel.com:911/ \
+Environment="https_proxy=http://proxy-dmz.intel.com:912/
  
 sudo systemctl daemon-reload \
 sudo systemctl restart docker
 
 ##  Set DNS to Docker Engine 
 - run below command below command lines to create daemon.json file for DNS configured
-  - sudo touch /etc/docker/daemon.json
-  - ehco '{' >> /etc/docker/daemon.json
-  - echo '    "dns" : [ "10.248.2.1","10.223.45.36" ]' >> /etc/docker/daemon.json
-  - echo '}' >> /etc/docker/daemon.json
+  - sudo vi /etc/docker/daemon.json
+  {
+      "dns" : [ "10.248.2.1","10.223.45.36" ]'\
+  }
 
 ## Restart docker services on Docker host
 sudo service docker restart
