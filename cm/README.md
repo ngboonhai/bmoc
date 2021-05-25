@@ -13,9 +13,9 @@
 sudo mkdir /etc/systemd/system/docker.service.d \
 sudo touch /etc/systemd/system/docker.service.d/proxy.conf
 
-echo "[Service]" >> /etc/systemd/system/docker.service.d/proxy.conf \
-echo 'Environment="http_proxy=http://proxy-dmz.intel.com:911/"' >> /etc/systemd/system/docker.service.d/proxy.conf \
-echo 'Environment="https_proxy=http://proxy-dmz.intel.com:912/"' >> /etc/systemd/system/docker.service.d/proxy.conf 
+echo "[Service] \n" >> /etc/systemd/system/docker.service.d/proxy.conf \
+echo 'Environment="http_proxy=http://proxy-dmz.intel.com:911/\n"' >> /etc/systemd/system/docker.service.d/proxy.conf \
+echo 'Environment="https_proxy=http://proxy-dmz.intel.com:912/\n"' >> /etc/systemd/system/docker.service.d/proxy.conf 
  
 sudo systemctl daemon-reload \
 sudo systemctl restart docker
