@@ -23,7 +23,7 @@ sudo systemctl restart docker
 ##  Set DNS to Docker Engine 
 - run below command below command lines to create daemon.json file for DNS configured
   - sudo vi /etc/docker/daemon.json
-  {
+  { \
       "dns" : [ "10.248.2.1","10.223.45.36" ]'\
   }
 
