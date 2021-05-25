@@ -6,6 +6,6 @@
   
 ## Download OpenVino Model Optimizer to /opt/intel/openvino_<version>/ directory
 - git clone https://github.com/openvinotoolkit/openvino.git \
-- cp -r openvino/model-optimzer /opt/intel/openvino_\<version>
+- cp -r openvino/model-optimzer /opt/intel/openvino_\<version>/deplotment_tools/
 - Install other re-requisites components needed to OpenVino Model Optimizer utility, run <model-optimizer-repo>/install_prerequisites/install_prerequisites.sh
   
