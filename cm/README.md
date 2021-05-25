@@ -26,6 +26,18 @@ sudo systemctl restart docker
   { \
       "dns" : [ "10.248.2.1","10.223.45.36" ] \
   }
+## Set docker_client configuration
+- mldir -p ~/.docker
+- vi ~/.docker/config.json
+{ \
+        "proxies": { \
+                "default": { \
+                        "httpProxy": "http://proxy-dmz.intel.com:911", \
+                        "httpsProxy": "http://proxy-dmz.intel.com:912", \
+                        "noProxy": "127.0.0.1,localhost,intel.com,.intel.com" \
+                } \
+        } \
+} \
 
 ## Restart docker services on Docker host
 sudo service docker restart
