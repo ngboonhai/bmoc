@@ -4,7 +4,7 @@
 ## Dataset use for Vision Models benchmarking.
 - Resnet50
 - SSD-Resnet34
-:info: Please refers to Intel Wiki Page 
+ℹ️ Please refers to Intel Wiki Page 
 
 ## How to Access to image-net.org portal
 - Request to register/sign-up an account from the portal - https://image-net.org/signup.php
