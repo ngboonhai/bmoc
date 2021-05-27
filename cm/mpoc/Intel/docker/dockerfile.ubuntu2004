@@ -40,5 +40,10 @@ RUN echo 'Acquire::http::Proxy "http://proxy-dmz.intel.com:911";' > /etc/apt/apt
     echo 'Acquire::https::Proxy "http://proxy-dmz.intel.com:912";' >> /etc/apt/apt.conf && \
 	echo 'Acquire::ftp::Proxy "http://proxy-dmz.intel.com:911";' >> /etc/apt/apt.conf
 
+# The entrypoint.sh script will switch to a non-privileged user for any execution input.
+# It is also to handle the username, uid and gid to solve permission issue whenever there is a volume mount into container.
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
+
 # Configuration, run bash interpreter by default 
 CMD ["/bin/bash"]
