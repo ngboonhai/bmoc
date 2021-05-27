@@ -29,7 +29,10 @@ RUN apt-get update && \
 	unzip \
 	ca-certificates \
 	python2 \
-        python-setuptools=44.0.0-2 \
+        python-setuptools \
+	python3 \
+        python3-setuptools \
+        python3-pip && \
 	apt-utils && \
 	apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
