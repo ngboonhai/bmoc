@@ -1,0 +1,7 @@
+Model,Scenario,Precision,Device,Batch Size,Instances,Performance,Results Validity,TEST START,TEST END
+ssd-resnet34,Single Stream,int8,CPU,1,1,296.71 ms,VALID,17:23:24.495,17:28:14.537
+ssd-resnet34,Single Stream,int8,CPU,1,1,303.46 ms,VALID,17:29:03.293,17:34:01.507
+resnet50,Single Stream,int8,CPU,1,1,6.8 ms,VALID,17:36:42.795,17:37:42.803
+resnet50,Single Stream,int8,CPU,1,1,6.8 ms,VALID,17:38:17.582,17:39:17.594
+resnet50,Offline,int8,CPU,1,8,176.655 fps,VALID,17:39:57.647,17:42:16.765
+resnet50,Offline,int8,CPU,1,8,176.034 fps,VALID,17:42:56.911,17:45:16.520
