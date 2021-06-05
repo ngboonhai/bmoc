@@ -9,6 +9,8 @@ source ~/.bashrc
 ## Dependencies only for Jetson system
 bash $MLPERF_SCRATCH_PATH/script/install_xavier_dependencies.sh
 
+## Build TensorRT and MLPerf Plugins
+make build 
 
 ## Download dataset from Image-net Org.
 mkdir -p $MLPERF_SCRATCH_PATH/data/imagenet
