@@ -26,8 +26,8 @@ bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_data.sh
 bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_model.sh
 
 
-## Calibrate Models format and Images
-python3 $INFERENCE_NVIDIA_PATH/code/resnet50/preprocess_data.py --val_only
+## Validate and Calibrate Models format and Images
+python3 $INFERENCE_NVIDIA_PATH/code/resnet50/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
