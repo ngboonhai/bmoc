@@ -10,7 +10,10 @@ source ~/.bashrc
 bash $MLPERF_SCRATCH_PATH/script/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
-make build 
+make clone_loadgen
+make build_plugins
+make build_loadgen
+make build_harness
 
 ## Download dataset from Image-net Org.
 mkdir -p $MLPERF_SCRATCH_PATH/data/imagenet
