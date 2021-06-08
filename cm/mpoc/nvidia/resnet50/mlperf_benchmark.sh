@@ -21,8 +21,8 @@ make build_harness
 
 ## Download dataset from Image-net Org.
 mkdir -p $MLPERF_SCRATCH_PATH/data/imagenet
-wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar -o /tmp/ILSVRC2012_img_val.tar
-tar xf /tmp/ILSVRC2012_img_val.tar -C $MLPERF_SCRATCH_PATH/data/imagenet
+wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
+tar xf ILSVRC2012_img_val.tar -C $MLPERF_SCRATCH_PATH/data/imagenet
 
 
 ## Perform dataset validation after downloaded.
