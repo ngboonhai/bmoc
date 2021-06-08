@@ -29,7 +29,7 @@ bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/preprocess_data.py
+python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
