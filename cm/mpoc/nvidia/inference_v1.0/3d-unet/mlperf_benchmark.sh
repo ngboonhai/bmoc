@@ -38,7 +38,7 @@ bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
-python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/preprocess_data.py
+python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
