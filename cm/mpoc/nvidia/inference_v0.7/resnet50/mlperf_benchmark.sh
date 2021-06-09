@@ -1,8 +1,8 @@
 #set -eo pipefail
 set -x
 
-git clone https://github.com/mlcommons/inference_results_v1.0.git ~/inference_results_v7.0
-INFERENCE_NVIDIA_PATH=~/inference_results_v1.0/closed/NVIDIA
+git clone https://github.com/mlcommons/inference_results_v0.7.git ~/inference_results_v7.0
+INFERENCE_NVIDIA_PATH=~/inference_results_v0.7/closed/NVIDIA
 MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 mkdir -p $MLPERF_SCRATCH_PATH
 echo "export INFERENCE_NVIDIA_PATH=$INFERENCE_NVIDIA_PATH" >> ~/.bashrc
