@@ -312,7 +312,7 @@ ifeq ($(ARCH), x86_64)
 		&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/DLRMBottomMLPPlugin \
 		&& make -j
 endif
-  #mkdir -p build/plugins/NMSOptPlugin
+	mkdir -p build/plugins/NMSOptPlugin
 	cd build/plugins/NMSOptPlugin \
 		&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/NMSOptPlugin \
 		&& make -j
