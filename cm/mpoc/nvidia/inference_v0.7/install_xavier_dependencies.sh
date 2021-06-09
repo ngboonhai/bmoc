@@ -68,7 +68,7 @@ export LIBRARY_PATH=$CUDA_ROOT/lib64:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$CUDA_ROOT/lib64:$LD_LIBRARY_PATH
 sudo python3 -m pip install -U --index-url https://pypi.org/simple --no-cache-dir setuptools==41.0.1 \
  && sudo python3 -m pip install Cython==0.29.10 \
- && sudo python3 -m pip install -U numpy==1.16.4 \
+ && sudo python3 -m pip install numpy==1.16.4 \
     matplotlib==3.0.2 \
     grpcio==1.16.1 \
     absl-py==0.7.1 \
