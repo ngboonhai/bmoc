@@ -1,6 +1,7 @@
 #set -eo pipefail
 set -x
 
+## Clone official MLPerf inference Git repo and install the dependencies which prepare from each Org.
 git clone https://github.com/mlcommons/inference_results_v0.7.git ~/inference_results_v0.7
 INFERENCE_NVIDIA_PATH=~/inference_results_v0.7/closed/NVIDIA
 MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
@@ -9,6 +10,11 @@ echo "export INFERENCE_NVIDIA_PATH=$INFERENCE_NVIDIA_PATH" >> ~/.bashrc
 echo "export MLPERF_SCRATCH_PATH=$MLPERF_SCRATCH_PATH" >> ~/.bashrc
 source ~/.bashrc
 export | grep $INFERENCE_NVIDIA_PATH
+
+## Update some files which errors detect from Origical files from Repo
+https://github.com/ngboonhai/bmoc 
+cat bmoc/cm/mpoc/nvidia/inference_v0.7/resnet50/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
+cat bmoc/cm/mpoc/nvidia/inference_v0.7/resnet50/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
 
 ## Dependencies only for Jetson system
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
