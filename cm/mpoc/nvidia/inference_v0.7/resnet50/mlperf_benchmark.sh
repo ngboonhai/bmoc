@@ -36,6 +36,7 @@ bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_data.sh
 
 
 ## Download Onnx Model from Zenodo Org.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_model.sh
 
 
@@ -44,6 +45,8 @@ cp $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt $INFERENCE_NVIDIA_PATH/
 shuf -n 1000 $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map_ori.txt > $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt
 cat $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt | wc -l
 python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py
+python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py --cal_only
+
 
 
 ## Execute MLPerf Benchmark
