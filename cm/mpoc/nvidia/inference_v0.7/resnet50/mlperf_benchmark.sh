@@ -12,7 +12,7 @@ source ~/.bashrc
 export | grep $INFERENCE_NVIDIA_PATH
 
 ## Update some files which errors detect from Origical files from Repo
-https://github.com/ngboonhai/bmoc 
+https://github.com/ngboonhai/bmoc.git
 cat bmoc/cm/mpoc/nvidia/inference_v0.7/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 cat bmoc/cm/mpoc/nvidia/inference_v0.7/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
 
