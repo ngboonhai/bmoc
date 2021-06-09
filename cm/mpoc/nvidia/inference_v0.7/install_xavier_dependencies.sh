@@ -85,7 +85,7 @@ sudo python3 -m pip install -U --index-url https://pypi.org/simple --no-cache-di
     pytest==5.1.2 \
     pillow==6.0.0 \
     scikit-learn==0.23.0 \
- && sudo python3 -m pip install protobuf==3.6.1 \
+    protobuf==3.6.1 \
     keras-preprocessing==1.0.5 \
     tensorflow-estimator==1.13.0 \
     tensorboard==1.13.0 \
