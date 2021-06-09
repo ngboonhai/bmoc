@@ -10,13 +10,20 @@ echo "export MLPERF_SCRATCH_PATH=$MLPERF_SCRATCH_PATH" >> ~/.bashrc
 source ~/.bashrc
 export | grep $INFERENCE_NVIDIA_PATH
 
+
+## Update some files which errors detect from Origical files from Repo
+https://github.com/ngboonhai/bmoc 
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
+
+
 ## Dependencies only for Jetson system
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
 make clone_loadgen
-make build_plugins
+#make build_plugins
 make build_loadgen
 make build_harness
 
