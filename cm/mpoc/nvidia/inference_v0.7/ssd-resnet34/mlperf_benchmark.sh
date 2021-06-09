@@ -36,7 +36,6 @@ bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py
 python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py --cal_only
 
 
