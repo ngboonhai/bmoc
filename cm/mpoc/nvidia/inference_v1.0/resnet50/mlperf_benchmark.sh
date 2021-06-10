@@ -16,7 +16,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/Makefile > $INFERENCE_NVIDIA_PATH/Makefil
 cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/code/harness/lwis/include/lwis_buffers.h
 
 ## Dependencies only for Jetson system
-sudo **apt-get update
+sudo apt-get update
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
@@ -51,7 +51,7 @@ python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
-# make run RUN_ARGS="--benchmarks=resnet50 --scenarios=SingleStream --test_mode=PerformanceOnly"
+make run RUN_ARGS="--benchmarks=resnet50 --scenarios=SingleStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=resnet50 --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=resnet50 --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=resnet50 --scenarios=MultiStream --test_mode=AccuracyOnly"
