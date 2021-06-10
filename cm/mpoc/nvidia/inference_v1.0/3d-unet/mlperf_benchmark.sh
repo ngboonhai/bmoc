@@ -38,14 +38,17 @@ unzip MICCAI_BraTS_2019_Data_Training.zip -d $MLPERF_SCRATCH_PATH/data/BraTS
 
 
 ## Perform dataset validation after downloaded.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_data.sh
 
 
 ## Download Onnx Model from Zenodo Org.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
+cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
 
