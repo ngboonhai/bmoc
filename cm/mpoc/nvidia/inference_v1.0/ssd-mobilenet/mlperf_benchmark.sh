@@ -17,7 +17,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/c
 
 
 ## Dependencies only for Jetson system
-sudo **apt-get update
+sudo apt-get update
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
@@ -28,14 +28,17 @@ make build_loadgen
 make build_harness
 
 ## Perform dataset download.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
 
 
 ## Download Onnx Model from Zenodo Org.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
+cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
 
 
