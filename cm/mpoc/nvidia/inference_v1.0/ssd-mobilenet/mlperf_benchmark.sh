@@ -43,9 +43,9 @@ python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
-# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=PerformanceOnly"
-# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=AccuracyOnly"
+make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=PerformanceOnly"
+make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=MultiStream --test_mode=AccuracyOnly"
-# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=PerformanceOnly"
-# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=AccuracyOnly"
+make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=PerformanceOnly"
+make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=AccuracyOnly"
