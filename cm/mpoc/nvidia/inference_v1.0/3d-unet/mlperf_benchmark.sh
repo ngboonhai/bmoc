@@ -18,6 +18,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/c
 
 
 ## Dependencies only for Jetson system
+sudo apt-get update
 sudo apt-get install -y curl
 pip3 install scikit-build
 pip3 install git+https://github.com/SimpleITK/SimpleITKPythonPackage.git -v
