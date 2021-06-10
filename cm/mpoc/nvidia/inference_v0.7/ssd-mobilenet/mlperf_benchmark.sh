@@ -17,6 +17,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v0.7/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/c
 
 
 ## Dependencies only for Jetson system
+sudo **apt-get update
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
