@@ -17,7 +17,8 @@ cat bmoc/cm/mpoc/nvidia/inference_v0.7/Makefile > $INFERENCE_NVIDIA_PATH/Makefil
 
 
 ## Dependencies only for Jetson system
-sudo apt-get install -y curl
+sudo apt-get update
+sudo apt-get install -y curl libopenmpi2
 pip3 install scikit-build
 pip3 install git+https://github.com/SimpleITK/SimpleITKPythonPackage.git -v
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
