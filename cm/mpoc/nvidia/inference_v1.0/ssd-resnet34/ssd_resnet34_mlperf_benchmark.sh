@@ -22,15 +22,15 @@ export | grep $INFERENCE_NVIDIA_PATH
 SCENARIO=$1
 TEST_MODE=$2
 if [ "$TEST1" == "" ]; then
-    echo "SingleStream"
+    SCENARIO="SingleStream"
 else
-    echo $SCENARIO
+    SCENARIO=$SCENARIO
 fi
 
 if [ "$TEST2" == "" ]; then
-    echo "PerformanceOnly"
+    TEST_MODE="PerformanceOnly"
 else
-    echo $TEST_MODE
+    TEST_MODE=$TEST_MODE
 fi
 
 ## Execute MLPerf Benchmark
