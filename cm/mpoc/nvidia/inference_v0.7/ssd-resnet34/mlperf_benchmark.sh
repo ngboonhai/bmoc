@@ -50,5 +50,5 @@ make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=SingleStream --test_mod
 make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=MultiStream --test_mode=AccuracyOnly"
-make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=PerformanceOnly"
-make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=AccuracyOnly"
+# make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=PerformanceOnly"
+# make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=AccuracyOnly"
