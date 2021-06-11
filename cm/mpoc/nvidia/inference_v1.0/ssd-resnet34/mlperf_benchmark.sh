@@ -12,6 +12,7 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 ## Create NVIDIA MLPerf scratch path
 [ ! -d "$MLPERF_SCRATCH_PATH" ] && mkdir -p $MLPERF_SCRATCH_PATH
 
+## Configure MLPerf scratch path into session environment
 grep -Rn "$MLPERF_SCRATCH_PATH" ~/.bashrc
 [ "$?" -ne "0" ] && echo "export INFERENCE_NVIDIA_PATH=$INFERENCE_NVIDIA_PATH" >> ~/.bashrc && echo "export MLPERF_SCRATCH_PATH=$MLPERF_SCRATCH_PATH" >> ~/.bashrc
 source ~/.bashrc
