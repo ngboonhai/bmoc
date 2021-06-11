@@ -49,6 +49,7 @@ bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
 
 ## Validate and Calibrate Models format and Images
 cd $INFERENCE_NVIDIA_PATH
+python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py --cal_only
 python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
 
