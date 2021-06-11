@@ -3,8 +3,8 @@ set -x
 
 ## Variable declaration
 MLPERF_INFERENCE_REPO="inference_results_v1.0"
-INFERENCE_NVIDIA_PATH="~/inference_results_v1.0/closed/NVIDIA"
-MLPERF_SCRATCH_PATH="$INFERENCE_NVIDIA_PATH/build"
+INFERENCE_NVIDIA_PATH=~/inference_results_v1.0/closed/NVIDIA
+MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 
 ## Checkout MLPerf Inference v1.0 repo from GitHub
 [ ! -d "$MLPERF_INFERENCE_REPO" ] && git clone https://github.com/mlcommons/$MLPERF_INFERENCE_REPO.git ~/$MLPERF_INFERENCE_REPO
