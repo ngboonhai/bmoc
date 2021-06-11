@@ -41,7 +41,11 @@ bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
+cp $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt
+shuf -n 1000 $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt > $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt
+cat $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt | wc -l
 cd $INFERENCE_NVIDIA_PATH
+python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py --cal_only
 python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py
 
 
