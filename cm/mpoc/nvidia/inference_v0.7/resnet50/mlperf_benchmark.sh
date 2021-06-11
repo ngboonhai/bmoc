@@ -48,6 +48,7 @@ cp $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt $INFERENCE_NVIDIA_PATH/
 shuf -n 1000 $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map_ori.txt > $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt
 cat $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt | wc -l
 cd $INFERENCE_NVIDIA_PATH
+python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py --cal_only
 python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py
 
 
