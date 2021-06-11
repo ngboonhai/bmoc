@@ -14,11 +14,12 @@ export | grep $INFERENCE_NVIDIA_PATH
 ## Update some files which errors detect from Origical files from Repo
 cat bmoc/cm/mpoc/nvidia/inference_v0.7/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 cat bmoc/cm/mpoc/nvidia/inference_v0.7/3d-unet/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/code/harness/lwis/include/lwis_buffers.h
 
 
 ## Dependencies only for Jetson system
 sudo apt-get update
-sudo apt-get install -y curl libopenmpi2
+sudo apt-get install -y curl
 pip3 install scikit-build
 pip3 install git+https://github.com/SimpleITK/SimpleITKPythonPackage.git -v
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
@@ -56,5 +57,5 @@ make run RUN_ARGS="--benchmarks=3d-unet --scenarios=SingleStream --test_mode=Per
 make run RUN_ARGS="--benchmarks=3d-unet --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=3d-unet --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=3d-unet --scenarios=MultiStream --test_mode=AccuracyOnly"
-make run RUN_ARGS="--benchmarks=3d-unet --scenarios=Offline --test_mode=PerformanceOnly"
-make run RUN_ARGS="--benchmarks=3d-unet --scenarios=Offline --test_mode=AccuracyOnly"
+# make run RUN_ARGS="--benchmarks=3d-unet --scenarios=Offline --test_mode=PerformanceOnly"
+# make run RUN_ARGS="--benchmarks=3d-unet --scenarios=Offline --test_mode=AccuracyOnly"
