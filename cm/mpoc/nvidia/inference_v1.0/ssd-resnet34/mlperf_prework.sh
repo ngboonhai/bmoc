@@ -23,15 +23,18 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 
 ## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
+pwd
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
 
 
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH
+pwd
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
 cd $INFERENCE_NVIDIA_PATH
+pwd
 python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py --cal_only
 python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
