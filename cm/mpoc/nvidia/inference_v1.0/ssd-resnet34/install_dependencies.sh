@@ -24,5 +24,5 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/install_xavier_dependencies.sh > $INFEREN
 
 ## Dependencies only for Jetson system
 sudo apt-get update
-sudo pip3 absl-py
+pip3 install absl-py
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
