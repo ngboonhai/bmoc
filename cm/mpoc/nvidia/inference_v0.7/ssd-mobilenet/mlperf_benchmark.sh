@@ -28,20 +28,24 @@ make build_loadgen
 make build_harness
 
 ## Perform dataset download.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
 
 
 ## Download Onnx Model from Zenodo Org.
+cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
+cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
-# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=PerformanceOnly"
-# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=AccuracyOnly"
+cd $INFERENCE_NVIDIA_PATH
+make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=PerformanceOnly"
+make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=MultiStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=PerformanceOnly"
