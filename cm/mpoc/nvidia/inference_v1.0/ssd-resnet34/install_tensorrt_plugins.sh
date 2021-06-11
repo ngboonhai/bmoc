@@ -25,7 +25,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/c
 
 ## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
-make clone_loadgen
+[ ! -d "$MLPERF_SCRATCH_PATH/inference" ] && make clone_loadgen
 make build_plugins
 make build_loadgen
 make build_harness
