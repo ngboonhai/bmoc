@@ -22,7 +22,7 @@ bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 ## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
 make clone_loadgen
-# make build_plugins
+make build_plugins
 make build_loadgen
 make build_harness
 
@@ -55,5 +55,5 @@ make run RUN_ARGS="--benchmarks=resnet50 --scenarios=SingleStream --test_mode=Pe
 make run RUN_ARGS="--benchmarks=resnet50 --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=resnet50 --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=resnet50 --scenarios=MultiStream --test_mode=AccuracyOnly"
-make run RUN_ARGS="--benchmarks=resnet50 --scenarios=Offline --test_mode=PerformanceOnly"
-make run RUN_ARGS="--benchmarks=resnet50 --scenarios=Offline --test_mode=AccuracyOnly"
+# make run RUN_ARGS="--benchmarks=resnet50 --scenarios=Offline --test_mode=PerformanceOnly"
+# make run RUN_ARGS="--benchmarks=resnet50 --scenarios=Offline --test_mode=AccuracyOnly"
