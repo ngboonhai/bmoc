@@ -316,18 +316,18 @@ endif
 	cd build/plugins/NMSOptPlugin \
 		&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/NMSOptPlugin \
 		&& make -j
-	mkdir -p build/plugins/RNNTOptPlugin
-	cd build/plugins/RNNTOptPlugin \
-		&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/RNNTOptPlugin \
-		&& make -j
-	mkdir -p build/plugins/instanceNormalization3DPlugin
-	cd build/plugins/instanceNormalization3DPlugin \
-		&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/instanceNormalization3DPlugin \
-		&& make -j
-	mkdir -p build/plugins/pixelShuffle3DPlugin
-	cd build/plugins/pixelShuffle3DPlugin \
-		&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/pixelShuffle3DPlugin \
-		&& make -j
+	#mkdir -p build/plugins/RNNTOptPlugin
+	#cd build/plugins/RNNTOptPlugin \
+	#	&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/RNNTOptPlugin \
+	#	&& make -j
+	#mkdir -p build/plugins/instanceNormalization3DPlugin
+	#cd build/plugins/instanceNormalization3DPlugin \
+	#	&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/instanceNormalization3DPlugin \
+	#	&& make -j
+	#mkdir -p build/plugins/pixelShuffle3DPlugin
+	#cd build/plugins/pixelShuffle3DPlugin \
+	#	&& cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) $(PROJECT_ROOT)/code/plugin/pixelShuffle3DPlugin \
+	#	&& make -j
 
 # Build LoadGen.
 .PHONY: build_loadgen
