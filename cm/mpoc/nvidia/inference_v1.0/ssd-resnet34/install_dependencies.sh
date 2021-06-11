@@ -10,7 +10,7 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [ ! -d "$MLPERF_INFERENCE_REPO" ] && git clone https://github.com/mlcommons/$MLPERF_INFERENCE_REPO.git ~/$MLPERF_INFERENCE_REPO
 
 ## Create NVIDIA MLPerf scratch path
-[ ! -d "$MLPERF_SCRATCH_PATH" ] $$ mkdir -p $MLPERF_SCRATCH_PATH
+[ ! -d "$MLPERF_SCRATCH_PATH" ] && mkdir -p $MLPERF_SCRATCH_PATH
 
 ## Set NVIDIA Mlperf scratch path as envrionment variable
 grep -Rn "$MLPERF_SCRATCH_PATH" ~/.bashrc
