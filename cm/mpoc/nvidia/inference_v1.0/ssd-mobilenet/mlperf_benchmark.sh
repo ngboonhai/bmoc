@@ -23,7 +23,7 @@ bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 ## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
 make clone_loadgen
-# make build_plugins
+make build_plugins
 make build_loadgen
 make build_harness
 
@@ -43,9 +43,10 @@ python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
 
 
 ## Execute MLPerf Benchmark
+cd $INFERENCE_NVIDIA_PATH
 make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=PerformanceOnly"
 make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=AccuracyOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=MultiStream --test_mode=PerformanceOnly"
 # make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=MultiStream --test_mode=AccuracyOnly"
-make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=PerformanceOnly"
-make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=AccuracyOnly"
+# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=PerformanceOnly"
+# make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=AccuracyOnly"
