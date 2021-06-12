@@ -34,4 +34,4 @@ fi
 
 ## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH
-make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=$SCENARIO --test_mode=$TEST_MODE"
+make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=$SCENARIO --test_mode=$TEST_MODE"
