@@ -100,6 +100,7 @@ sudo python3 -m pip install -U --index-url https://pypi.org/simple --no-cache-di
  && sudo python -m pip install absl-py==0.7.1 \
  && sudo python3 -m pip install numpy==1.16.4 \
  && sudo python3 -m pip install tqdm==4.46.0
+ && sudo python3 -m pip install onnx==1.7.0
 
 # Install ONNX graph surgeon, needed for 3D-Unet ONNX preprocessing.
 cd /tmp \
