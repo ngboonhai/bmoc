@@ -1,13 +1,25 @@
 #set -eo pipefail
 set -x
 
-git clone https://github.com/mlcommons/inference_results_v0.7.git ~/inference_results_v0.7
-INFERENCE_NVIDIA_PATH=~/inference_results_v0.7/closed/NVIDIA
+## Variable declaration
+MLPERF_INFERENCE_REPO="inference_results_v1.0"
+INFERENCE_NVIDIA_PATH=~/inference_results_v1.0/closed/NVIDIA
 MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
-mkdir -p $MLPERF_SCRATCH_PATH
-echo "export INFERENCE_NVIDIA_PATH=$INFERENCE_NVIDIA_PATH" >> ~/.bashrc
-echo "export MLPERF_SCRATCH_PATH=$MLPERF_SCRATCH_PATH" >> ~/.bashrc
+
+## Checkout MLPerf Inference v1.0 repo from GitHub
+[ ! -d "$MLPERF_INFERENCE_REPO" ] && git clone https://github.com/mlcommons/$MLPERF_INFERENCE_REPO.git ~/$MLPERF_INFERENCE_REPO
+
+## Create NVIDIA MLPerf scratch path
+[ ! -d "$MLPERF_SCRATCH_PATH" ] && mkdir -p $MLPERF_SCRATCH_PATH
+
+## Configure MLPerf scratch path into session environment
+grep -Rn "$MLPERF_SCRATCH_PATH" ~/.bashrc
+[ "$?" -ne "0" ] && echo "export INFERENCE_NVIDIA_PATH=$INFERENCE_NVIDIA_PATH" >> ~/.bashrc && echo "export MLPERF_SCRATCH_PATH=$MLPERF_SCRATCH_PATH" >> ~/.bashrc
 source ~/.bashrc
+
+## Check and Set NVIDIA Mlperf scratch path as envrionment variable
+[[ ! -z `export | grep INFERENCE_NVIDIA_PATH` ]] && echo $INFERENCE_NVIDIA_PATH || export INFERENCE_NVIDIA_PATH=~/inference_results_v1.0/closed/NVIDIA
+[[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
 
@@ -26,7 +38,7 @@ bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
-make clone_loadgen
+[ ! -d "$MLPERF_SCRATCH_PATH/inference" ] && make clone_loadgen
 make build_plugins
 make build_loadgen
 make build_harness
