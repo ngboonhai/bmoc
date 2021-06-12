@@ -20,15 +20,15 @@ export | grep $INFERENCE_NVIDIA_PATH
 
 ## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
+bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_data.sh
 
 
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
+bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_model.sh
 
 
 ## Validate and Calibrate Models format and Images
 cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py --cal_only
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
+python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py --cal_only
+python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py
