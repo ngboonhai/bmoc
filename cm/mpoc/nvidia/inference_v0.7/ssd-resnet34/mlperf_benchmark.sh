@@ -36,7 +36,7 @@ bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 ## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
-make clone_loadgen
+[ ! -d "$MLPERF_SCRATCH_PATH/inference" ] && make clone_loadgen
 make build_plugins
 make build_loadgen
 make build_harness
