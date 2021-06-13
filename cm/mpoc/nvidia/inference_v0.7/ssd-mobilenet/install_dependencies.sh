@@ -17,18 +17,12 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
-## Perform dataset download.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
+## Update some files which errors detect from Origical files from Repo
+cat bmoc/cm/mpoc/nvidia/inference_v0.7/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
-## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
-
-## Validate and Calibrate Models format and Images
-cp $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt
-shuf -n 2000 $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt > $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt
-cat $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt | wc -l
-cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py --cal_only
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
+## Dependencies only for Jetson system
+sudo apt-get update
+sudo apt-get install -y curl
+pip3 install scikit-build
+pip install absl-py
+bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
