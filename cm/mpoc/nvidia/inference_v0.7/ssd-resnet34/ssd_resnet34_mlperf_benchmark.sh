@@ -20,13 +20,13 @@ export | grep $INFERENCE_NVIDIA_PATH
 ## Config mlperf benchmark scenario and Test mode default values
 SCENARIO=$1
 TEST_MODE=$2
-if [ "$TEST1" == "" ]; then
+if [ "$SCENARIO" == "" ]; then
     SCENARIO="SingleStream"
 else
     SCENARIO=$SCENARIO
 fi
 
-if [ "$TEST2" == "" ]; then
+if [ "$TEST_MODE" == "" ]; then
     TEST_MODE="PerformanceOnly"
 else
     TEST_MODE=$TEST_MODE
