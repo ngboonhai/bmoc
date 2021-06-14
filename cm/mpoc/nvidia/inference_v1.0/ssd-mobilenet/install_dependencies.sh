@@ -27,3 +27,14 @@ sudo apt-get install -y python-dev python3-dev python-pip python3-pip curl libop
 pip3 install scikit-build onnx astunparse
 pip install absl-py
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
+
+# Re-check and install ONNX preprocessing again.
+cd /tmp \
+&& git clone https://github.com/NVIDIA/TensorRT.git \
+&& cd TensorRT \
+&& git checkout release/7.1 \
+&& cd tools/onnx-graphsurgeon \
+&& make build \
+&& sudo python3 -m pip install --no-deps -t /usr/local/lib/python3.6/dist-packages --force-reinstall dist/*.whl \
+&& cd /tmp \
+&& rm -rf TensorRT
