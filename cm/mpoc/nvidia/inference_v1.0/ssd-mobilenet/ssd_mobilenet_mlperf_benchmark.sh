@@ -6,6 +6,9 @@ MLPERF_INFERENCE_REPO="inference_results_v1.0"
 INFERENCE_NVIDIA_PATH=~/inference_results_v1.0/closed/NVIDIA
 MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 
+## Valid "astunparse" components install
+pip3 install astunparse
+
 ## Checkout MLPerf Inference v1.0 repo from GitHub
 [ ! -d "$MLPERF_INFERENCE_REPO" ] && git clone https://github.com/mlcommons/$MLPERF_INFERENCE_REPO.git ~/$MLPERF_INFERENCE_REPO
 
@@ -16,9 +19,6 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep INFERENCE_NVIDIA_PATH` ]] && echo $INFERENCE_NVIDIA_PATH || export INFERENCE_NVIDIA_PATH=~/inference_results_v1.0/closed/NVIDIA
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
-
-## Valid "astunparse" components install
-pip3 install astunparse
 
 ## Config mlperf benchmark scenario and Test mode default values
 SCENARIO=$1
@@ -37,4 +37,5 @@ fi
 
 ## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH
+export TF_ENABLE_DEPRECATION_WARNINGS=1
 make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=$SCENARIO --test_mode=$TEST_MODE"
