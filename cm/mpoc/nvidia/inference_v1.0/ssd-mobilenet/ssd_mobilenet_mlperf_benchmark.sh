@@ -17,6 +17,9 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
+## Valid "astunparse" components install
+pip3 install astunparse
+
 ## Config mlperf benchmark scenario and Test mode default values
 SCENARIO=$1
 TEST_MODE=$2
