@@ -17,23 +17,14 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
-## Download dataset from Image-net Org.
-mkdir -p $MLPERF_SCRATCH_PATH/data/imagenet
-wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
-tar xf ILSVRC2012_img_val.tar -C $MLPERF_SCRATCH_PATH/data/imagenet
-
 ## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_data.sh
+bash $INFERENCE_NVIDIA_PATH/code/bert/tensorrt/download_data.sh
 
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_model.sh
+bash $INFERENCE_NVIDIA_PATH/code/bert/tensorrt/download_model.sh
 
 ## Validate and Calibrate Models format and Images
-cp $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map_ori.txt
-shuf -n 2000 $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map_ori.txt > $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt
-cat $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt | wc -l
 cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py --cal_only
-python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py
+python3 $INFERENCE_NVIDIA_PATH/code/bert/tensorrt/preprocess_data.py
