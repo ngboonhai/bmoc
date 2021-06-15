@@ -6,6 +6,9 @@ MLPERF_INFERENCE_REPO="inference_results_v0.7"
 INFERENCE_NVIDIA_PATH=~/inference_results_v0.7/closed/NVIDIA
 MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 
+## Valid "astunparse" components install
+pip3 install astunparse
+
 ## Checkout MLPerf Inference v0.7 repo from GitHub
 [ ! -d "$MLPERF_INFERENCE_REPO" ] && git clone https://github.com/mlcommons/$MLPERF_INFERENCE_REPO.git ~/$MLPERF_INFERENCE_REPO
 

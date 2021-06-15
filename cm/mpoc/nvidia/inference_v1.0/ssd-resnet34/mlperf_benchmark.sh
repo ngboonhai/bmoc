@@ -73,8 +73,4 @@ python3 $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/preprocess_data.py
 ## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH
 make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=SingleStream --test_mode=PerformanceOnly"
-make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=SingleStream --test_mode=AccuracyOnly"
-# make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=MultiStream --test_mode=PerformanceOnly"
-# make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=MultiStream --test_mode=AccuracyOnly"
-# make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=PerformanceOnly"
-# make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=AccuracyOnly"
+make run RUN_ARGS="--benchmarks=ssd-resnet34 --scenarios=Offline --test_mode=PerformanceOnly"
