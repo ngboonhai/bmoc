@@ -17,15 +17,21 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
-## Perform dataset download.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_data.sh
-rm $MLPERF_SCRATCH_PATH/data/LibriSpeech/*.tar.gz
+## Config mlperf benchmark scenario and Test mode default values
+SCENARIO=$1
+TEST_MODE=$2
+if [ "$SCENARIO" == "" ]; then
+    SCENARIO="SingleStream"
+else
+    SCENARIO=$SCENARIO
+fi
 
-## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_model.sh
+if [ "$TEST_MODE" == "" ]; then
+    TEST_MODE="PerformanceOnly"
+else
+    TEST_MODE=$TEST_MODE
+fi
 
-## Validate and Calibrate Models format and Images
+## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/preprocess_data.py
+make run RUN_ARGS="--benchmarks=dlrm --scenarios=$SCENARIO --test_mode=$TEST_MODE"

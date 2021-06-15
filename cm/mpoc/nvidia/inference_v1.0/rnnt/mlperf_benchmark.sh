@@ -57,6 +57,7 @@ make build_harness
 ## Perform dataset validation after downloaded.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_data.sh
+rm $MLPERF_SCRATCH_PATH/data/LibriSpeech/*.tar.gz
 
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH

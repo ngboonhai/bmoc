@@ -17,15 +17,14 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
-## Perform dataset download.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_data.sh
-rm $MLPERF_SCRATCH_PATH/data/LibriSpeech/*.tar.gz
+## Update some files which errors detect from Origical files from Repo
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/code/harness/lwis/include/lwis_buffers.h
 
-## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_model.sh
 
-## Validate and Calibrate Models format and Images
+## Build TensorRT and MLPerf Plugins
 cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/preprocess_data.py
+[ ! -d "$MLPERF_SCRATCH_PATH/inference" ] && make clone_loadgen
+make build_plugins
+make build_loadgen
+make build_harness

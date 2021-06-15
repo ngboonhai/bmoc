@@ -59,17 +59,15 @@ make build_harness
 mkdir -p $MLPERF_SCRATCH_PATH/data/imagenet
 wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
 tar xf ILSVRC2012_img_val.tar -C $MLPERF_SCRATCH_PATH/data/imagenet
-
+rm $INFERENCE_NVIDIA_PATH/ILSVRC2012_img_val.tar
 
 ## Perform dataset validation after downloaded.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_data.sh
 
-
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/download_model.sh
-
 
 ## Validate and Calibrate Models format and Images
 cp $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map_ori.txt
@@ -78,8 +76,6 @@ cat $INFERENCE_NVIDIA_PATH/data_maps/imagenet/val_map.txt | wc -l
 cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py --cal_only
 python3 $INFERENCE_NVIDIA_PATH/code/resnet50/tensorrt/preprocess_data.py
-
-
 
 ## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH

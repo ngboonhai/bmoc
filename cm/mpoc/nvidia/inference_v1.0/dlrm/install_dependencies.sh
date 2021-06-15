@@ -17,15 +17,26 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
-## Perform dataset download.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_data.sh
-rm $MLPERF_SCRATCH_PATH/data/LibriSpeech/*.tar.gz
+## Update some files which errors detect from Origical files from Repo
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
-## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_model.sh
 
-## Validate and Calibrate Models format and Images
-cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/preprocess_data.py
+## Dependencies only for Jetson system
+sudo apt-get update
+sudo apt-get install -y python-dev python3-dev python-pip python3-pip curl libopenmpi2
+pip3 install scikit-build astunparse
+pip install absl-py
+bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
+
+# Re-check and install ONNX preprocessing again.
+pip install numpy
+pip3 install onnx
+cd /tmp \
+&& git clone https://github.com/NVIDIA/TensorRT.git \
+&& cd TensorRT \
+&& git checkout release/7.1 \
+&& cd tools/onnx-graphsurgeon \
+&& make build \
+&& sudo python3 -m pip install --no-deps -t /usr/local/lib/python3.6/dist-packages --force-reinstall dist/*.whl \
+&& cd /tmp \
+&& rm -rf TensorRT

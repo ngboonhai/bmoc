@@ -57,6 +57,7 @@ make build_harness
 ## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_data.sh
+rm $MLPERF_SCRATCH_PATH/data/coco/*.zip
 
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH

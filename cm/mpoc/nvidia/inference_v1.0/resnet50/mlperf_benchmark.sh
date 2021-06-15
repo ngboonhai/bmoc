@@ -58,6 +58,7 @@ make build_harness
 mkdir -p $MLPERF_SCRATCH_PATH/data/imagenet
 wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
 tar xf ILSVRC2012_img_val.tar -C $MLPERF_SCRATCH_PATH/data/imagenet
+rm $INFERENCE_NVIDIA_PATH/ILSVRC2012_img_val.tar
 
 ## Perform dataset validation after downloaded.
 cd $INFERENCE_NVIDIA_PATH

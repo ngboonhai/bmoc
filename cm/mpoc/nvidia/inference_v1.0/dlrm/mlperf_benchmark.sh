@@ -29,7 +29,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/c
 
 ## Dependencies only for Jetson system
 sudo apt-get update
-ssudo apt-get install -y python-dev python3-dev python-pip python3-pip curl libopenmpi2
+sudo apt-get install -y python-dev python3-dev python-pip python3-pip curl libopenmpi2
 pip install absl-py
 pip3 install scikit-build astunparse
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
@@ -54,29 +54,19 @@ make build_plugins
 make build_loadgen
 make build_harness
 
-## Perform dataset download.
+## Perform dataset validation after downloaded.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
-rm $MLPERF_SCRATCH_PATH/data/coco/*.zip
+bash $INFERENCE_NVIDIA_PATH/code/dlrm/tensorrt/download_data.sh
 
 ## Download Onnx Model from Zenodo Org.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
+bash $INFERENCE_NVIDIA_PATH/code/dlrm/tensorrt/download_model.sh
 
 ## Validate and Calibrate Models format and Images
-cp $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt
-shuf -n 2000 $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt > $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt
-cat $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt | wc -l
 cd $INFERENCE_NVIDIA_PATH
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py --cal_only
-python3 $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/preprocess_data.py
-
-## Valid "astunparse" components install
-pip3 install astunparse
+python3 $INFERENCE_NVIDIA_PATH/code/dlrm/tensorrt/preprocess_data.py
 
 ## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH
-export TF_ENABLE_DEPRECATION_WARNINGS=1
-make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=SingleStream --test_mode=PerformanceOnly"
-make run RUN_ARGS="--benchmarks=ssd-mobilenet --scenarios=Offline --test_mode=PerformanceOnly"
-
+make run RUN_ARGS="--benchmarks=dlrm --scenarios=SingleStream --test_mode=PerformanceOnly"
+make run RUN_ARGS="--benchmarks=dlrm --scenarios=Offline --test_mode=PerformanceOnly"
