@@ -58,20 +58,22 @@ make build_loadgen
 make build_harness
 
 ## Download dataset from Image-net Org.
-mkdir -p $MLPERF_SCRATCH_PATH/data/BraTS
-curl -L -O https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/2019/MICCAI_BraTS_2019_Data_Training.zip
-unzip MICCAI_BraTS_2019_Data_Training.zip -d $MLPERF_SCRATCH_PATH/data/BraTS
+if [ ! -d $MLPERF_SCRATCH_PATH/data/BraTS/MICCAI_BraTS_2019_Data_Training ]; then
+    mkdir -p $MLPERF_SCRATCH_PATH/data/BraTS
+    curl -L -O https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/2019/MICCAI_BraTS_2019_Data_Training.zip
+    unzip MICCAI_BraTS_2019_Data_Training.zip -d $MLPERF_SCRATCH_PATH/data/BraTS
+    rm MICCAI_BraTS_2019_Data_Training.zip 
+fi
 
-
-## Perform dataset validation after downloaded.
+## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_data.sh
 
-
 ## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
-
+if [ ! -f MLPERF_SCRATCH_PATH/models/3d-unet/3dUNetBraTS.onnx ]; then
+    cd $INFERENCE_NVIDIA_PATH
+    bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
+}
 
 ## Validate and Calibrate Models format and Images
 cd $INFERENCE_NVIDIA_PATH

@@ -27,5 +27,8 @@ cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/download_model.sh
 
 ## Validate and Calibrate Models format and Images
+pip install toml
+pip3 install enscons
+pip3 install apex
 cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/rnnt/tensorrt/preprocess_data.py

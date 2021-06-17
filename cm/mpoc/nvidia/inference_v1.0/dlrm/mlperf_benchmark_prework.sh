@@ -17,6 +17,10 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
+## Download dataset 
+cd /tmp
+curl -O http://azuremlsampleexperiments.blob.core.windows.net/criteo/day_{`seq -s ‘,’ 0 23`}.gz
+
 ## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/dlrm/tensorrt/download_data.sh
