@@ -73,7 +73,7 @@ bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_data.sh
 if [ ! -f MLPERF_SCRATCH_PATH/models/3d-unet/3dUNetBraTS.onnx ]; then
     cd $INFERENCE_NVIDIA_PATH
     bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
-}
+]
 
 ## Validate and Calibrate Models format and Images
 cd $INFERENCE_NVIDIA_PATH
