@@ -1,6 +1,7 @@
 # Expect image name passed in as IMAGE argument to be used as base image to
 # build on top with the following OpenVino
 ARG IMAGE
+ARG INTEL_PUB_KEY
 
 # Build from the passed in image
 FROM $IMAGE
@@ -10,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Download and Install OpenVino Toolkit
 RUN cd /tmp && \ 
-    wget https://apt.repos.intel.com/openvino/2021/GPG-PUB-KEY-INTEL-OPENVINO-2021 && \
+    wget INTEL_PUB_KEY && \
 	apt-key add /tmp/GPG-PUB-KEY-INTEL-OPENVINO-2021 && \
 	rm /tmp/GPG-PUB-KEY-INTEL-OPENVINO-2021 && \
 	echo "deb https://apt.repos.intel.com/openvino/2021 all main" | sudo tee /etc/apt/sources.list.d/intel-openvino-2021.list && \
