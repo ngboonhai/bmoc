@@ -17,13 +17,13 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 [[ ! -z `export | grep MLPERF_SCRATCH_PATH` ]] && echo $MLPERF_SCRATCH_PATH || export MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
-## ## Sanity check exisitng dependecies and Additional dependecies install require due to version not competible for preporcess data steps
+## Sanity check exisitng dependecies and Additional dependecies install require due to version not competible for preporcess data steps
 sudo python3 -m pip install numpy==1.16.4 pandas
 sudo python3 -m pip install batchgenerators
-sudo python3 -m pip install nnunet
 cd /tmp
 wget -O torch-1.7.0-cp36-cp36m-linux_aarch64.whl https://nvidia.box.com/shared/static/cs3xn3td6sfgtene6jdvsxlr366m2dhq.whl
 sudo python3 -m pip install torch-1.7.0-cp36-cp36m-linux_aarch64.whl
+sudo python3 -m pip install nnunet
 
 ## Download dataset from Image-net Org.
 if [ ! -d $MLPERF_SCRATCH_PATH/data/BraTS/MICCAI_BraTS_2019_Data_Training ]; then
