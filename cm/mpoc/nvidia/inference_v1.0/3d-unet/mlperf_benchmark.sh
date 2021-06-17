@@ -73,6 +73,7 @@ if [ ! -f $MLPERF_SCRATCH_PATH/models/3d-unet/3dUNetBraTS.onnx ]; then
 fi
 
 ## Sanity check exisitng dependecies and Additional dependecies install require due to version not competible for preporcess data steps
+sudo apt-get install libatlas-base-dev gfortran
 sudo python3 -m pip install numpy==1.16.4 pandas
 sudo python3 -m pip install batchgenerators
 cd /tmp
