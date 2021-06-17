@@ -54,14 +54,18 @@ make build_plugins
 make build_loadgen
 make build_harness
 
-## Perform dataset download.
+# Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_data.sh
-rm $MLPERF_SCRATCH_PATH/data/coco/*.zip
+bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
+if [ -f $MLPERF_SCRATCH_PATH/data/coco/*.zip ]; then
+    rm $MLPERF_SCRATCH_PATH/data/coco/*.zip
+fi
 
 ## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_model.sh
+if [ ! -f $MLPERF_SCRATCH_PATH/models/SSDResNet34/resnet34-ssd1200.pytorch ]; then
+    cd $INFERENCE_NVIDIA_PATH
+    bash $INFERENCE_NVIDIA_PATH/code/ssd-resnet34/tensorrt/download_model.sh
+fi
 
 ## Validate and Calibrate Models format and Images
 cp $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt

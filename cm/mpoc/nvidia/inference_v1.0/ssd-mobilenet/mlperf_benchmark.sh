@@ -57,11 +57,15 @@ make build_harness
 ## Perform dataset download.
 cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_data.sh
-rm $MLPERF_SCRATCH_PATH/data/coco/*.zip
+if [ -f $MLPERF_SCRATCH_PATH/data/coco/*.zip ]; then
+    rm $MLPERF_SCRATCH_PATH/data/coco/*.zip
+fi
 
 ## Download Onnx Model from Zenodo Org.
-cd $INFERENCE_NVIDIA_PATH
-bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
+if [ ! -f $MLPERF_SCRATCH_PATH/models/SSDMobileNet/frozen_inference_graph.pb ]; then
+    cd $INFERENCE_NVIDIA_PATH $MLPERF_SCRATCH_PATH
+    bash $INFERENCE_NVIDIA_PATH/code/ssd-mobilenet/tensorrt/download_model.sh
+fi
 
 ## Validate and Calibrate Models format and Images
 cp $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map.txt $INFERENCE_NVIDIA_PATH/data_maps/coco/val_map_ori.txt
