@@ -35,6 +35,15 @@ if [ ! -f MLPERF_SCRATCH_PATH/models/3d-unet/3dUNetBraTS.onnx ]; then
     bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
 fi
 
+## ## Sanity check exisitng dependecies and Additional dependecies install require due to version not competible for preporcess data steps
+sudo python3 -m pip install SimpleITK
+sudo python3 -m pip install numpy==1.16.4 pandas
+sudo python3 -m pip install batchgenerators
+sudo python3 -m pip install nnunet
+cd /tmp
+wget -O torch-1.7.0-cp36-cp36m-linux_aarch64.whl https://nvidia.box.com/shared/static/cs3xn3td6sfgtene6jdvsxlr366m2dhq.whl
+sudo python3 -m pip install torch-1.7.0-cp36-cp36m-linux_aarch64.whl
+
 ## Validate and Calibrate Models format and Images
 cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
