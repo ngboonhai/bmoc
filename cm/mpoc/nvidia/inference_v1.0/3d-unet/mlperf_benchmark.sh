@@ -67,7 +67,7 @@ cd $INFERENCE_NVIDIA_PATH
 bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_data.sh
 
 ## Download Onnx Model from Zenodo Org.
-if [ ! -f MLPERF_SCRATCH_PATH/models/3d-unet/3dUNetBraTS.onnx ]; then
+if [ ! -f $MLPERF_SCRATCH_PATH/models/3d-unet/3dUNetBraTS.onnx ]; then
     cd $INFERENCE_NVIDIA_PATH
     bash $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/download_model.sh
 fi
