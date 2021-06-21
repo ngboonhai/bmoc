@@ -138,7 +138,7 @@ sudo python3 -m pip install protobuf==3.11.1 \
  && rm -rf cmake-3.17.3 \
  && sudo apt-get install -y libtiff5-dev \
  && cd /usr/local \
- && sudo git clone -b release_v0.26 --recursive https://github.com/NVIDIA/DALI \
+ && sudo git clone -b release_v0.25 --recursive https://github.com/NVIDIA/DALI \
  && cd DALI \
  && sudo mkdir build \
  && cd build \
