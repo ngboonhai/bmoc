@@ -82,11 +82,12 @@ sudo python3 -m pip install torch-1.7.0-cp36-cp36m-linux_aarch64.whl
 sudo python3 -m pip install nnunet
 
 ## Validate and Calibrate Models format and Images
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
 ## Execute MLPerf Benchmark
-export PREPROCESSED_DATA_DIR="build/preprocessed_data"
+#export PREPROCESSED_DATA_DIR="build/preprocessed_data"
 cd $INFERENCE_NVIDIA_PATH
 make run RUN_ARGS="--benchmarks=3d-unet --scenarios=SingleStream --config_ver=default --test_mode=PerformanceOnly"
 make run RUN_ARGS="--benchmarks=3d-unet --scenarios=Offline --config_ver=default --test_mode=PerformanceOnly"
