@@ -87,5 +87,6 @@ python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
 ## Execute MLPerf Benchmark
 cd $INFERENCE_NVIDIA_PATH
+export PREPROCESSED_DATA_DIR="build/preprocessed_data"
 make run RUN_ARGS="--benchmarks=3d-unet --scenarios=SingleStream --test_mode=PerformanceOnly"
 make run RUN_ARGS="--benchmarks=3d-unet --scenarios=Offline --test_mode=PerformanceOnly"
