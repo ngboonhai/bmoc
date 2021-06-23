@@ -26,6 +26,7 @@ export | grep $INFERENCE_NVIDIA_PATH
 cat bmoc/cm/mpoc/nvidia/inference_v1.0/install_xavier_dependencies.sh > $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 cat bmoc/cm/mpoc/nvidia/inference_v1.0/3d-unet/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
 cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/code/harness/lwis/include/lwis_buffers.h
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
 ## Dependencies only for Jetson system
 sudo apt-get update
@@ -82,7 +83,6 @@ sudo python3 -m pip install torch-1.7.0-cp36-cp36m-linux_aarch64.whl
 sudo python3 -m pip install nnunet
 
 ## Validate and Calibrate Models format and Images
-cat bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
 
