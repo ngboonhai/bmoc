@@ -31,13 +31,13 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PA
 ## Dependencies only for Jetson system
 sudo apt-get update
 sudo apt-get install -y python-dev python3-dev python-pip python3-pip curl libopenmpi2
-pip install absl-py
-pip3 install scikit-build astunparse
+sudo python -m pip install absl-py
+sudo python3 -m pip install scikit-build astunparse
 bash $INFERENCE_NVIDIA_PATH/scripts/install_xavier_dependencies.sh
 
 # Re-check and install ONNX preprocessing again.
-pip install numpy
-pip3 install onnx
+sudo python -m pip install numpy==1.16.4
+sudo python3 -m pip install onnx==1.7.0
 cd /tmp \
 && git clone https://github.com/NVIDIA/TensorRT.git \
 && cd TensorRT \
