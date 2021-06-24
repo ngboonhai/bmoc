@@ -23,6 +23,7 @@ cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/c
 
 
 ## Build TensorRT and MLPerf Plugins
+export NVIDIA_TF32_OVERRIDE=0
 cd $INFERENCE_NVIDIA_PATH
 [ ! -d "$MLPERF_SCRATCH_PATH/inference" ] && make clone_loadgen
 make build_plugins
