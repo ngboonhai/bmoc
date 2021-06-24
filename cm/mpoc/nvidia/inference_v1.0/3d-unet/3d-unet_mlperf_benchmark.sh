@@ -34,5 +34,6 @@ fi
 
 ## Execute MLPerf Benchmark
 #export PREPROCESSED_DATA_DIR="build/preprocessed_data"
+sudo python3 -m pip install onnx==1.7.0
 cd $INFERENCE_NVIDIA_PATH
 make run RUN_ARGS="--benchmarks=3d-unet --scenarios=$SCENARIO --config_ver=default --test_mode=$TEST_MODE"
