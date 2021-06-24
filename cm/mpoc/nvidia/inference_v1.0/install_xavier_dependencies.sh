@@ -37,7 +37,7 @@ cd /tmp
 # install cub
 wget https://github.com/NVlabs/cub/archive/1.8.0.zip -O cub-1.8.0.zip \
  && unzip cub-1.8.0.zip \
- && sudo mv cub-1.8.0/cub /usr/include/aarch64-linux-gnu/ \
+ && sudo cp -r cub-1.8.0/cub /usr/include/aarch64-linux-gnu/ \
  && rm -rf cub-1.8.0.zip cub-1.8.0
 
 # install gflags
