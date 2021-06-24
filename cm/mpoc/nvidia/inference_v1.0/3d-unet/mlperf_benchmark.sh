@@ -49,6 +49,7 @@ cd /tmp \
 && rm -rf TensorRT
 
 ## Build TensorRT and MLPerf Plugins
+export NVIDIA_TF32_OVERRIDE=0
 cd $INFERENCE_NVIDIA_PATH
 [ ! -d "$MLPERF_SCRATCH_PATH/inference" ] && make clone_loadgen
 make build_plugins
