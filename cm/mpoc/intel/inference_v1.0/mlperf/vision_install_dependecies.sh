@@ -160,7 +160,8 @@ rm -rf ${MLPERF_DIR}/inference_results_v1.0
 echo ${SKIPS}
 echo ${DASHES}
 if [ -e ${SOURCE_DIR}/Release/ov_mlperf ]; then
-        echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
+        ## Print and notify where the MLperf Library location
+	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
         echo ${SKIPS}
         echo " * * * Important directories * * *"
         echo -e "\e[1;32m OPENVINO_LIBRARIES=${OPENVINO_DIR}/bin/intel64/Release/lib    \e[0m"
@@ -168,6 +169,21 @@ if [ -e ${SOURCE_DIR}/Release/ov_mlperf ]; then
         echo -e "\e[1;32m OMP_LIBRARY=${OPENVINO_DIR}/inference-engine/temp/omp/lib     \e[0m"
         echo -e "\e[1;32m BOOST_LIBRARIES=${BOOST_DIR}/boost_1_72_0/stage/lib           \e[0m"
         echo -e "\e[1;32m GFLAGS_LIBRARIES=${GFLAGS_DIR}/gflags-build/lib               \e[0m"
+	
+	## Setup mlperf environment variable
+	echo "#!/bin/bash" >  ${CUR_DIR}/setup_envs.sh
+	echo ${SKIPS} >> ${CUR_DIR}/setup_envs.sh
+	echo "OPENVINO_LIBRARIES=${OPENVINO_DIR}/bin/intel64/Release/lib" >> ${CUR_DIR}/setup_envs.sh
+        echo "OPENCV_LIBRARIES=${OPENCV_DIRS[0]}/opencv/lib" >> ${CUR_DIR}/setup_envs.sh
+        echo "OMP_LIBRARY=${OPENVINO_DIR}/inference-engine/temp/omp/lib" >> ${CUR_DIR}/setup_envs.sh
+        echo "BOOST_LIBRARIES=${BOOST_DIR}/boost_1_72_0/stage/lib" >> ${CUR_DIR}/setup_envs.sh
+        echo "GFLAGS_LIBRARIES=${GFLAGS_DIR}/gflags-build/lib" >> ${CUR_DIR}/setup_envs.sh
+	echo ${SKIPS} >> ${CUR_DIR}/setup_envs.sh
+	echo "export LD_LIBRARY_PATH=${OPENVINO_LIBRARIES}:${OMP_LIBRARY}:${OPENCV_LIBRARIES}:${BOOST_LIBRARIES}:${GFLAGS_LIBRARIES}" >> ${CUR_DIR}/setup_envs.sh
+	echo "export OV_MLPERF_BIN=${CUR_DIR}/bin/ov_mlperf" >> ${CUR_DIR}/setup_envs.sh
+	echo "export DATA_DIR=${CUR_DIR}/datasets"  >> ${CUR_DIR}/setup_envs.sh
+	echo "export MODELS_DIR=${CUR_DIR}/models"  >> ${CUR_DIR}/setup_envs.sh
+	echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh     
 else
         echo -e "\e[0;31m ov_mlperf not built. Please check logs on screen\e[0m"
 fi
