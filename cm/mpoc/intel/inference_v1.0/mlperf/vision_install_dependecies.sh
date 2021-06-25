@@ -147,19 +147,14 @@ cmake -DInferenceEngine_DIR=${OPENVINO_DIR}/build/ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
 		..
-
 make
-
-if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
-        mkdir -p ${CUR_DIR}/bin
-        cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
-fi
-rm -rf ${SOURCE_DIR}
-rm -rf ${MLPERF_DIR}/inference_results_v1.0
 
 echo ${SKIPS}
 echo ${DASHES}
-if [ -e ${SOURCE_DIR}/Release/ov_mlperf ]; then
+if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
+        mkdir -p ${CUR_DIR}/bin
+        cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
+	
         ## Print and notify where the MLperf Library location
 	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
         echo ${SKIPS}
@@ -188,3 +183,5 @@ else
         echo -e "\e[0;31m ov_mlperf not built. Please check logs on screen\e[0m"
 fi
 echo ${DASHES}
+rm -rf ${SOURCE_DIR}
+rm -rf ${MLPERF_DIR}/inference_results_v1.0
