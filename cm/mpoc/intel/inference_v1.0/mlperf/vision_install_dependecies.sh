@@ -15,7 +15,7 @@ trap 'error ${LINENO}' ERR
 sudo apt update
 sudo apt-get install libglib2.0-dev libtbb-dev python3-dev python3-pip cmake
 
-CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 SKIPS=" "
 DASHES="================================================"
@@ -32,7 +32,7 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #	Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
 echo ${SKIPS}
-echo " ========== Building OpenVINO libraries ==========="
+echo " ========== Building OpenVINO Libraries ==========="
 echo ${SKIPS}
 
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
@@ -59,7 +59,7 @@ export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${OPENCV_DIRS[0]}/opencv/lib
 make -j$(nproc)
 
 #=============================================================
-#	Build gflags
+#	Build Gflags
 #=============================================================
 echo ${SKIPS}
 echo " ============ Building Gflags ==========="
@@ -76,7 +76,7 @@ cmake .. && make
 #	Build boost
 #=============================================================
 echo ${SKIPS}
-echo "========= Building boost =========="
+echo "========= Building Boost =========="
 echo ${SKIPS}
 
 BOOST_DIR=${DEPS_DIR}/boost
@@ -95,7 +95,7 @@ cd boost_1_72_0
 #	Build loadgen
 #===============================================================
 echo ${SKIPS}
-echo " =========== Building mlperf loadgenerator =========="
+echo " =========== Building MLPerf Load Generator =========="
 echo ${SKIPS}
 
 MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
@@ -150,11 +150,18 @@ cmake -DInferenceEngine_DIR=${OPENVINO_DIR}/build/ \
 
 make
 
+if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
+        mkdir -p ${CUR_DIR}/bin
+        cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
+fi
+rm -rf ${SOURCE_DIR}
+rm -rf ${MLPERF_DIR}/inference_results_v1.0
+
 echo ${SKIPS}
 echo ${DASHES}
 if [ -e ${SOURCE_DIR}/Release/ov_mlperf ]; then
-        echo -e "\e[1;32m ov_mlperf built at ${SOURCE_DIR}/Release/ov_mlperf            \e[0m"
-        echo " "
+        echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
+        echo ${SKIPS}
         echo " * * * Important directories * * *"
         echo -e "\e[1;32m OPENVINO_LIBRARIES=${OPENVINO_DIR}/bin/intel64/Release/lib    \e[0m"
         echo -e "\e[1;32m OPENCV_LIBRARIES=${OPENCV_DIRS[0]}/opencv/lib                 \e[0m"
