@@ -128,6 +128,8 @@ echo ${SKIPS}
 echo " ========== Building ov_mlperf ==========="
 echo ${SKIPS}
 
+git clone https://github.com/mlcommons/inference_results_v1.0.git 
+cp -r inference_results_v1.0/closed/Intel/code/resnet50/openvino/src ${CUR_DIR}
 SOURCE_DIR=${CUR_DIR}/src
 cd ${SOURCE_DIR}
 
