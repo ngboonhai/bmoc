@@ -1,4 +1,5 @@
-#!/bin/bash
+#set -eo pipefail
+set -x
 
 error() {
     local code="${3:-1}"
