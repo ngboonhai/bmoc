@@ -15,7 +15,7 @@ trap 'error ${LINENO}' ERR
 sudo apt update
 sudo apt-get install libglib2.0-dev libtbb-dev python3-dev python3-pip cmake
 
-CUR_DIR=`pwd`
+CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 BUILD_DIRECTORY=${CUR_DIR}
 SKIPS=" "
 DASHES="================================================"
@@ -32,7 +32,7 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #	Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
 echo ${SKIPS}
-echo " ========== Building OpenVINO Libraries ==========="
+echo " ========== Building OpenVINO libraries ==========="
 echo ${SKIPS}
 
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
@@ -59,7 +59,7 @@ export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${OPENCV_DIRS[0]}/opencv/lib
 make -j$(nproc)
 
 #=============================================================
-#	Build Gflags
+#	Build gflags
 #=============================================================
 echo ${SKIPS}
 echo " ============ Building Gflags ==========="
@@ -76,7 +76,7 @@ cmake .. && make
 #	Build boost
 #=============================================================
 echo ${SKIPS}
-echo "========= Building Boost =========="
+echo "========= Building boost =========="
 echo ${SKIPS}
 
 BOOST_DIR=${DEPS_DIR}/boost
@@ -95,7 +95,7 @@ cd boost_1_72_0
 #	Build loadgen
 #===============================================================
 echo ${SKIPS}
-echo " =========== Building MLPerf Load Generator =========="
+echo " =========== Building mlperf loadgenerator =========="
 echo ${SKIPS}
 
 MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
@@ -109,7 +109,7 @@ python3 -m pip install absl-py numpy pybind11
 git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
 
 cd ${MLPERF_INFERENCE_REPO}/loadgen
-git checkout r1.0
+git checkout r0.7
 git submodule update --init --recursive
 
 mkdir build && cd build
@@ -147,41 +147,21 @@ cmake -DInferenceEngine_DIR=${OPENVINO_DIR}/build/ \
 		-DCMAKE_BUILD_TYPE=Release \
 		-Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
 		..
+
 make
 
 echo ${SKIPS}
 echo ${DASHES}
-if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
-        mkdir -p ${CUR_DIR}/bin
-        cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
-	
-        ## Print and notify where the MLperf Library location
-	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
-        echo ${SKIPS}
+if [ -e ${SOURCE_DIR}/Release/ov_mlperf ]; then
+        echo -e "\e[1;32m ov_mlperf built at ${SOURCE_DIR}/Release/ov_mlperf            \e[0m"
+        echo " "
         echo " * * * Important directories * * *"
         echo -e "\e[1;32m OPENVINO_LIBRARIES=${OPENVINO_DIR}/bin/intel64/Release/lib    \e[0m"
         echo -e "\e[1;32m OPENCV_LIBRARIES=${OPENCV_DIRS[0]}/opencv/lib                 \e[0m"
         echo -e "\e[1;32m OMP_LIBRARY=${OPENVINO_DIR}/inference-engine/temp/omp/lib     \e[0m"
         echo -e "\e[1;32m BOOST_LIBRARIES=${BOOST_DIR}/boost_1_72_0/stage/lib           \e[0m"
         echo -e "\e[1;32m GFLAGS_LIBRARIES=${GFLAGS_DIR}/gflags-build/lib               \e[0m"
-	
-	## Setup mlperf environment variable
-	echo "#!/bin/bash" >  ${CUR_DIR}/setup_envs.sh
-	echo ${SKIPS} >> ${CUR_DIR}/setup_envs.sh
-	echo "OPENVINO_LIBRARIES=${OPENVINO_DIR}/bin/intel64/Release/lib" >> ${CUR_DIR}/setup_envs.sh
-        echo "OPENCV_LIBRARIES=${OPENCV_DIRS[0]}/opencv/lib" >> ${CUR_DIR}/setup_envs.sh
-        echo "OMP_LIBRARY=${OPENVINO_DIR}/inference-engine/temp/omp/lib" >> ${CUR_DIR}/setup_envs.sh
-        echo "BOOST_LIBRARIES=${BOOST_DIR}/boost_1_72_0/stage/lib" >> ${CUR_DIR}/setup_envs.sh
-        echo "GFLAGS_LIBRARIES=${GFLAGS_DIR}/gflags-build/lib" >> ${CUR_DIR}/setup_envs.sh
-	echo ${SKIPS} >> ${CUR_DIR}/setup_envs.sh
-	echo "export LD_LIBRARY_PATH=${OPENVINO_LIBRARIES}:${OMP_LIBRARY}:${OPENCV_LIBRARIES}:${BOOST_LIBRARIES}:${GFLAGS_LIBRARIES}" >> ${CUR_DIR}/setup_envs.sh
-	echo "export OV_MLPERF_BIN=${CUR_DIR}/bin/ov_mlperf" >> ${CUR_DIR}/setup_envs.sh
-	echo "export DATA_DIR=${CUR_DIR}/datasets"  >> ${CUR_DIR}/setup_envs.sh
-	echo "export MODELS_DIR=${CUR_DIR}/models"  >> ${CUR_DIR}/setup_envs.sh
-	echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh     
 else
         echo -e "\e[0;31m ov_mlperf not built. Please check logs on screen\e[0m"
 fi
 echo ${DASHES}
-rm -rf ${SOURCE_DIR}
-rm -rf ${MLPERF_DIR}/inference_results_v1.0
