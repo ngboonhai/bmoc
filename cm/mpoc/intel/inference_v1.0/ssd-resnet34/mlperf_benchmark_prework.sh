@@ -11,18 +11,20 @@ if [ ! -d ${CUR_DIR}/datasets/ssd-resnet34 ]; then
     unzip val2017.zip -d ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val
 	unzip annotations_trainval2017.zip -d ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val
     rm ${CUR_DIR}/ILSVRC2012_img_val.tar
+else
+	echo -e "\e[1;32m COCO val2017 datatsets available in system          \e[0m"
 fi
 
 ## Create resnet imagenet validation text file
 shuf -n 2000 bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/val_map.txt > ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val2017/val_map.txt
-cat ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val_map.txt | wc -l
+cat ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val2017/val_map.txt | wc -l
 
 
 ## Download ssd-resnet34 model file
 if [ ! -f ${CUR_DIR}/models/ssd-resnet34/resnet34-ssd1200.onnx ]; then
 	mkdir ${CUR_DIR}/models/ssd-resnet34
 	cd ${CUR_DIR}/models/ssd-resnet34
-	https://zenodo.org/record/3228411/files/resnet34-ssd1200.onnx
+	wget https://zenodo.org/record/3228411/files/resnet34-ssd1200.onnx
 	cd ${CUR_DIR}
 fi
 
