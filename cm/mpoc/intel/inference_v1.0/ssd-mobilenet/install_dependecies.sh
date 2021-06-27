@@ -23,10 +23,6 @@ DASHES="================================================"
 
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
-if [ -e ${MLPERF_DIR} ]; then
-    sudo rm -r ${MLPERF_DIR}
-fi
-
 DEPS_DIR=${MLPERF_DIR}/dependencies
 
 #====================================================================
@@ -149,7 +145,12 @@ echo ${SKIPS}
           -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
           ..
 	make
-
+	if [ "$?" -ne "0" ]; then
+        	echo -e "\e[0;31m [Error]: ov_mlperf not built. Please check logs on screen!!\e[0m"
+		exit 1
+    	else
+        	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
+    	fi
 	echo ${SKIPS}
 	echo ${DASHES}
 
@@ -158,7 +159,6 @@ echo ${SKIPS}
     cp  bmoc/cm/mpoc/intel/scripts/*  ${CUR_DIR}
     
     ## Print and notify where the MLperf Library location
-    echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
     echo ${SKIPS}
     echo " * * * Important directories * * *"
     echo -e "\e[1;32m OPENVINO_LIBRARIES=${OPENVINO_DIR}/bin/intel64/Release/lib    \e[0m"
@@ -183,7 +183,7 @@ echo ${SKIPS}
 		echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh
 	fi
 else
-        echo -e "\e[0;31m ov_mlperf not built. Please check logs on screen\e[0m"
+        echo -e "\e[0;32m Existing ov_mlperf binary detected, no build is needed. \e[0m"
 fi
 echo ${DASHES}
 if [ -d ${SOURCE_DIR} ]; then
