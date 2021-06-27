@@ -53,7 +53,7 @@ if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_fp16.xml ]; then
         --model_name resnet50_fp16 \
         --output softmax_tensor
         
-    echo -e "\e[0;32m Resnet50 model files generated!!\e[0m"
+    echo -e "\e[0;32m Download Resnet50 model, optimize and IR generated!!\e[0m"
 else
-    echo -e "\e[0;32m Resnet50 model files detected!!\e[0m"
+    echo -e "\e[0;32m Resnet50 IR files detected!!\e[0m"
 fi
