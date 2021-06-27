@@ -44,7 +44,7 @@ class MLPerfRunner():
 				if not ret_code:
 					self.writeOutput(self.workloads[w_id], append)
 				else:
-					print("                      ERROR: Run failed")
+					print("                      [ERROR]: Run failed")
 					sys.exit(1)
 					
 				append = True
