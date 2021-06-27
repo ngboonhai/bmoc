@@ -1,0 +1,68 @@
+## Pull container images from Docker Hub repository or private repository
+FROM ubuntu:18.04
+
+# Set apt-get to noninteractive install.
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install apt-utils and locales. Generate en_US.UTF-8 locale.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        apt-utils \
+	build-essential \
+        locales && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    locale-gen "en_US.UTF-8"
+
+# Set locale environment variables.
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+
+## Install basic Ubuntu tools requirement.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    git \
+	vim \
+	sudo \
+	wget \
+	curl \
+	gnupg \
+	unzip \
+	ca-certificates \
+	python \
+        python-setuptools \
+	python3 \
+        python3-setuptools \
+        python3-pip \
+	apt-utils && \
+	apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    locale-gen "en_US.UTF-8"
+
+# Set Python version cofiguration path
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2
+    
+# Ubuntu 20.04's repository doesn't include python-pip by default, it needs to be obtained from somewhere else
+# Refer to this page for more details https://linuxhint.com/install_python_pip_tool_ubuntu/
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py && \
+    python2 get-pip.py && \
+    rm get-pip.py
+
+SHELL ["/bin/bash","-o", "pipefail", "-c"]
+# Add proxies to apt.conf
+RUN echo 'Acquire::http::Proxy "http://proxy-dmz.intel.com:911";' > /etc/apt/apt.conf && \
+    echo 'Acquire::https::Proxy "http://proxy-dmz.intel.com:912";' >> /etc/apt/apt.conf && \
+    echo 'Acquire::ftp::Proxy "http://proxy-dmz.intel.com:911";' >> /etc/apt/apt.conf
+
+# Download gosu, it is to step down from root to a non-privileged user during container startup.
+# For more information, please refer to https://github.com/tianon/gosu.
+RUN curl -k -L -o /usr/local/bin/gosu https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 && \
+    chmod +x /usr/local/bin/gosu
+    
+# The entrypoint.sh script will switch to a non-privileged user for any execution input.
+# It is also to handle the username, uid and gid to solve permission issue whenever there is a volume mount into container.
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
+
+# Configuration, run bash interpreter by default 
+CMD ["/bin/bash"]

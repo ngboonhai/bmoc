@@ -1,0 +1,19 @@
+{
+        "Iterations": 3,
+        "DelayBetweenRuns": 30,
+        "Workloads":
+        [
+      {
+          "model_name": "bert",
+          "scenario": "Offline",
+          "device": "CPU",
+          "precision": "int8",
+          "batch_size": [1],
+          "instances": 20,
+          "nstreams": 10,
+          "nseq": 128,
+          "nseq_step": 64,
+          "total_sample_count": 10833
+          }
+        ]
+}
