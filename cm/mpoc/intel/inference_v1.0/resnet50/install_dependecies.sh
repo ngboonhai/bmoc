@@ -23,10 +23,6 @@ DASHES="================================================"
 
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
-if [ -e ${MLPERF_DIR} ]; then
-    sudo rm -r ${MLPERF_DIR}
-fi
-
 DEPS_DIR=${MLPERF_DIR}/dependencies
 
 #====================================================================
