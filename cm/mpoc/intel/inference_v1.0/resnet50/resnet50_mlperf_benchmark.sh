@@ -9,7 +9,7 @@ if [ ! -d ${CUR_DIR}/Configs/mlperf.conf ]; then
 	cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/mlperf.conf ${CUR_DIR}/Configs/
 	echo -e "\e[0;32m Copied default configudation to Configs directory!!\e[0m"
 else
-	echo -e "\e[0;31m Existing deafult configudation detected!!\e[0m"
+	echo -e "\e[0;32m Existing deafult configudation detected!!\e[0m"
 fi
 
 
@@ -19,7 +19,7 @@ if [ ! -d ${CUR_DIR}/Configs/resnet50 ]; then
 	cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/resnet50/config/* ${CUR_DIR}/Configs/resnet50/
 	echo -e "\e[0;32m Copied Resnet50 mlperf configudation to current working directory!!\e[0m"
 else
-	echo -e "\e[0;31m Existing Resnet50 mlperf configudation detected!!\e[0m"
+	echo -e "\e[0;32m Existing Resnet50 mlperf configudation detected!!\e[0m"
 fi
 
 ## Sanity check all the pre-work is ready before run mlperf benchmark task
