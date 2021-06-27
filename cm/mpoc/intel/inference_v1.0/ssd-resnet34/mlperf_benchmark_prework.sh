@@ -29,7 +29,7 @@ if [ ! -f ${CUR_DIR}/models/ssd-resnet34/resnet34-ssd1200.onnx ]; then
 fi
 
 ## Convert existing model file into FP16
-python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model_optimizer/mo.py \
+python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo.py \
   	--input_model ${CUR_DIR}/models/ssd-resnet34/resnet34-ssd1200.onnx \
 	--data_type FP16 \
 	--output_dir ${CUR_DIR}/models/ssd-resnet34 \
