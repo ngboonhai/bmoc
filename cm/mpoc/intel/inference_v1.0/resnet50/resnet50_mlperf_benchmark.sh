@@ -11,10 +11,7 @@ if [ ! -d ${CUR_DIR}/Configs/mlperf.conf ]; then
 else
     echo -e "\e[0;32m Existing deafult configudation detected!!\e[0m"
 fi
-<<<<<<< HEAD
-=======
 echo ${SKIPS}
->>>>>>> 82b3d6e2ad56e9af6386bacf5bf1dafe1e990ec3
 
 ##  Check and ready Resnet50 MLPerf configuration files.
 if [ ! -d ${CUR_DIR}/Configs/resnet50 ]; then
