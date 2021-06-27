@@ -12,6 +12,7 @@ else
     echo -e "\e[0;32m Existing deafult configudation detected!!\e[0m"
 fi
 
+
 ##  Check and ready Resnet50 MLPerf configuration files.
 if [ ! -d ${CUR_DIR}/Configs/resnet50 ]; then
     mkdir -p ${CUR_DIR}/Configs/resnet50
