@@ -4,6 +4,15 @@ set -x
 CUR_DIR=`pwd`
 SKIPS=" "
 
+## Sanity Check and copy mlperf python scripts
+if [ ! -f ${CUR_DIR}/run_mlperf.sh ]; then
+	cp ${CUR_DIR}/bmoc/cm/mpoc/intel/scrips/* ${CUR_DIR}/
+	echo -e "\e[0;32m Copied mlperf scripts to directory!!\e[0m"
+else
+    echo -e "\e[0;32m Existing mlperf scripts detected!!\e[0m"
+fi
+echo ${SKIPS}
+
 ##  Check over all default MLPerf configuration files.
 if [ ! -d ${CUR_DIR}/Configs/mlperf.conf ]; then
     mkdir -p ${CUR_DIR}/Configs
