@@ -9,9 +9,9 @@ if [ ! -d ${CUR_DIR}/datasets/resnet50 ]; then
     wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
     tar xf ILSVRC2012_img_val.tar -C ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val
     rm ${CUR_DIR}/ILSVRC2012_img_val.tar
-    echo -e "\e[0;31m Resnet50 datasets downloaded and extracted complete!!\e[0m"
+    echo -e "\e[0;32m Resnet50 datasets downloaded and extracted complete!!\e[0m"
 else
-    echo -e "\e[0;31m Resnet50 datasets detected!!\e[0m"
+    echo -e "\e[0;32m Resnet50 datasets detected!!\e[0m"
 fi
 
 ## Create resnet imagenet validation text file
