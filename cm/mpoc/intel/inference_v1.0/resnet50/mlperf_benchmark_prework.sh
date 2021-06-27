@@ -15,7 +15,7 @@ else
 fi
 
 ## Create resnet imagenet validation text file
-if [ ! -f ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/val_map.txt ]: then
+if [ ! -f ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/val_map.txt ]; then
     shuf -n 2000 bmoc/cm/mpoc/intel/inference_v1.0/resnet50/val_map.txt > ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/val_map.txt
     cat ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/val_map.txt | wc -l
     echo -e "\e[0;32m Resnet50 imagenet validation file generated!!\e[0m"
