@@ -23,14 +23,14 @@ else
 fi
 
 ## Sanity check all the pre-work is ready before run mlperf benchmark task
-if [ ! -f ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val/ ]; then
+if [ -f ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val/ ]; then
     echo -e "\e[0;32m ssd-mobilenet imagenet datasets is ready!!\e[0m"
 else
     echo -e "\e[0;31m Unable to find ssd-mobilenet imagenet datasets, please check!!\e[0m"
     exit 1
 fi
 
-if [ ! -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
+if [ -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
     echo -e "\e[0;32m ssd-mobilenet IR files is ready!!\e[0m"
 else
     echo -e "\e[0;31m Unable to find ssd-mobilenet IR file, please check!!\e[0m"
