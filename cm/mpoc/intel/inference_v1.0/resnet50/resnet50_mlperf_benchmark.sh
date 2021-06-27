@@ -27,12 +27,14 @@ if [ ! -f ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/ ]: then
 	echo -e "\e[0;32m Resnet50 imagenet datasets is ready!!\e[0m"
 else
 	echo -e "\e[0;31m Unable to find resnet50 imagenet datasets, please check!!\e[0m"
+	exit 1
 fi
 
 if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_fp16.xml ]; then
 	echo -e "\e[0;32m Resnet50 IR files is ready!!\e[0m"
 else
 	echo -e "\e[0;31m Unable to find resnet50 IR file, please check!!\e[0m"
+	exit 1
 fi
 
 ## Config mlperf benchmark scenario and Test mode default values
