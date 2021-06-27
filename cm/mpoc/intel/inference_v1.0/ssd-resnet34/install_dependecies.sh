@@ -56,7 +56,7 @@ if [ ! -d ${OPENVINO_DIR} ]; then
 
 	make -j$(nproc)
 else
-	echo -e "\e[0;31m OpenVinon Toolkit installed!!\e[0m"
+	echo -e "\e[0;32m OpenVinon Toolkit installed!!\e[0m"
 fi
 
 #=============================================================
@@ -73,7 +73,7 @@ if [ ! -d ${GFLAGS_DIR} ]; then
 	mkdir gflags-build && cd gflags-build
 	cmake .. && make 
 else
-	echo -e "\e[0;31m GFLAGS Tools installed!!\e[0m"
+	echo -e "\e[0;32m GFLAGS Tools installed!!\e[0m"
 fi
 
 #=============================================================
@@ -93,7 +93,7 @@ if [ ! -d ${BOOST_DIR} ]; then
 	./bootstrap.sh --with-libraries=filesystem 
 	./b2 --with-filesystem
 else
-	echo -e "\e[0;31m BOOST Tools installed!!\e[0m"
+	echo -e "\e[0;32m BOOST Tools installed!!\e[0m"
 fi
 
 #===============================================================
