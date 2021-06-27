@@ -30,7 +30,7 @@ echo ${SKIPS}
 ## Check ssd-resnet34 model folder..
 if [ ! -d ${CUR_DIR}/models/ssd-resnet34 ]; then
     mkdir -p ${CUR_DIR}/models/ssd-resnet34
-    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/model ${CUR_DIR}/Configs/ssd-resnet34/
+    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/model/* ${CUR_DIR}/models/ssd-resnet34/
     echo -e "\e[0;32m Created ssd-resnet34 model folder!!\e[0m"
 else
     echo -e "\e[0;32m Existing ssd-resnet34 model folder detected!!\e[0m"
