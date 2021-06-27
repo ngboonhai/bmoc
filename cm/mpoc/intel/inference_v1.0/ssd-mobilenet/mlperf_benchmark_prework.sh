@@ -40,24 +40,24 @@ echo ${SKIPS}
 
 ## Download ssd-mobilenet TenrsorFlow model file and optimize the file with OpenVino toolkit
 if [ ! -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
-    cd ${CUR_DIR}/models/ssd-mobilenet
-    if [ ! -f ssd_mobilenet_v1_coco_2018_01_28.onnx ]; then
-        wget https://zenodo.org/record/4735652/files/ssd_mobilenet_v1_coco_2018_01_28.onnx
+    if [ ! -f ${CUR_DIR}/models/ssd-mobilenet/ssd_mobilenet_v1_coco_2018_01_28.onnx ]; then
+    	cd ${CUR_DIR}/models/ssd-mobilenet
+    	wget https://zenodo.org/record/4735652/files/ssd_mobilenet_v1_coco_2018_01_28.onnx
+	cd ${CUR_DIR}
     fi
-    cd ${CUR_DIR}
-
+    
     echo "========== Genereting ssd-mobilenet IR files============="
-## Convert existing model file into FP16
+    ## Convert existing model file into FP16
     python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo.py \
         --input_model ${CUR_DIR}/models/ssd-mobilenet/ssd_mobilenet_v1_coco_2018_01_28.onnx \
-		--data_type FP16 \
-		--output_dir ${CUR_DIR}/models/ssd-mobilenet \
-		--model_name ssd-mobilenet_fp16 \
-		--input image \
-		--mean_values [123.675,116.28,103.53] \
-		--scale_values [58.395,57.12,57.375] \
-		--input_shape "[1,3,300,300]" \
-		--keep_shape_ops
+	--data_type FP16 \
+	--output_dir ${CUR_DIR}/models/ssd-mobilenet \
+	--model_name ssd-mobilenet_fp16 \
+	--input image \
+	--mean_values [123.675,116.28,103.53] \
+	--scale_values [58.395,57.12,57.375] \
+	--input_shape "[1,3,300,300]" \
+	--keep_shape_ops
     if [ "$?" -ne "0" ]; then
         echo -e "\e[0;31m [Error]: IR generate failed, please check!!\e[0m"
     else
