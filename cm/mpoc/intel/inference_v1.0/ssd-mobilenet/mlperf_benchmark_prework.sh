@@ -41,7 +41,9 @@ echo ${SKIPS}
 ## Download ssd-mobilenet TenrsorFlow model file and optimize the file with OpenVino toolkit
 if [ ! -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
     cd ${CUR_DIR}/models/ssd-mobilenet
-    wget https://zenodo.org/record/4735652/files/ssd_mobilenet_v1_coco_2018_01_28.onnx
+    if [ ! -f ssd_mobilenet_v1_coco_2018_01_28.onnx ]; then
+        wget https://zenodo.org/record/4735652/files/ssd_mobilenet_v1_coco_2018_01_28.onnx
+    fi
     cd ${CUR_DIR}
 
     echo "========== Genereting ssd-mobilenet IR files============="
@@ -56,7 +58,11 @@ if [ ! -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
 		--scale_values [58.395,57.12,57.375] \
 		--input_shape "[1,3,300,300]" \
 		--keep_shape_ops
-    echo -e "\e[0;32m ssd-mobilenet model download, optimized and IR files generated!!\e[0m"
+    if [ "$?" -ne "0" ]; then
+        echo -e "\e[0;31m [Error]: IR generate failed, please check!!\e[0m"
+    else
+        echo -e "\e[0;32m ssd-mobilenet model download, optimized and IR files generated!!\e[0m"
+    fi
 else
     echo -e "\e[0;32m ssd-mobilenet IR files detected!!\e[0m"
 fi
