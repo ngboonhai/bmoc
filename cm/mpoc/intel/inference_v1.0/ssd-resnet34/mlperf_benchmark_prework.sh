@@ -45,19 +45,23 @@ if [ ! -f ${CUR_DIR}/models/ssd-resnet34/ssd-resnet34_fp16.xml ]; then
 		cd ${CUR_DIR}
 	fi
 
-	echo "========== Genereting ssd-resnet34 IR files============="
-	## Convert existing model file into FP16
-	python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo.py \
-		--input_model ${CUR_DIR}/models/ssd-resnet34/resnet34-ssd1200.onnx \
-		--data_type FP16 \
-		--output_dir ${CUR_DIR}/models/ssd-resnet34 \
-		--model_name ssd-resnet34_fp16 \
-		--input image \
-		--mean_values [123.675,116.28,103.53] \
-		--scale_values [58.395,57.12,57.375] \
-		--input_shape "[1,3,1200,1200]" \
-		--keep_shape_ops
-	echo -e "\e[0;32m ssd-resnet34 model download, optimized and IR files files generated!!\e[0m"
+    echo "========== Genereting ssd-resnet34 IR files============="
+    ## Convert existing model file into FP16
+    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo.py \
+    	--input_model ${CUR_DIR}/models/ssd-resnet34/resnet34-ssd1200.onnx \
+	--data_type FP16 \
+	--output_dir ${CUR_DIR}/models/ssd-resnet34 \
+	--model_name ssd-resnet34_fp16 \
+	--input image \
+	--mean_values [123.675,116.28,103.53] \
+	--scale_values [58.395,57.12,57.375] \
+	--input_shape "[1,3,1200,1200]" \
+	--keep_shape_ops
+    if [ "$?" -ne "0" ]; then
+        echo -e "\e[0;31m [Error]: IR generate failed, please check!!\e[0m"
+    else
+        echo -e "\e[0;32m ssd-resnet34 model download, optimized and IR files files generated!!\e[0m"
+    fi
 else
     echo -e "\e[0;32m ssd-resnet34 IR files detected!!\e[0m"
 fi
