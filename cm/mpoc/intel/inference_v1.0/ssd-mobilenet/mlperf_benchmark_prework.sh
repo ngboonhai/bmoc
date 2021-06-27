@@ -46,7 +46,7 @@ if [ ! -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
 
     echo "========== Genereting ssd-mobilenet IR files============="
 ## Convert existing model file into FP16
-    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model_optimizer/mo.py \
+    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo.py \
         --input_model ${CUR_DIR}/models/ssd-mobilenet/ssd_mobilenet_v1_coco_2018_01_28.onnx \
 		--data_type FP16 \
 		--output_dir ${CUR_DIR}/models/ssd-mobilenet \
