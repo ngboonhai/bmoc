@@ -38,13 +38,15 @@ echo ${SKIPS}
 
 ## Download resnet50 TenrsorFlow model file and optimize the file with OpenVino toolkit
 if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_fp16.xml ]; then
-    cd ${CUR_DIR}/models/resnet50
-    wget https://zenodo.org/record/2535873/files/resnet50_v1.pb
-    cd ${CUR_DIR}
+    if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_v1.pb ]; then
+        cd ${CUR_DIR}/models/resnet50
+        wget https://zenodo.org/record/2535873/files/resnet50_v1.pb
+        cd ${CUR_DIR}
+    fi
 
     echo "========== Genereting Resnet50 IR files============="
 ## Convert existing model file into FP16
-    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model_optimizer/mo_tf.py \
+    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo_tf.py \
         --input_model ${CUR_DIR}/models/resnet50/resnet50_v1.pb \
         --data_type FP16 \
         --output_dir ${CUR_DIR}/models/resnet50 \
