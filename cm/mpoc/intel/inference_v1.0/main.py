@@ -45,6 +45,7 @@ class MLPerfRunner():
 					self.writeOutput(self.workloads[w_id], append)
 				else:
 					print("                      ERROR: Run failed")
+					sys.exit(1)
 					
 				append = True
 				if total_runs < num_wklds:
