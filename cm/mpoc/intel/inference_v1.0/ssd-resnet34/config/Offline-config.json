@@ -7,7 +7,7 @@
 	  "model_name": "ssd-resnet34",
 	  "scenario": "Offline",
 	  "device": "CPU",
-	  "precision": "int8",
+	  "precision": "fp16",
 	  "batch_size": [2,4],
 	  "instances": 8,
 	  "nstreams": 4,
