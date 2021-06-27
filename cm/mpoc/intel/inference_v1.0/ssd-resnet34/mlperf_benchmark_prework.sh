@@ -40,7 +40,6 @@ echo ${SKIPS}
 ## Download ssd-resnet34 model file
 if [ ! -f ${CUR_DIR}/models/ssd-resnet34/ssd-resnet34_fp16.xml ]; then
 	if [ ! -f ${CUR_DIR}/models/ssd-resnet34/resnet34-ssd1200.onnx ]; then
-		mkdir ${CUR_DIR}/models/ssd-resnet34
 		cd ${CUR_DIR}/models/ssd-resnet34
 		wget https://zenodo.org/record/3228411/files/resnet34-ssd1200.onnx
 		cd ${CUR_DIR}
