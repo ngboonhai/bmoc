@@ -24,7 +24,7 @@ fi
 echo ${SKIPS}
 
 ## Sanity check all the pre-work is ready before run mlperf benchmark task
-if [ -f ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/ ]; then
+if [ -d ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val ]; then
     echo -e "\e[0;32m Resnet50 imagenet datasets is ready!!\e[0m"
 else
     echo -e "\e[0;31m Unable to find resnet50 imagenet datasets, please check!!\e[0m"
