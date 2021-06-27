@@ -3,6 +3,16 @@ set -x
 
 CUR_DIR=`pwd`
 
+##  Check over all default MLPerf configuration files.
+if [ ! -d ${CUR_DIR}/Configs/mlperf.conf ]; then
+	mkdir -p ${CUR_DIR}/Configs
+	cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/mlperf.conf ${CUR_DIR}/Configs/
+	echo -e "\e[0;32m Copied default configudation to Configs directory!!\e[0m"
+else
+	echo -e "\e[0;31m Existing deafult configudation detected!!\e[0m"
+fi
+
+
 ##  Check and ready Resnet50 MLPerf configuration files.
 if [ ! -d ${CUR_DIR}/Configs/resnet50 ]; then
 	mkdir -p ${CUR_DIR}/Configs/resnet50
