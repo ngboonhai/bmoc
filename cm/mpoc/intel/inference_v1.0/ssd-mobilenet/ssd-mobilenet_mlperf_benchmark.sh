@@ -2,7 +2,7 @@
 set -x
 
 CUR_DIR=`pwd`
-
+SKIPS=" "
 ##  Check over all default MLPerf configuration files.
 if [ ! -d ${CUR_DIR}/Configs/mlperf.conf ]; then
     mkdir -p ${CUR_DIR}/Configs
@@ -11,7 +11,7 @@ if [ ! -d ${CUR_DIR}/Configs/mlperf.conf ]; then
 else
     echo -e "\e[0;32m Existing deafult configudation detected!!\e[0m"
 fi
-
+echo ${SKIPS}
 
 ##  Check and ready ssd-mobilenet MLPerf configuration files.
 if [ ! -d ${CUR_DIR}/Configs/ssd-mobilenet ]; then
@@ -21,6 +21,7 @@ if [ ! -d ${CUR_DIR}/Configs/ssd-mobilenet ]; then
 else
     echo -e "\e[0;32m Existing ssd-mobilenet mlperf configudation detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 ## Sanity check all the pre-work is ready before run mlperf benchmark task
 if [ -d ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val ]; then
@@ -29,6 +30,7 @@ else
     echo -e "\e[0;31m Unable to find ssd-mobilenet imagenet datasets, please check!!\e[0m"
     exit 1
 fi
+echo ${SKIPS}
 
 if [ -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
     echo -e "\e[0;32m ssd-mobilenet IR files is ready!!\e[0m"
@@ -36,6 +38,7 @@ else
     echo -e "\e[0;31m Unable to find ssd-mobilenet IR file, please check!!\e[0m"
     exit 1
 fi
+echo ${SKIPS}
 
 ## Config mlperf benchmark scenario and Test mode default values
 SCENARIO=$1
