@@ -2,6 +2,7 @@
 set -x
 
 CUR_DIR=`pwd`
+SKIPS=" "
 
 ## Download dataset from Image-net Org.
 if [ ! -d ${CUR_DIR}/datasets/resnet50 ]; then
@@ -13,6 +14,7 @@ if [ ! -d ${CUR_DIR}/datasets/resnet50 ]; then
 else
     echo -e "\e[0;32m Resnet50 datasets detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 ## Create resnet imagenet validation text file
 if [ ! -f ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/val_map.txt ]; then
@@ -22,6 +24,7 @@ if [ ! -f ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val/val_map.t
 else
     echo -e "\e[0;32m Existing Resnet50 validation file detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 ## Check Resnet50 model folder..
 if [ ! -d ${CUR_DIR}/models/resnet50 ]; then
@@ -31,16 +34,19 @@ if [ ! -d ${CUR_DIR}/models/resnet50 ]; then
 else
     echo -e "\e[0;32m Existing Resnet50 model folder detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 ## Download resnet50 TenrsorFlow model file and optimize the file with OpenVino toolkit
 if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_fp16.xml ]; then
-    cd ${CUR_DIR}/models/resnet50
-    wget https://zenodo.org/record/2535873/files/resnet50_v1.pb
-    cd ${CUR_DIR}
+    if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_v1.pb ]; then
+        cd ${CUR_DIR}/models/resnet50
+        wget https://zenodo.org/record/2535873/files/resnet50_v1.pb
+        cd ${CUR_DIR}
+    fi
 
-    echo "========== Genereting Resnet50 IR files=============
+    echo "========== Genereting Resnet50 IR files============="
 ## Convert existing model file into FP16
-    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model_optimizer/mo_tf.py \
+    python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo_tf.py \
         --input_model ${CUR_DIR}/models/resnet50/resnet50_v1.pb \
         --data_type FP16 \
         --output_dir ${CUR_DIR}/models/resnet50 \
@@ -48,7 +54,8 @@ if [ ! -f ${CUR_DIR}/models/resnet50/resnet50_fp16.xml ]; then
         --mean_values "[123.68, 116.78, 103.94]" \
         --model_name resnet50_fp16 \
         --output softmax_tensor
-    echo -e "\e[0;32m Resnet50 model files generated!!\e[0m"
+        
+    echo -e "\e[0;32m Download Resnet50 model, optimize and IR generated!!\e[0m"
 else
-    echo -e "\e[0;32m Resnet50 model files detected!!\e[0m"
+    echo -e "\e[0;32m Resnet50 IR files detected!!\e[0m"
 fi
