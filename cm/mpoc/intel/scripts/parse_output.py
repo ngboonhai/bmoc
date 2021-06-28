@@ -46,7 +46,7 @@ class MLPerfParser(object):
 		self.benchmark_scenario = "---"
 		self.benchmark_model = "---"
 		self.device_name = "---"
-		self.benchmark_metrics = {"Single Stream": "90th %tile Latency", "Offline": "Throughput", "Server": "Completed QPS"}
+		self.benchmark_metrics = {"SingleStream": "90th %tile Latency", "Offline": "Throughput", "Server": "Completed QPS"}
 		self.benchmark_val = "--"
 		self.batch_size = "--"
 		self.instances = "--"
