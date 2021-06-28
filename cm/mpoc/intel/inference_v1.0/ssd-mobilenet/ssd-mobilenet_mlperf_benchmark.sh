@@ -4,6 +4,9 @@ set -x
 CUR_DIR=`pwd`
 SKIPS=" "
 
+## Source system environment
+source setup_envs.sh
+
 ## Sanity Check and copy mlperf python scripts
 if [ ! -f ${CUR_DIR}/run_mlperf.sh ]; then
 	cp ${CUR_DIR}/bmoc/cm/mpoc/intel/scrips/* ${CUR_DIR}/
