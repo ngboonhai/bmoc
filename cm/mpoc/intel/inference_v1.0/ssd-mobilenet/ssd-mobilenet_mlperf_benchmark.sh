@@ -65,7 +65,7 @@ PRECISION=$2
 if [ "${PRECISION}" == "" ]; then
     PRECISION="int8"
 else
-    PRECISION=${SCENARIO}
+    PRECISION=${PRECISION}
 fi
 
 ## Run MLPerf benchmark for ssd-mobilenet model
