@@ -133,7 +133,7 @@ def validate_params(config_data={}):
 
 
         # Set other parameters
-        params["data_path"] = os.path.join(os.environ["DATA_DIR"],DATASETS[params["model_name"]])
+        params["data_path"] = os.path.join(os.environ["DATA_DIR"],params["model_name"],DATASETS[params["model_name"]])
         params["dataset"] = PREPROC[params["model_name"]]
         params["mlperf_conf"] = os.path.join(os.environ["CONFIGS_DIR"], "mlperf.conf")
         params["user_conf"] = os.path.join(os.environ["CONFIGS_DIR"], params["model_name"], "user.conf")
