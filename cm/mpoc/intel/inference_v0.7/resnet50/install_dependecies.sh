@@ -139,9 +139,9 @@ echo ${SKIPS}
 echo " ========== Building ov_mlperf ==========="
 echo ${SKIPS}
 
-	git clone https://github.com/mlcommons/inference_results_v0.7.git 
-	cp -r inference_results_v0.7/closed/Intel/code/resnet/resnet-ov ${CUR_DIR}/
-	SOURCE_DIR=${CUR_DIR}/resnet-ov
+	git clone https://github.com/mlcommons/inference_results_v1.0.git 
+	cp -r inference_results_v1.0/closed/Intel/code/resnet50/openvino/src ${CUR_DIR}/
+	SOURCE_DIR=${CUR_DIR}/src
 	cd ${SOURCE_DIR}
 
 	if [ -d build ]; then
@@ -205,6 +205,6 @@ if [ -d ${SOURCE_DIR} ]; then
 	rm -rf ${SOURCE_DIR}
 fi
 
-if [ -d ${MLPERF_DIR}/inference_results_v0.7 ]; then
-	rm -rf ${MLPERF_DIR}/inference_results_v0.7
+if [ -d ${MLPERF_DIR}/inference_results_v1.0 ]; then
+	rm -rf ${MLPERF_DIR}/inference_results_v1.0
 fi
