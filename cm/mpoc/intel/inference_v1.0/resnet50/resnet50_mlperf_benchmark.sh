@@ -40,16 +40,18 @@ echo ${SKIPS}
 if [ -d ${CUR_DIR}/datasets/resnet50/dataset-imagenet-ilsvrc2012-val ]; then
     echo -e "\e[0;32m Resnet50 imagenet datasets is ready!!\e[0m"
 else
-    echo -e "\e[0;31m Unable to find resnet50 imagenet datasets, please check!!\e[0m"
-    exit 1
+    echo -e "\e[0;31m Unable to find resnet50 imagenet datasets!!\e[0m"
+    echo -e "\e[0;31m System going to help to download resnet50 imagenet datasets, please wait... !!\e[0m"
+    ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/resnet50/mlperf_benchmark_prework.sh
 fi
 echo ${SKIPS}
 
 if [ -f ${CUR_DIR}/models/resnet50/resnet50_fp16.xml ]; then
     echo -e "\e[0;32m Resnet50 IR files is ready!!\e[0m"
 else
-    echo -e "\e[0;31m Unable to find resnet50 IR file, please check!!\e[0m"
-    exit 1
+    echo -e "\e[0;31m Unable to find resnet50 IR file!!\e[0m"
+    echo -e "\e[0;31m System going to help to run resnet50 IR file generation, please wait...!!\e[0m"
+    ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/resnet50/mlperf_benchmark_prework.sh
 fi
 echo ${SKIPS}
 
