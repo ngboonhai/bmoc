@@ -169,7 +169,7 @@ echo ${SKIPS}
 
     mkdir -p ${CUR_DIR}/bin
     cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
-    cp  bmoc/cm/mpoc/intel/scripts/*  ${CUR_DIR}
+    cp  bmoc/cm/mpoc/intel/scripts/*  ${CUR_DIR}/
     
     ## Print and notify where the MLperf Library location
     echo ${SKIPS}
