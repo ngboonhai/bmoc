@@ -12,7 +12,7 @@ if [ ! -d ${CUR_DIR}/datasets/ssd-mobilenet ]; then
     unzip val2017.zip -d ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val
 	unzip annotations_trainval2017.zip -d ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val
     rm ${CUR_DIR}/val2017.zip ${CUR_DIR}/annotations_trainval2017.zip
-    echo -e "\e[0;32m ssd-mobilenet datasets downloaded and extracted complete!!\e[0m"
+echo -e "\e[0;32m ssd-mobilenet datasets downloaded and extracted complete!!\e[0m"
 else
     echo -e "\e[0;32m ssd-mobilenet datasets detected!!\e[0m"
 fi
