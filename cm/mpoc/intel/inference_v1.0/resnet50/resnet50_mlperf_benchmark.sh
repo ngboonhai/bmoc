@@ -57,7 +57,7 @@ echo ${SKIPS}
 SCENARIO=$1
 if [ "${SCENARIO}" == "" ]; then
     SCENARIO="SingleStream"
-else}
+else
     SCENARIO=${SCENARIO}
 fi
 
