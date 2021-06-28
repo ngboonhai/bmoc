@@ -15,13 +15,17 @@ trap 'error ${LINENO}' ERR
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip
-wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
-sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
-sudo apt-get update
-sudo apt-get install -y kitware-archive-keyring
-sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
-sudo apt-get update
-sudo apt-get install -y cmake
+if [ ! `cmake --version | head -1 | awk '{print $3}'` == 3.20.5 ]; then
+	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
+	sudo apt-get update
+	sudo apt-get install -y kitware-archive-keyring
+	sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
+	sudo apt-get update
+	sudo apt-get install -y cmake
+else
+	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
+fi
 
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
