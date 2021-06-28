@@ -29,7 +29,7 @@ echo ${SKIPS}
 ## Check Resnet50 model folder..
 if [ ! -d ${CUR_DIR}/models/resnet50 ]; then
     mkdir -p ${CUR_DIR}/models/resnet50
-    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/resnet50/model/* ${CUR_DIR}/Configs/resnet50/
+    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/resnet50/model/* ${CUR_DIR}/models/resnet50/
     echo -e "\e[0;32m Created Resnet50 model folder!!\e[0m"
 else
     echo -e "\e[0;32m Existing Resnet50 model folder detected!!\e[0m"
