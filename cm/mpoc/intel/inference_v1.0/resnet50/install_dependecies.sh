@@ -14,17 +14,14 @@ trap 'error ${LINENO}' ERR
 
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip cmake
-cd /tmp
-wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz \
-&& tar -xzf cmake-3.17.3.tar.gz \
-&& rm cmake-3.17.3.tar.gz \
-&& cd cmake-3.17.3 \
-&& ./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release \
-&& make -j8 \
-&& sudo make install \
-&& cd /tmp \
-&& rm -rf cmake-3.17.3
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip
+wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+sudo apt-get update
+sudo apt-get install -y kitware-archive-keyring
+sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
+sudo apt-get update
+sudo apt-get install -y cmake
 
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
