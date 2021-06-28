@@ -15,7 +15,7 @@ trap 'error ${LINENO}' ERR
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip
-sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.0.0a0
+sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.0.0a0 onnx==1.7.0
 if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.15 ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
