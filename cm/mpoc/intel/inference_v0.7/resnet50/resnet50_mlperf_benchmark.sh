@@ -62,7 +62,7 @@ else
 fi
 
 PRECISION=$2
-if [ "${SCENARIO}" == "" ]; then
+if [ "${PRECISION}" == "" ]; then
     PRECISION="int8"
 else
     PRECISION=${SCENARIO}
