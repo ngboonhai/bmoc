@@ -140,8 +140,8 @@ echo " ========== Building ov_mlperf ==========="
 echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v0.7.git 
-	cp -r inference_results_v0.7/closed/Intel/code/resnet50/openvino/src ${CUR_DIR}
-	SOURCE_DIR=${CUR_DIR}/src
+	cp -r inference_results_v0.7/closed/Intel/code/resnet/resnet-ov ${CUR_DIR}/
+	SOURCE_DIR=${CUR_DIR}/resnet-ov
 	cd ${SOURCE_DIR}
 
 	if [ -d build ]; then
