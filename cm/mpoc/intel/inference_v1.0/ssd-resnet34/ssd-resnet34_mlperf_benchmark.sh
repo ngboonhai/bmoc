@@ -40,16 +40,18 @@ echo ${SKIPS}
 if [ -d ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val ]; then
     echo -e "\e[0;32m ssd-resnet34 imagenet datasets is ready!!\e[0m"
 else
-    echo -e "\e[0;31m Unable to find ssd-resnet34 imagenet datasets, please check!!\e[0m"
-    exit 1
+    echo -e "\e[0;31m Unable to find ssd-resnet34 imagenet datasets!!\e[0m"
+    echo -e "\e[0;31m System going to help to download ssd-resnet34 imagenet datasets, please wait... !!\e[0m"
+    ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/mlperf_benchmark_prework.sh
 fi
 echo ${SKIPS}
 
 if [ -f ${CUR_DIR}/models/ssd-resnet34/ssd-resnet34_fp16.xml ]; then
     echo -e "\e[0;32m ssd-resnet34 IR files is ready!!\e[0m"
 else
-    echo -e "\e[0;31m Unable to find ssd-resnet34 IR file, please check!!\e[0m"
-    exit 1
+    echo -e "\e[0;31m Unable to find ssd-resnet34 IR file!!\e[0m"
+    echo -e "\e[0;31m System going to help to run ssd-resnet34 IR file generation, please wait...!!\e[0m"
+    ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/mlperf_benchmark_prework.sh
 fi
 echo ${SKIPS}
 

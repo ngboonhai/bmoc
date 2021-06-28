@@ -19,7 +19,7 @@ echo ${SKIPS}
 
 ## Create resnet imagenet validation text file
 if [ ! -f ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val_map.txt ]; then
-    shuf -n 2000 bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/val_map.txt > ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val_map.txt
+    shuf -n 2000 bmoc/cm/mpoc/intel/inference_v0.7/ssd-resnet34/val_map.txt > ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val_map.txt
     cat ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val/val_map.txt | wc -l
     echo -e "\e[0;32m ssd-resnet34 imagenet validation file generated!!\e[0m"
 else
@@ -30,7 +30,7 @@ echo ${SKIPS}
 ## Check ssd-resnet34 model folder..
 if [ ! -d ${CUR_DIR}/models/ssd-resnet34 ]; then
     mkdir -p ${CUR_DIR}/models/ssd-resnet34
-    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-resnet34/model/* ${CUR_DIR}/models/ssd-resnet34/
+    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v0.7/ssd-resnet34/model/* ${CUR_DIR}/models/ssd-resnet34/
     echo -e "\e[0;32m Created ssd-resnet34 model folder!!\e[0m"
 else
     echo -e "\e[0;32m Existing ssd-resnet34 model folder detected!!\e[0m"

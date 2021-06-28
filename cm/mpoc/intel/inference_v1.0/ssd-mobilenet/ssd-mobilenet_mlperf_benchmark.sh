@@ -40,16 +40,18 @@ echo ${SKIPS}
 if [ -d ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val ]; then
     echo -e "\e[0;32m ssd-mobilenet imagenet datasets is ready!!\e[0m"
 else
-    echo -e "\e[0;31m Unable to find ssd-mobilenet imagenet datasets, please check!!\e[0m"
-    exit 1
+    echo -e "\e[0;31m Unable to find ssd-mobilenet imagenet datasets!!\e[0m"
+    echo -e "\e[0;31m System going to help to download ssd-mobilenet imagenet datasets, please wait... !!\e[0m"
+    ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-mobilenet/mlperf_benchmark_prework.sh
 fi
 echo ${SKIPS}
 
 if [ -f ${CUR_DIR}/models/ssd-mobilenet/ssd-mobilenet_fp16.xml ]; then
     echo -e "\e[0;32m ssd-mobilenet IR files is ready!!\e[0m"
 else
-    echo -e "\e[0;31m Unable to find ssd-mobilenet IR file, please check!!\e[0m"
-    exit 1
+    echo -e "\e[0;31m Unable to find ssd-mobilenet IR file!!\e[0m"
+    echo -e "\e[0;31m System going to help to run ssd-mobilenet IR file generation, please wait...!!\e[0m"
+    ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-mobilenet/mlperf_benchmark_prework.sh
 fi
 echo ${SKIPS}
 
