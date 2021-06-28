@@ -31,7 +31,7 @@ echo ${SKIPS}
 ## Check ssd-mobilenet model folder..
 if [ ! -d ${CUR_DIR}/models/ssd-mobilenet ]; then
     mkdir -p ${CUR_DIR}/models/ssd-mobilenet
-    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-mobilenet/model/* ${CUR_DIR}/Configs/ssd-mobilenet/
+    cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/ssd-mobilenet/model/* ${CUR_DIR}/models/ssd-mobilenet/
     echo -e "\e[0;32m Created ssd-mobilenet model folder!!\e[0m"
 else
     echo -e "\e[0;32m Existing ssd-mobilenet model folder detected!!\e[0m"
