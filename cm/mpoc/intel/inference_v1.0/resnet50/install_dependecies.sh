@@ -14,7 +14,7 @@ trap 'error ${LINENO}' ERR
 
 
 sudo apt update
-sudo apt-get install libglib2.0-dev libtbb-dev python3-dev python3-pip cmake
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip cmake
 
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
