@@ -1,0 +1,16 @@
+{
+	"Iterations": 3,
+	"DelayBetweenRuns": 30,
+	"Workloads":
+	[
+      {
+	  "model_name": "ssd-mobilenet",
+	  "scenario": "Offline",
+	  "device": "CPU",
+	  "precision": "int8",
+	  "batch_size": [1,2],
+	  "instances": 8,
+	  "nstreams": 4
+	  }
+	]
+}

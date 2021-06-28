@@ -1,0 +1,16 @@
+{
+	"Iterations": 3,
+	"DelayBetweenRuns": 30,
+	"Workloads":
+	[
+      {
+	  "model_name": "resnet50",
+	  "scenario": "Offline",
+	  "device": "CPU",
+	  "precision": "fp16",
+	  "batch_size": [1],
+	  "instances": 20,
+	  "nstreams": 10
+	  }
+	]
+}
