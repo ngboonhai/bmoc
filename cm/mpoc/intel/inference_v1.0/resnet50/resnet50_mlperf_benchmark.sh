@@ -61,5 +61,12 @@ else
     SCENARIO=${SCENARIO}
 fi
 
+PRECISION=$2
+if [ "${SCENARIO}" == "" ]; then
+    PRECISION="int8"
+else
+    PRECISION=${SCENARIO}
+fi
+
 ## Run MLPerf benchmark for Resnet50 model
-bash run_mlperf.sh Configs/resnet50/${SCENARIO}-config.json
+run_mlperf.sh Configs/resnet50/${SCENARIO}-${PRECISION}-config.json

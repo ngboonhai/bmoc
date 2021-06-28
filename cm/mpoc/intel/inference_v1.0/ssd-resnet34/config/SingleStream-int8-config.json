@@ -1,0 +1,17 @@
+{
+	"Iterations": 3,
+	"DelayBetweenRuns": 30,
+	"Workloads":
+	[
+      {
+	  "model_name": "ssd-resnet34",
+	  "scenario": "SingleStream",
+	  "device": "CPU",
+	  "precision": "fp16",
+	  "batch_size": [1],
+	  "instances": 1,
+	  "nstreams": 1,
+      "total_sample_count": 1024
+      }
+	]
+}

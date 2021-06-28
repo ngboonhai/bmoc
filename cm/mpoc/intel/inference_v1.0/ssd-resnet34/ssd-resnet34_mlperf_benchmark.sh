@@ -60,6 +60,12 @@ if [ "${SCENARIO}" == "" ]; then
 else
     SCENARIO=${SCENARIO}
 fi
+PRECISION=$2
+if [ "${SCENARIO}" == "" ]; then
+    PRECISION="int8"
+else
+    PRECISION=${SCENARIO}
+fi
 
 ## Run MLPerf benchmark for ssd-resnet34 model
-bash run_mlperf.sh Configs/ssd-resnet34/${SCENARIO}-config.json
+run_mlperf.sh Configs/ssd-resnet34/${SCENARIO}-${PRECISION}-config.json

@@ -1,0 +1,25 @@
+{
+	"Iterations": 3,
+	"DelayBetweenRuns": 30,
+	"Workloads":
+	[
+      {
+	  "model_name": "ssd-mobilenet",
+	  "scenario": "Offline",
+	  "device": "MULTI:CPU,GPU",
+	  "precision": "fp16",
+	  "batch_size": [1,2,4],
+	  "instances": 12,
+	  "nstreams": "CPU:4,GPU:2"
+	  },
+      {
+	  "model_name": "ssd-mobilenet",
+	  "scenario": "Offline",
+	  "device": "MULTI:GPU,CPU",
+	  "precision": "fp16",
+	  "batch_size": [1,2,4],
+	  "instances": 12,
+	  "nstreams": "GPU:2,CPU:4"
+	  }
+	]
+}
