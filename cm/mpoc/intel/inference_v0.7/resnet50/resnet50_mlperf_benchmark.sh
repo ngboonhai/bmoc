@@ -71,4 +71,4 @@ else
 fi
 
 ## Run MLPerf benchmark for Resnet50 model
-run_mlperf.sh Configs/resnet50/${SCENARIO}-${PRECISION}-config.json
+./run_mlperf.sh Configs/resnet50/${SCENARIO}-${PRECISION}-config.json
