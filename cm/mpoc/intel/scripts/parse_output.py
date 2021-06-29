@@ -64,12 +64,14 @@ class MLPerfParser(object):
 			for line in lines:
 				if "Scenario" in line:
 					self.benchmark_scenario = line.split(": ")[-1]
-					if self.benchmark_scenario == "SingleStream" || self.benchmark_scenario == "Single Stream":
+					if (self.benchmark_scenario == "SingleStream" or self.benchmark_scenario == "Single Stream"):
 						self.benchmark_scenario = "Single Stream"
 				if "POWER_BEGIN" in line:
 					self.test_start = line.split(" ")[-1]
 				if "POWER_END" in line:
 					self.test_end = line.split(" ")[-1]
+				if "*" in line:
+					self.Recommendations = line
 
 	def parseMLPerfSummary(self):
 		if self.summary_file:
@@ -214,7 +216,8 @@ class MLPerfParser(object):
 		res = res + writeRow("Instances", self.instances, shift=table_shift)
 		
 		# Add ...<whatever-of-interest>...
-		
+		if self.results_valid = "INVALID":
+			res = res + writeRow("Recommendations", self.Recommendations, shift=table_shift)
 		# Close bottom
 		res = res + topBottom(corner="@", bnd = "=", shift=table_shift)
 
