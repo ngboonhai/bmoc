@@ -222,7 +222,7 @@ class MLPerfParser(object):
 		res = res + writeRow("Instances", self.instances, shift=table_shift)
 		
 		# Add ...<whatever-of-interest>...
-		if self.results_valid = "INVALID":
+		if self.results_valid == "INVALID":
 			res = res + writeRow("Recommendations", self.Recommendations, shift=table_shift)
 		# Close bottom
 		res = res + topBottom(corner="@", bnd = "=", shift=table_shift)
