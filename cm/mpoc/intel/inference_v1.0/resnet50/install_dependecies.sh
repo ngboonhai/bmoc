@@ -14,8 +14,16 @@ trap 'error ${LINENO}' ERR
 
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake
 sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.0.0a0 onnx==1.7.0
+
+DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
+if [ "${DIST}" == "focal" ]; then
+        sudo python3 -m pip install tensorflow==2.2.0rc1
+else
+        sudo python3 -m pip install tensorflow==2.0.0a0
+fi
+
 if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.15 ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
