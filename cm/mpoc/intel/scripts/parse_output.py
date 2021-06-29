@@ -80,7 +80,11 @@ class MLPerfParser(object):
 			for line in lines:
 				if "Scenario" in line:
 					self.benchmark_scenario = line.split(": ")[-1]
+					if (self.benchmark_scenario == "SingleStream" or self.benchmark_scenario == "Single Stream"):
+						self.benchmark_scenario = "Single Stream"
 				elif "VALID" in line:
+					self.results_valid = line.split(": ")[-1]
+				elif "INVALID" in line:
 					self.results_valid = line.split(": ")[-1]
 				elif "90th percentile" in line:
 					self.benchmark_val = str(round(int(line.split(": ")[-1])/1000000, 2)) + " ms"
@@ -88,6 +92,8 @@ class MLPerfParser(object):
 					self.benchmark_val = line.split(": ")[-1] + " fps"
 				elif "Samples per" in line:
 					self.benchmark_val = line.split(": ")[-1] + " fps"
+				elif "*" in line:
+					self.Recommendations = line
 
 
 	def parseMLPerfLogs(self, append=False):
