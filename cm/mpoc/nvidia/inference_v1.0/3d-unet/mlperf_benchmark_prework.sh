@@ -39,10 +39,10 @@ fi
 sudo apt-get install -y libatlas-base-dev gfortran
 sudo python3 -m pip install numpy==1.16.4 pandas
 sudo python3 -m pip install batchgenerators
-cd /tmp
 wget -O torch-1.7.0-cp36-cp36m-linux_aarch64.whl https://nvidia.box.com/shared/static/cs3xn3td6sfgtene6jdvsxlr366m2dhq.whl
 sudo python3 -m pip install torch-1.7.0-cp36-cp36m-linux_aarch64.whl
 sudo python3 -m pip install nnunet
+rm torch-1.7.0-cp36-cp36m-linux_aarch64.whl
 
 ## Validate and Calibrate Models format and Images
 cat ./bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py 
