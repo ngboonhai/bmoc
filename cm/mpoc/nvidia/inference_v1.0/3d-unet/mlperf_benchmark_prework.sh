@@ -45,6 +45,6 @@ sudo python3 -m pip install nnunet
 rm torch-1.7.0-cp36-cp36m-linux_aarch64.whl
 
 ## Validate and Calibrate Models format and Images
-cat ./bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py 
+cat bmoc/cm/mpoc/nvidia/inference_v1.0/preprocess_data.py > $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py 
 cd $INFERENCE_NVIDIA_PATH
 python3 $INFERENCE_NVIDIA_PATH/code/3d-unet/tensorrt/preprocess_data.py
