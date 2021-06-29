@@ -71,4 +71,4 @@ else
 fi
 
 ## Run MLPerf benchmark for ssd-mobilenet model
-run_mlperf.sh Configs/ssd-mobilenet/${SCENARIO}-${PRECISION}-config.json
+./run_mlperf.sh Configs/ssd-mobilenet/${SCENARIO}-${PRECISION}-config.json
