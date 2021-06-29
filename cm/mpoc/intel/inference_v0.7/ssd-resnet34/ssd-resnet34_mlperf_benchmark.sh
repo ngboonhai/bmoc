@@ -1,5 +1,4 @@
 #set -eo pipefail
-set -x
 
 CUR_DIR=`pwd`
 SKIPS=" "
@@ -70,4 +69,4 @@ else
 fi
 
 ## Run MLPerf benchmark for ssd-resnet34 model
-run_mlperf.sh Configs/ssd-resnet34/${SCENARIO}-${PRECISION}-config.json
+./run_mlperf.sh Configs/ssd-resnet34/${SCENARIO}-${PRECISION}-config.json
