@@ -56,7 +56,8 @@ DATASETS = {
         "ssd-mobilenet-v2": "dataset-coco-2017-val",
         "mobilebert": "dataset-SQUAD",
         "deeplabv3": "ADE20K/images/validation",
-        "bert": "dataset-SQUAD"
+        "bert": "dataset-SQUAD",
+        "3d-unet": "BraTS"
         }
 
 
