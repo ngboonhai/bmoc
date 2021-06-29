@@ -46,7 +46,7 @@ class MLPerfParser(object):
 		self.benchmark_scenario = "---"
 		self.benchmark_model = "---"
 		self.device_name = "---"
-		self.benchmark_metrics = {"SingleStream": "90th %tile Latency", "Offline": "Throughput", "Server": "Completed QPS"}
+		self.benchmark_metrics = {"Single Stream": "90th %tile Latency", "Offline": "Throughput", "Server": "Completed QPS"}
 		self.benchmark_val = "--"
 		self.batch_size = "--"
 		self.instances = "--"
@@ -64,7 +64,8 @@ class MLPerfParser(object):
 			for line in lines:
 				if "Scenario" in line:
 					self.benchmark_scenario = line.split(": ")[-1]
-					
+					if self.benchmark_scenario == "SingleStream" || self.benchmark_scenario == "Single Stream":
+						self.benchmark_scenario = "Single Stream"
 				if "POWER_BEGIN" in line:
 					self.test_start = line.split(" ")[-1]
 				if "POWER_END" in line:
@@ -97,7 +98,7 @@ class MLPerfParser(object):
 	def writeToOutput(self, append=False):
 		fieldnames = ["Model", 
 					"Scenario",
-					"Precision",					
+					"Precision",
 					"Device",
 					"Batch Size",
 					"Instances",
