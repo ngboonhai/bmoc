@@ -1,8 +1,7 @@
 #set -eo pipefail
-set -x
 
 CUR_DIR=`pwd`
-
+SKIPS=" "
 ## Download dataset from Image-net Org.
 if [ ! -d ${CUR_DIR}/datasets/ssd-resnet34 ]; then
     mkdir -p ${CUR_DIR}/datasets/ssd-resnet34/dataset-coco-2017-val

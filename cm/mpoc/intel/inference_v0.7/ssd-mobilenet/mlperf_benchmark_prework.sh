@@ -1,5 +1,4 @@
 #set -eo pipefail
-set -x
 
 CUR_DIR=`pwd`
 SKIPS=" "

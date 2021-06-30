@@ -4,24 +4,6 @@
 	"Workloads":
 	[
       {
-	  "model_name": "mobilenet",
-	  "scenario": "SingleStream",
-	  "device": "CPU",
-	  "precision": "int8",
-	  "batch_size": 1,
-	  "instances": 1,
-	  "nstreams": 1
-	  },
-      {
-	  "model_name": "mobilenet",
-	  "scenario": "Offline",
-	  "device": "CPU",
-	  "precision": "int8",
-	  "batch_size": 1,
-	  "instances": 8,
-	  "nstreams": 4
-	  },
-      {
 	  "model_name": "resnet50",
 	  "scenario": "SingleStream",
 	  "device": "CPU",
@@ -53,6 +35,42 @@
 	  "scenario": "Offline",
 	  "device": "CPU",
 	  "precision": "int8",
+	  "batch_size": 1,
+	  "instances": 8,
+	  "nstreams": 4
+	  },
+	  {
+	  "model_name": "ssd-resnet34",
+	  "scenario": "SingleStream",
+	  "device": "CPU",
+	  "precision": "int8",
+	  "batch_size": 1,
+	  "instances": 1,
+	  "nstreams": 1
+	  },
+      {
+	  "model_name": "ssd-resnet34",
+	  "scenario": "Offline",
+	  "device": "CPU",
+	  "precision": "int8",
+	  "batch_size": 1,
+	  "instances": 8,
+	  "nstreams": 4
+	  },
+	  {
+	  "model_name": "3d-unet",
+	  "scenario": "SingleStream",
+	  "device": "CPU",
+	  "precision": "fp32",
+	  "batch_size": 1,
+	  "instances": 1,
+	  "nstreams": 1
+	  },
+      {
+	  "model_name": "3d-unet",
+	  "scenario": "Offline",
+	  "device": "CPU",
+	  "precision": "fp32",
 	  "batch_size": 1,
 	  "instances": 8,
 	  "nstreams": 4

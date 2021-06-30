@@ -1,0 +1,17 @@
+{
+	"Iterations": 3,
+	"DelayBetweenRuns": 30,
+	"Workloads":
+	[
+      {
+	  "model_name": "3d-unet",
+	  "scenario": "Offline",
+	  "device": "CPU",
+	  "precision": "fp16",
+	  "batch_size": [2,4],
+	  "instances": 8,
+	  "nstreams": 4,
+      "total_sample_count": 1024
+      }
+	]
+}
