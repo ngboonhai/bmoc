@@ -11,6 +11,14 @@ error() {
 }
 trap 'error ${LINENO}' ERR
 
+CUR_DIR=`pwd`
+BUILD_DIRECTORY=${CUR_DIR}
+SKIPS=" "
+DASHES="================================================"
+
+echo ${SKIPS}
+echo -e "\e[0;32m Check and installing workload dependencis\e[0m"
+echo ${SKIPS}
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake
@@ -32,12 +40,23 @@ else
 	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
 fi
 
-CUR_DIR=`pwd`
-BUILD_DIRECTORY=${CUR_DIR}
-SKIPS=" "
-DASHES="================================================"
-
-
+if [ ! -d /opt/intel/openvino_2021 ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;32m Installing OpenVino Toolkit \e[0m"
+	echo ${SKIPS}
+	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
+	tar vf l_openvino_toolkit_p_2021.3.394.tgz
+	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
+	cd l_openvino_toolkit_p_2021.3.394
+	sudo ./install.sh -s silent.cfg
+	cd ${CUR_DIR}
+	rm -rf l_openvino_toolkit_p_2021.3.394
+	rm vf l_openvino_toolkit_p_2021.3.394.tgz
+	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+else
+	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
+fi
+	
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
 DEPS_DIR=${MLPERF_DIR}/dependencies
 
