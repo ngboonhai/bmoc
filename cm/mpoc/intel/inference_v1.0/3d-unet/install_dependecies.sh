@@ -17,7 +17,7 @@ SKIPS=" "
 DASHES="================================================"
 
 echo ${SKIPS}
-echo -e "\e[0;34m Check and installing workload dependencis \e[0m"
+echo -e "\e[0;34m ========= Check and installing workload dependencis ========= \e[0m"
 echo ${SKIPS}
 
 sudo apt update
@@ -42,10 +42,10 @@ fi
 
 if [ ! -d /opt/intel/openvino_2021 ]; then
 	echo ${SKIPS}
-	echo -e "\e[0;32m Installing OpenVino Toolkit \e[0m"
+	echo -e "\e[0;32m ========== Installing OpenVino Toolkit =========== \e[0m"
 	echo ${SKIPS}
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
-	tar vf l_openvino_toolkit_p_2021.3.394.tgz
+	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
 	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
 	cd l_openvino_toolkit_p_2021.3.394
 	sudo ./install.sh -s silent.cfg
