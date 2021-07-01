@@ -190,7 +190,7 @@ echo ${SKIPS}
 	echo ${DASHES}
 
     mkdir -p ${CUR_DIR}/bin
-    cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin/3d_unet_ov_mlperf
+    cp ${SOURCE_DIR}/bin/intel64/Release/ov_mlperf ${CUR_DIR}/bin/3d_unet_ov_mlperf
     
     ## Print and notify where the MLperf Library location
     echo ${SKIPS}
