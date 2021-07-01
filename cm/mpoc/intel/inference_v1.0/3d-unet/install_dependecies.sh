@@ -17,7 +17,7 @@ SKIPS=" "
 DASHES="================================================"
 
 echo ${SKIPS}
-echo -e "\e[0;32m Check and installing workload dependencis\e[0m"
+echo -e "\e[0;34m Check and installing workload dependencis \e[0m"
 echo ${SKIPS}
 
 sudo apt update
@@ -66,7 +66,7 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
 if [ ! -d ${OPENVINO_DIR} ]; then
 	echo ${SKIPS}
-	echo " ========== Building OpenVINO Libraries ==========="
+	echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
 	echo ${SKIPS}
 	
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
@@ -100,7 +100,7 @@ fi
 GFLAGS_DIR=${DEPS_DIR}/gflags
 if [ ! -d ${GFLAGS_DIR} ]; then
 	echo ${SKIPS}
-	echo " ============ Building Gflags ==========="
+	echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
 	echo ${SKIPS}
 
 	git clone https://github.com/gflags/gflags.git ${GFLAGS_DIR}
@@ -117,7 +117,7 @@ fi
 BOOST_DIR=${DEPS_DIR}/boost
 if [ ! -d ${BOOST_DIR} ]; then
 	echo ${SKIPS}
-	echo "========= Building Boost =========="
+	echo -e "\e[0;34m ========= Building Boost ========== \e[0m"
 	echo ${SKIPS}
 	mkdir ${BOOST_DIR}
 	cd ${BOOST_DIR}
@@ -136,7 +136,7 @@ fi
 MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
 if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	echo ${SKIPS}
-	echo " =========== Building MLPerf Load Generator =========="
+	echo -e "\e[0;34m =========== Building MLPerf Load Generator ========== \e[0m"
 	echo ${SKIPS}
 
 	python3 -m pip install absl-py numpy pybind11
@@ -156,7 +156,7 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 #==============================================================
 
 echo ${SKIPS}
-echo " ========== Building ov_mlperf ==========="
+echo -e "\e[0;34m ========== Building ov_mlperf =========== \e[0m"
 echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v1.0.git 
