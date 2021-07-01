@@ -14,7 +14,10 @@ trap 'error ${LINENO}' ERR
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip
-sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.0.0a0 onnx==1.7.0
+sudo python3 -m pip install networkx==2.2 defusedxml numpy==1.16.6 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
+sudo python3 -m pip install addict==2.2.1 tqdm==4.31.1 pandas==0.24.2 Cython==0.29.23
+sudo python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
+sudo python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.15 ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
@@ -116,11 +119,12 @@ echo ${SKIPS}
 echo " =========== Building MLPerf Load Generator =========="
 echo ${SKIPS}
 
-if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
+if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
 
 	python3 -m pip install absl-py numpy pybind11
 	git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
+	sudo cp ${MLPERF_INFERENCE_REPO}/mlperf-inference/vision/medical_imaging/3d-unet/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	cd ${MLPERF_INFERENCE_REPO}/loadgen
 	git checkout r1.0
 	git submodule update --init --recursive
@@ -139,8 +143,8 @@ echo " ========== Building ov_mlperf ==========="
 echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v1.0.git 
-	cp -r inference_results_v1.0/closed/Intel/code/resnet50/openvino/src ${CUR_DIR}
-	SOURCE_DIR=${CUR_DIR}/src
+	cp -r inference_results_v1.0/closed/Intel/code/3d-unet-99.9/openvino ${CUR_DIR}
+	SOURCE_DIR=${CUR_DIR}/openvino
 	cd ${SOURCE_DIR}
 
 	if [ -d build ]; then
@@ -168,8 +172,7 @@ echo ${SKIPS}
 	echo ${DASHES}
 
     mkdir -p ${CUR_DIR}/bin
-    cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
-    cp  ${CUR_DIR}/bmoc/cm/mpoc/intel/scripts/*  ${CUR_DIR}/
+    cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin/3d_unet_ov_mlperf
     
     ## Print and notify where the MLperf Library location
     echo ${SKIPS}

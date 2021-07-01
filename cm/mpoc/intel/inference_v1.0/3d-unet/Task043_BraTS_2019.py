@@ -64,7 +64,7 @@ def main():
 
     task_name = "Task043_BraTS2019"
     downloaded_data_dir = args.downloaded_data_dir
-    nnUNet_raw_data = os.path.join(os.getcwd(),"build/raw_data")
+    nnUNet_raw_data = os.path.join(os.getcwd(),"build","raw_data","nnUNet_raw_data")
 
     target_base =  os.path.join(nnUNet_raw_data, task_name)
     target_imagesTr =  os.path.join(target_base, "imagesTr")
