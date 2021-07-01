@@ -14,8 +14,8 @@ trap 'error ${LINENO}' ERR
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake
-sudo python3 -m pip install networkx==2.2 defusedxml numpy==1.19.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
-sudo python3 -m pip install addict==2.2.1 tqdm==4.31.1 pandas==0.24.2 Cython==0.29.23
+sudo python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
+sudo python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
 sudo python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 sudo python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.15 ]; then
