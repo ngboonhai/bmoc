@@ -219,7 +219,17 @@ echo ${SKIPS}
 else
         echo -e "\e[0;32m Existing ov_mlperf binary detected, no build is needed. \e[0m"
 fi
-echo ${DASHES}
+
+## copy preprocess and other python script needed.
+if [ ! -f ${CUR_DIR}/preprocess.py ]; then
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/preprocess.py ${CUR_DIR}/preprocess.py
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/ov_calibrate.py ${CUR_DIR}/ov_calibrate.py
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/Task043_BraTS_2019.py ${CUR_DIR}/Task043_BraTS_2019.py
+    echo -e "\e[0;32m Copied 3d-unet preprocess python script file!!\e[0m"
+else
+    echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
+fi
+echo ${SKIPS}
 
 if [ -d ${SOURCE_DIR} ]; then
 	rm -rf ${SOURCE_DIR}
@@ -228,3 +238,4 @@ fi
 if [ -d ${MLPERF_DIR}/inference_results_v1.0 ]; then
 	rm -rf ${MLPERF_DIR}/inference_results_v1.0
 fi
+echo ${DASHES}
