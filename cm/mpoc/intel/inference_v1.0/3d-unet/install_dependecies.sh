@@ -171,13 +171,13 @@ echo ${SKIPS}
 
 	mkdir build && cd build
 	. /opt/intel/openvino_2021/bin/setupvars.sh
-	cmake -DInferenceEngine_DIR=${OPENVINO_DIR}/build/ \
-		  -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
-		  -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
-          -DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
-          -DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
-          -DCMAKE_BUILD_TYPE=Release \
-          -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
+	cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
+		-DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
+		-DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
+          	-DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
+          	-DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
+          	-DCMAKE_BUILD_TYPE=Release \
+          	-Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
           ..
 	make
 	if [ "$?" -ne "0" ]; then
