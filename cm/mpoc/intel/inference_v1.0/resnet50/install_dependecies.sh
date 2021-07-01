@@ -49,12 +49,12 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #====================================================================
 #   Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
-echo ${SKIPS}
-echo " ========== Building OpenVINO Libraries ==========="
-echo ${SKIPS}
-
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
 if [ ! -d ${OPENVINO_DIR} ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
+	echo ${SKIPS}
+	
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
 	cd ${OPENVINO_DIR}
 	git checkout releases/2021/2
@@ -83,12 +83,12 @@ fi
 #=============================================================
 #   Build Gflags
 #=============================================================
-echo ${SKIPS}
-echo " ============ Building Gflags ==========="
-echo ${SKIPS}
-
 GFLAGS_DIR=${DEPS_DIR}/gflags
 if [ ! -d ${GFLAGS_DIR} ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
+	echo ${SKIPS}
+
 	git clone https://github.com/gflags/gflags.git ${GFLAGS_DIR}
 	cd ${GFLAGS_DIR}
 	mkdir gflags-build && cd gflags-build
@@ -100,12 +100,11 @@ fi
 #=============================================================
 #   Build boost
 #=============================================================
-echo ${SKIPS}
-echo "========= Building Boost =========="
-echo ${SKIPS}
-
 BOOST_DIR=${DEPS_DIR}/boost
 if [ ! -d ${BOOST_DIR} ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m ========= Building Boost ========== \e[0m"
+	echo ${SKIPS}
 	mkdir ${BOOST_DIR}
 	cd ${BOOST_DIR}
 	wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
@@ -120,22 +119,23 @@ fi
 #===============================================================
 #   Build loadgen
 #===============================================================
-echo ${SKIPS}
-echo " =========== Building MLPerf Load Generator =========="
-echo ${SKIPS}
-
-if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
-	MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
+MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
+if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m =========== Building MLPerf Load Generator ========== \e[0m"
+	echo ${SKIPS}
 
 	python3 -m pip install absl-py numpy pybind11
-	git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
-	cd ${MLPERF_INFERENCE_REPO}/loadgen
-	git checkout r1.0
-	git submodule update --init --recursive
-	mkdir build && cd build
-	cmake -DPYTHON_EXECUTABLE=`which python3` ..
-	make
-	cp libmlperf_loadgen.a ../
+	if [ ! -d ${MLPERF_INFERENCE_REPO} ]; then
+		git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
+		cd ${MLPERF_INFERENCE_REPO}/loadgen
+		git checkout r1.0
+		git submodule update --init --recursive
+		mkdir build && cd build
+		cmake -DPYTHON_EXECUTABLE=`which python3` ..
+		make
+		cp libmlperf_loadgen.a ../
+	fi
 	cd ${MLPERF_DIR}
 
 # =============================================================
@@ -143,7 +143,7 @@ if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
 #==============================================================
 
 echo ${SKIPS}
-echo " ========== Building ov_mlperf ==========="
+echo -e "\e[0;34m ========== Building ov_mlperf =========== \e[0m"
 echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v1.0.git 
