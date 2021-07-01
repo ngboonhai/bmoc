@@ -13,8 +13,16 @@ trap 'error ${LINENO}' ERR
 
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip
-sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake
+sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.2.0rc1 onnx==1.7.0
+
+DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
+if [ "${DIST}" == "focal" ]; then
+        sudo python3 -m pip install tensorflow==2.2.0rc1
+else
+        sudo python3 -m pip install tensorflow==2.0.0a0
+fi
+
 if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.15 ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
@@ -41,12 +49,12 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #====================================================================
 #   Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
-echo ${SKIPS}
-echo " ========== Building OpenVINO Libraries ==========="
-echo ${SKIPS}
-
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
 if [ ! -d ${OPENVINO_DIR} ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
+	echo ${SKIPS}
+	
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
 	cd ${OPENVINO_DIR}
 	git checkout releases/2021/2
@@ -69,18 +77,20 @@ if [ ! -d ${OPENVINO_DIR} ]; then
 
 	make -j$(nproc)
 else
+	TEMPCV_DIR=${OPENVINO_DIR}/inference-engine/temp/opencv_4*
+	OPENCV_DIRS=$(ls -d -1 ${TEMPCV_DIR} )
 	echo -e "\e[0;32m OpenVinon Toolkit installed!!\e[0m"
 fi
 
 #=============================================================
 #   Build Gflags
 #=============================================================
-echo ${SKIPS}
-echo " ============ Building Gflags ==========="
-echo ${SKIPS}
-
 GFLAGS_DIR=${DEPS_DIR}/gflags
 if [ ! -d ${GFLAGS_DIR} ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
+	echo ${SKIPS}
+
 	git clone https://github.com/gflags/gflags.git ${GFLAGS_DIR}
 	cd ${GFLAGS_DIR}
 	mkdir gflags-build && cd gflags-build
@@ -92,12 +102,11 @@ fi
 #=============================================================
 #   Build boost
 #=============================================================
-echo ${SKIPS}
-echo "========= Building Boost =========="
-echo ${SKIPS}
-
 BOOST_DIR=${DEPS_DIR}/boost
 if [ ! -d ${BOOST_DIR} ]; then
+	echo ${SKIPS}
+	echo -e "\e[0;34m ========= Building Boost ========== \e[0m"
+	echo ${SKIPS}
 	mkdir ${BOOST_DIR}
 	cd ${BOOST_DIR}
 	wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
@@ -112,22 +121,23 @@ fi
 #===============================================================
 #   Build loadgen
 #===============================================================
-echo ${SKIPS}
-echo " =========== Building MLPerf Load Generator =========="
-echo ${SKIPS}
-
+MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
 if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
-	MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
+	echo ${SKIPS}
+	echo -e "\e[0;34m =========== Building MLPerf Load Generator ========== \e[0m"
+	echo ${SKIPS}
 
 	python3 -m pip install absl-py numpy pybind11
-	git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
-	cd ${MLPERF_INFERENCE_REPO}/loadgen
-	git checkout r1.0
-	git submodule update --init --recursive
-	mkdir build && cd build
-	cmake -DPYTHON_EXECUTABLE=`which python3` ..
-	make
-	cp libmlperf_loadgen.a ../
+	if [ ! -d ${MLPERF_INFERENCE_REPO} ]; then
+		git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
+		cd ${MLPERF_INFERENCE_REPO}/loadgen
+		git checkout r1.0
+		git submodule update --init --recursive
+		mkdir build && cd build
+		cmake -DPYTHON_EXECUTABLE=`which python3` ..
+		make
+		cp libmlperf_loadgen.a ../
+	fi
 	cd ${MLPERF_DIR}
 
 # =============================================================
@@ -135,7 +145,7 @@ if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
 #==============================================================
 
 echo ${SKIPS}
-echo " ========== Building ov_mlperf ==========="
+echo -e "\e[0;34m ========== Building ov_mlperf =========== \e[0m"
 echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v1.0.git 
@@ -169,7 +179,7 @@ echo ${SKIPS}
 
     mkdir -p ${CUR_DIR}/bin
     cp ${SOURCE_DIR}/Release/ov_mlperf ${CUR_DIR}/bin
-    cp  {CUR_DIR}/bmoc/cm/mpoc/intel/scripts/*  ${CUR_DIR}/
+    cp  ${CUR_DIR}/bmoc/cm/mpoc/intel/scripts/*  ${CUR_DIR}/
     
     ## Print and notify where the MLperf Library location
     echo ${SKIPS}
@@ -198,7 +208,7 @@ echo ${SKIPS}
 else
         echo -e "\e[0;32m Existing ov_mlperf binary detected, no build is needed. \e[0m"
 fi
-echo ${DASHES}
+
 if [ -d ${SOURCE_DIR} ]; then
 	rm -rf ${SOURCE_DIR}
 fi
@@ -206,3 +216,5 @@ fi
 if [ -d ${MLPERF_DIR}/inference_results_v1.0 ]; then
 	rm -rf ${MLPERF_DIR}/inference_results_v1.0
 fi
+
+echo ${DASHES}
