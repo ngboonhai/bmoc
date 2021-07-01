@@ -6,8 +6,8 @@ SKIPS=" "
 sudo python3 -m pip install numpy==1.19.5
 sudo python3 -m pip install torch torchvision batchgenerators nnunet pandas
 ## Download dataset from Image-net Org.
-if [ ! -d ${CUR_DIR}/datasets/3d-unet ]; then
-    mkdir -p ${CUR_DIR}/datasets/3d-unet/BraTS
+if [ ! -d ${CUR_DIR}/build/data/3d-unet ]; then
+    mkdir -p ${CUR_DIR}/build/data/3d-unet/BraTS
     curl -L -O https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/2019/MICCAI_BraTS_2019_Data_Training.zip
     unzip MICCAI_BraTS_2019_Data_Training.zip -d ${CUR_DIR}/build/data/3d-unet/BraTS
     rm MICCAI_BraTS_2019_Data_Training.zip
@@ -27,11 +27,11 @@ fi
 echo ${SKIPS}
 
 ## Check 3d-unet model folder..
-if [ ! -d ${CUR_DIR}/models/3d-unet ]; then
-    mkdir -p ${CUR_DIR}/models/3d-unet
+if [ ! -d ${CUR_DIR}/build/model/3d-unet ]; then
+    mkdir -p ${CUR_DIR}build/model/3d-unet
     #cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/model/* ${CUR_DIR}/models/3d-unet/
     wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/3d-unet_model.zip
-    unzip 3d-unet_model.zip -d ${CUR_DIR}/models/3d-unet
+    unzip 3d-unet_model.zip -d ${CUR_DIR}/build/model/3d-unet
     rm 3d-unet_model.zip 
     echo -e "\e[0;32m Created 3d-unet model folder!!\e[0m"
 else
@@ -42,7 +42,7 @@ echo ${SKIPS}
 ## Download 3D-Unet Fold file data
 if [ ! -f build/result/nnUNet/3d_fullres/Task043_BraTS2019/nnUNetTrainerV2__nnUNetPlansv2.mlperf.1/plans.pkl ]; then
     wget https://zenodo.org/record/3904106/files/fold_1.zip
-    unzip fold_1.zip 
+    unzip fold_1.zip ${CUR_DIR}/build/result/nnUNet/
     echo -e "\e[0;32m Created 3d-unet fold data!!\e[0m"
 else
     echo -e "\e[0;32m Existing 3d-unet fold data detected!!\e[0m"
@@ -51,28 +51,29 @@ echo ${SKIPS}
 
 ## Download 3d-unet model file
 if [ ! -f ${CUR_DIR}/models/3d-unet/3d-unet_fp16.xml ]; then
-    if [ ! -f ${CUR_DIR}/models/3d-unet/224_224_160.onnx ]; then
+    if [ ! -f ${CUR_DIR}/build/model/3d-unet/224_224_160.onnx ]; then
         cd ${CUR_DIR}/models/3d-unet
         wget https://zenodo.org/record/3928973/files/224_224_160.onnx
-        unzip -d ${CUR_DIR}/uild/result fold_1.zip
+        unzip -d ${CUR_DIR}/build/result fold_1.zip
         rm fold_1.zip
     fi
 
 ## Optimize and convert model format file into IR files.
     echo -e "\e[0;34m========== Genereting 3d-unet IR files=============\e[0m"
     python3 ${CUR_DIR}/MLPerf-Intel-openvino/dependencies/openvino-repo/model-optimizer/mo_onnx.py \
-        --input_model ${CUR_DIR}/models/3d-unet/224_224_160.onnx \
-        --output_dir ${CUR_DIR}/models/3d-unet \
+        --input_model ${CUR_DIR}/build/model/3d-unet/224_224_160.onnx \
+        --output_dir ${CUR_DIR}/build/model/3d-unet \
         --model_name 3d-unet_fp32 
     if [ "$?" -ne "0" ]; then
         echo -e "\e[0;31m [Error]: IR generate failed, please check!!\e[0m"
+	exit 1
     else
         echo -e "\e[0;32m 3d-unet model download, optimized and IR files files generated!!\e[0m"
     fi
 
 ## Prepare calibration file 
     if [ ! -f ${CUR_DIR}/datasets/3d-unet/BraTS/brats_cal_images_list.txt ]; then
-        cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/datasets/3d-unet/BraTS
+        cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
         echo -e "\e[0;32m Copied 3d-unet calibration txt file!!\e[0m"
     else
         echo -e "\e[0;32m 3d-unet calibration txt detected!!\e[0m"
@@ -94,6 +95,7 @@ if [ ! -f ${CUR_DIR}/models/3d-unet/3d-unet_fp16.xml ]; then
         --preprocessed_data_dir ${CUR_DIR}/build/data/calibration
     if [ "$?" -ne "0" ]; then
         echo -e "\e[0;31m [Error]: 3D-Unet preocess data faile and please check!!\e[0m"
+	exit 1
     else
         echo -e "\e[0;32m 3D-Unet preocess data completed!!\e[0m"
     fi
@@ -106,6 +108,7 @@ if [ ! -f ${CUR_DIR}/models/3d-unet/3d-unet_fp16.xml ]; then
         --int8_directory ${CUR_DIR}/build/model/calibrated
     if [ "$?" -ne "0" ]; then
         echo -e "\e[0;31m [Error]: 3D-Unet Calibration failed and please check!!\e[0m"
+	exit 1
     else
         echo -e "\e[0;32m 3D-Unet calibration completed!!\e[0m"
     fi
