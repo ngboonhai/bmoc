@@ -90,6 +90,7 @@ if [ ! -f ${CUR_DIR}/preprocess.py ]; then
 else
     echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 echo -e "\e[0;34m========== Reading 3d-unet Patients data =============\e[0m"
 python3 Task043_BraTS_2019.py \
@@ -100,6 +101,7 @@ if [ "$?" -ne "0" ]; then
 else
     echo -e "\e[0;32m 3D-Unet patiens data preocess completed!!\e[0m"
 fi
+echo ${SKIPS}
 
 echo -e "\e[0;34m========== Pre-process 3d-unet data =============\e[0m"
 python3 preprocess.py \
@@ -111,6 +113,7 @@ if [ "$?" -ne "0" ]; then
 else
     echo -e "\e[0;32m 3D-Unet preocess data completed!!\e[0m"
 fi
+echo ${SKIPS}
 
 echo -e "\e[0;34m========== Calibrate 3D-Unet Datasets to INT8 Precision =============\e[0m"
 python3 ov_calibrate.py \
