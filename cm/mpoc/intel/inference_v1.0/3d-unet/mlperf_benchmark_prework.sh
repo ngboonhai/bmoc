@@ -40,7 +40,7 @@ fi
 echo ${SKIPS}
 
 ## Download 3d-unet model file
-if [ ! -f ${CUR_DIR}/models/3d-unet/3d-unet_fp32.xml ]; then
+if [ ! -f ${CUR_DIR}/models/3d-unet/3d-unet_fp16.xml ]; then
     if [ ! -f ${CUR_DIR}/models/3d-unet/224_224_160.onnx ]; then
         cd ${CUR_DIR}/models/3d-unet
         wget https://zenodo.org/record/3928973/files/224_224_160.onnx

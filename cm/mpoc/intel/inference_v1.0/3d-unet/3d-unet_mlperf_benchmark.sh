@@ -26,7 +26,7 @@ fi
 echo ${SKIPS}
 
 ##  Check and ready 3d-unetMLPerf configuration files.
-if [ ! -d ${CUR_DIR}/Configs/3d-unet]; then
+if [ ! -d ${CUR_DIR}/Configs/3d-unet ]; then
     mkdir -p ${CUR_DIR}/Configs/3d-unet
     cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/config/* ${CUR_DIR}/Configs/3d-unet/
     echo -e "\e[0;32m Copied 3d-unetmlperf configudation to current working directory!!\e[0m"

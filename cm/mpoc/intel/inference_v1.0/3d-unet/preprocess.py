@@ -44,7 +44,7 @@ def preprocess_MLPerf(model, checkpoint_name, folds, fp16, list_of_lists, output
     assert len(list_of_lists) == len(output_filenames)
 
     print("loading parameters for folds", folds)
-    trainer, params = load_model_and_checkpoint_files(model, folds, fp16=fp16, checkpoint_name=checkpoint_name)
+    trainer, params = load_model_and_checkpoint_files(model, folds, fp16, checkpoint_name=checkpoint_name)
 
     print("starting preprocessing generator")
     preprocessing = preprocess_multithreaded(trainer, list_of_lists, output_filenames, num_threads_preprocessing, None)
