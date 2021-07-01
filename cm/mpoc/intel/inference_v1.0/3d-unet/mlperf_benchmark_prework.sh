@@ -69,48 +69,51 @@ if [ ! -f ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml ]; then
     else
         echo -e "\e[0;32m 3d-unet model download, optimized and IR files files generated!!\e[0m"
     fi
+else
+    echo -e "\e[0;32m 3d-unet IR files detected!!\e[0m"
+fi
 
 ## Prepare calibration file 
-    if [ ! -f ${CUR_DIR}/datasets/3d-unet/BraTS/brats_cal_images_list.txt ]; then
-        cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
-        echo -e "\e[0;32m Copied 3d-unet calibration txt file!!\e[0m"
-    else
-        echo -e "\e[0;32m 3d-unet calibration txt detected!!\e[0m"
-    fi
+if [ ! -f ${CUR_DIR}/datasets/3d-unet/BraTS/brats_cal_images_list.txt ]; then
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
+    echo -e "\e[0;32m Copied 3d-unet calibration txt file!!\e[0m"
+else
+    echo -e "\e[0;32m 3d-unet calibration txt detected!!\e[0m"
+fi
 
 ## copy preprocess and other python script needed.
-    if [ ! -f ${CUR_DIR}/preprocess.py ]; then
-        cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/preprocess.py ${CUR_DIR}/preprocess.py
-		cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/ov_calibrate.py ${CUR_DIR}/ov_calibrate.py
-		cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/Task043_BraTS_2019.py ${CUR_DIR}/Task043_BraTS_2019.py
-        echo -e "\e[0;32m Copied 3d-unet preprocess python script file!!\e[0m"
-    else
-        echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
-    fi
+if [ ! -f ${CUR_DIR}/preprocess.py ]; then
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/preprocess.py ${CUR_DIR}/preprocess.py
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/ov_calibrate.py ${CUR_DIR}/ov_calibrate.py
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/Task043_BraTS_2019.py ${CUR_DIR}/Task043_BraTS_2019.py
+    echo -e "\e[0;32m Copied 3d-unet preprocess python script file!!\e[0m"
+else
+    echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
+fi
 
-    echo -e "\e[0;34m========== Pre-process 3d-unet data =============\e[0m"
-    python3 preprocess.py \
-        --validation_fold_file ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt \
-        --preprocessed_data_dir ${CUR_DIR}/build/data/calibration
-    if [ "$?" -ne "0" ]; then
-        echo -e "\e[0;31m [Error]: 3D-Unet preocess data faile and please check!!\e[0m"
-	exit 1
-    else
-        echo -e "\e[0;32m 3D-Unet preocess data completed!!\e[0m"
-    fi
+echo -e "\e[0;34m========== Pre-process 3d-unet data =============\e[0m"
+python3 preprocess.py \
+    --validation_fold_file ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt \
+    --preprocessed_data_dir ${CUR_DIR}/build/data/calibration
+if [ "$?" -ne "0" ]; then
+    echo -e "\e[0;31m [Error]: 3D-Unet preocess data faile and please check!!\e[0m"
+    exit 1
+else
+    echo -e "\e[0;32m 3D-Unet preocess data completed!!\e[0m"
+fi
 
-    echo -e "\e[0;34m========== Calibrate 3D-Unet Datasets to INT8 Precision =============\e[0m"
-    python3 ov_calibrate.py \
-        --model ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml \
-        --model_name 3d-unet_int8 \
-        --preprocessed_data_dir ${CUR_DIR}/build/data/calibration/ \
-        --int8_directory ${CUR_DIR}/build/model/calibrated
-    if [ "$?" -ne "0" ]; then
-        echo -e "\e[0;31m [Error]: 3D-Unet Calibration failed and please check!!\e[0m"
-	exit 1
-    else
-        echo -e "\e[0;32m 3D-Unet calibration completed!!\e[0m"
-    fi
+echo -e "\e[0;34m========== Calibrate 3D-Unet Datasets to INT8 Precision =============\e[0m"
+python3 ov_calibrate.py \
+    --model ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml \
+    --model_name 3d-unet_int8 \
+    --preprocessed_data_dir ${CUR_DIR}/build/data/calibration/ \
+    --int8_directory ${CUR_DIR}/build/model/calibrated
+if [ "$?" -ne "0" ]; then
+    echo -e "\e[0;31m [Error]: 3D-Unet Calibration failed and please check!!\e[0m"
+    exit 1
+else
+    echo -e "\e[0;32m 3D-Unet calibration completed!!\e[0m"
+fi
 else
     echo -e "\e[0;32m 3d-unet IR files detected!!\e[0m"
 fi
