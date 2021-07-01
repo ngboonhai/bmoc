@@ -124,7 +124,7 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 
 	python3 -m pip install absl-py numpy pybind11
 	git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
-	sudo cp ${MLPERF_INFERENCE_REPO}/mlperf-inference/vision/medical_imaging/3d-unet/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
+	sudo cp ${MLPERF_INFERENCE_REPO}/mlperf-inference/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	cd ${MLPERF_INFERENCE_REPO}/loadgen
 	git checkout r1.0
 	git submodule update --init --recursive
