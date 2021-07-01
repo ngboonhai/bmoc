@@ -181,10 +181,10 @@ echo ${SKIPS}
           ..
 	make
 	if [ "$?" -ne "0" ]; then
-        	echo -e "\e[0;31m [Error]: ov_mlperf not built. Please check logs on screen!!\e[0m"
+        	echo -e "\e[0;31m [Error]: ov_mlperf not built. Please check logs on screen!!  \e[0m"
 		exit 1
     	else
-        	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
+        	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/3d_unet_ov_mlperf  \e[0m"
     	fi
 	echo ${SKIPS}
 	echo ${DASHES}
