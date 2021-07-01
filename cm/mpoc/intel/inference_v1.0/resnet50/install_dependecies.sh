@@ -77,6 +77,8 @@ if [ ! -d ${OPENVINO_DIR} ]; then
 
 	make -j$(nproc)
 else
+	TEMPCV_DIR=${OPENVINO_DIR}/inference-engine/temp/opencv_4*
+	OPENCV_DIRS=$(ls -d -1 ${TEMPCV_DIR} )
 	echo -e "\e[0;32m OpenVinon Toolkit installed!!\e[0m"
 fi
 
