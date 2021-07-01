@@ -81,17 +81,6 @@ else
     echo -e "\e[0;32m 3d-unet calibration txt detected!!\e[0m"
 fi
 
-## copy preprocess and other python script needed.
-if [ ! -f ${CUR_DIR}/preprocess.py ]; then
-    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/preprocess.py ${CUR_DIR}/preprocess.py
-    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/ov_calibrate.py ${CUR_DIR}/ov_calibrate.py
-    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/Task043_BraTS_2019.py ${CUR_DIR}/Task043_BraTS_2019.py
-    echo -e "\e[0;32m Copied 3d-unet preprocess python script file!!\e[0m"
-else
-    echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
-fi
-echo ${SKIPS}
-
 echo -e "\e[0;34m========== Reading 3d-unet Patients data =============\e[0m"
 python3 Task043_BraTS_2019.py \
     --downloaded_data_dir ${CUR_DIR}/build/data/3d-unet/BraTS/MICCAI_BraTS_2019_Data_Training
