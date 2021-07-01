@@ -120,7 +120,7 @@ fi
 #   Build loadgen
 #===============================================================
 MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
-if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
+if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
 	echo ${SKIPS}
 	echo -e "\e[0;34m =========== Building MLPerf Load Generator ========== \e[0m"
 	echo ${SKIPS}
