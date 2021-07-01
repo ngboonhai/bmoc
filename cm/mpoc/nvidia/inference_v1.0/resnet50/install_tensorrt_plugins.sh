@@ -18,8 +18,8 @@ MLPERF_SCRATCH_PATH=$INFERENCE_NVIDIA_PATH/build
 export | grep $INFERENCE_NVIDIA_PATH
 
 ## Update some files which errors detect from Origical files from Repo
-cat bmoc/cm/mpoc/nvidia/inference_v1.0/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
-cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/code/harness/lwis/include/lwis_buffers.h
+#cat bmoc/cm/mpoc/nvidia/inference_v1.0/Makefile > $INFERENCE_NVIDIA_PATH/Makefile
+#cat bmoc/cm/mpoc/nvidia/inference_v1.0/lwis_buffers.h > $INFERENCE_NVIDIA_PATH/code/harness/lwis/include/lwis_buffers.h
 
 
 ## Build TensorRT and MLPerf Plugins
