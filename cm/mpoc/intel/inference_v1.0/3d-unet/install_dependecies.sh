@@ -44,12 +44,12 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #====================================================================
 #   Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
-echo ${SKIPS}
-echo " ========== Building OpenVINO Libraries ==========="
-echo ${SKIPS}
-
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
 if [ ! -d ${OPENVINO_DIR} ]; then
+	echo ${SKIPS}
+	echo " ========== Building OpenVINO Libraries ==========="
+	echo ${SKIPS}
+	
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
 	cd ${OPENVINO_DIR}
 	git checkout releases/2021/2
@@ -78,12 +78,12 @@ fi
 #=============================================================
 #   Build Gflags
 #=============================================================
-echo ${SKIPS}
-echo " ============ Building Gflags ==========="
-echo ${SKIPS}
-
 GFLAGS_DIR=${DEPS_DIR}/gflags
 if [ ! -d ${GFLAGS_DIR} ]; then
+	echo ${SKIPS}
+	echo " ============ Building Gflags ==========="
+	echo ${SKIPS}
+
 	git clone https://github.com/gflags/gflags.git ${GFLAGS_DIR}
 	cd ${GFLAGS_DIR}
 	mkdir gflags-build && cd gflags-build
@@ -95,12 +95,11 @@ fi
 #=============================================================
 #   Build boost
 #=============================================================
-echo ${SKIPS}
-echo "========= Building Boost =========="
-echo ${SKIPS}
-
 BOOST_DIR=${DEPS_DIR}/boost
 if [ ! -d ${BOOST_DIR} ]; then
+	echo ${SKIPS}
+	echo "========= Building Boost =========="
+	echo ${SKIPS}
 	mkdir ${BOOST_DIR}
 	cd ${BOOST_DIR}
 	wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
@@ -115,16 +114,15 @@ fi
 #===============================================================
 #   Build loadgen
 #===============================================================
-echo ${SKIPS}
-echo " =========== Building MLPerf Load Generator =========="
-echo ${SKIPS}
-
+MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
 if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
-	MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
+	echo ${SKIPS}
+	echo " =========== Building MLPerf Load Generator =========="
+	echo ${SKIPS}
 
 	python3 -m pip install absl-py numpy pybind11
 	git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
-	sudo cp ${MLPERF_INFERENCE_REPO}/mlperf-inference/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
+	sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	cd ${MLPERF_INFERENCE_REPO}/loadgen
 	git checkout r1.0
 	git submodule update --init --recursive
