@@ -42,7 +42,7 @@ fi
 
 if [ ! -d /opt/intel/openvino_2021 ]; then
 	echo ${SKIPS}
-	echo -e "\e[0;32m ========== Installing OpenVino Toolkit =========== \e[0m"
+	echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
 	echo ${SKIPS}
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
 	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
