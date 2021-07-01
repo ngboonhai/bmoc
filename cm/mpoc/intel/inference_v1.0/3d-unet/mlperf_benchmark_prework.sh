@@ -19,6 +19,7 @@ echo ${SKIPS}
 
 ## Create 3D-unet imagenet calibtration text file
 if [ ! -f ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt ]; then
+    mkdir -p ${CUR_DIR}/build/data/calibration/
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
     echo -e "\e[0;32m Copied 3d-unet imagenet calibration file!!\e[0m"
 else
@@ -28,10 +29,10 @@ echo ${SKIPS}
 
 ## Check 3d-unet model folder..
 if [ ! -d ${CUR_DIR}/build/model/3d-unet ]; then
-    mkdir -p ${CUR_DIR}build/model/3d-unet
+    mkdir -p ${CUR_DIR}/build/model/3d-unet
     #cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/model/* ${CUR_DIR}/models/3d-unet/
     wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/3d-unet_model.zip
-    unzip 3d-unet_model.zip -d ${CUR_DIR}/build/model/3d-unet
+    unzip 3d-unet_model.zip -d ${CUR_DIR}/build/model/3d-unet/
     rm 3d-unet_model.zip 
     echo -e "\e[0;32m Created 3d-unet model folder!!\e[0m"
 else
