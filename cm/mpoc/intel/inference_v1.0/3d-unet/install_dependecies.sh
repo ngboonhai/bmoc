@@ -170,7 +170,7 @@ echo ${SKIPS}
 	fi
 
 	mkdir build && cd build
-
+	. /opt/intel/openvino_2021/bin/setupvars.sh
 	cmake -DInferenceEngine_DIR=${OPENVINO_DIR}/build/ \
 		  -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
 		  -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
