@@ -91,12 +91,22 @@ else
     echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
 fi
 
+echo -e "\e[0;34m========== Reading 3d-unet Patients data =============\e[0m"
+python3 Task043_BraTS_2019.py \
+    --downloaded_data_dir ${CUR_DIR}/build/data/3d-unet/BraTS/MICCAI_BraTS_2019_Data_Trainingt 
+if [ "$?" -ne "0" ]; then
+    echo -e "\e[0;31m [Error]: 3D-Unet preocess patients data file and please check!!\e[0m"
+    exit 1
+else
+    echo -e "\e[0;32m 3D-Unet preocess data completed!!\e[0m"
+fi
+
 echo -e "\e[0;34m========== Pre-process 3d-unet data =============\e[0m"
 python3 preprocess.py \
     --validation_fold_file ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt \
     --preprocessed_data_dir ${CUR_DIR}/build/data/calibration
 if [ "$?" -ne "0" ]; then
-    echo -e "\e[0;31m [Error]: 3D-Unet preocess data faile and please check!!\e[0m"
+    echo -e "\e[0;31m [Error]: 3D-Unet preocess data failed and please check!!\e[0m"
     exit 1
 else
     echo -e "\e[0;32m 3D-Unet preocess data completed!!\e[0m"
