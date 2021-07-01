@@ -208,7 +208,6 @@ echo ${SKIPS}
 else
         echo -e "\e[0;32m Existing ov_mlperf binary detected, no build is needed. \e[0m"
 fi
-echo ${DASHES}
 
 if [ -d ${SOURCE_DIR} ]; then
 	rm -rf ${SOURCE_DIR}
@@ -217,3 +216,5 @@ fi
 if [ -d ${MLPERF_DIR}/inference_results_v1.0 ]; then
 	rm -rf ${MLPERF_DIR}/inference_results_v1.0
 fi
+
+echo ${DASHES}
