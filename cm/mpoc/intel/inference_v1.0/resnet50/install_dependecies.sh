@@ -14,7 +14,7 @@ trap 'error ${LINENO}' ERR
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake
-sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.0.0a0 onnx==1.7.0
+sudo python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.2.0 onnx==1.7.0
 
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
 if [ "${DIST}" == "focal" ]; then
