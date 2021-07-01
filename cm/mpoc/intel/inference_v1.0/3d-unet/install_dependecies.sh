@@ -18,7 +18,7 @@ sudo python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tens
 sudo python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
 sudo python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 sudo python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
-if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.15 ]; then
+if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.17 ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
 	sudo apt-get update
