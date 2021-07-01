@@ -235,7 +235,6 @@ if [ ! -f ${CUR_DIR}/preprocess.py ]; then
 else
     echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
 fi
-echo ${SKIPS}
 
 if [ -d ${SOURCE_DIR} ]; then
 	rm -rf ${SOURCE_DIR}
