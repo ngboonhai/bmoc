@@ -148,7 +148,6 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	echo ${SKIPS}
 
 	python3 -m pip install absl-py numpy pybind11
-	sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	if [ ! -d ${MLPERF_INFERENCE_REPO} ]; then
 		git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
 		cd ${MLPERF_INFERENCE_REPO}/loadgen
@@ -160,6 +159,7 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 		cp libmlperf_loadgen.a ../
 	fi
 	
+	sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	cd ${MLPERF_DIR}
 
 # =============================================================
