@@ -19,7 +19,6 @@ trap 'error ${LINENO}' ERR
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake
 
-mkdir -p resnet50
 python3 -m venv resnet50
 source resnet50/bin/activate
 
