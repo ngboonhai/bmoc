@@ -143,7 +143,6 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	echo ${SKIPS}
 
 	python3 -m pip install absl-py numpy pybind11
-	sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	if [ ! -d ${MLPERF_INFERENCE_REPO} ]; then
 		git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
 		cd ${MLPERF_INFERENCE_REPO}/loadgen
@@ -216,7 +215,7 @@ echo ${SKIPS}
 		echo "GFLAGS_LIBRARIES=${GFLAGS_DIR}/gflags-build/lib" >> ${CUR_DIR}/setup_envs.sh
 		echo ${SKIPS} >> ${CUR_DIR}/setup_envs.sh
 		echo 'export LD_LIBRARY_PATH=${OPENVINO_LIBRARIES}:${OMP_LIBRARY}:${OPENCV_LIBRARIES}:${BOOST_LIBRARIES}:${GFLAGS_LIBRARIES}' >> ${CUR_DIR}/setup_envs.sh
-		echo "export OV_MLPERF_BIN=${CUR_DIR}/bin/ov_mlperf" >> ${CUR_DIR}/setup_envs.sh
+		echo "export OV_MLPERF_BIN=${CUR_DIR}/bin/3d_unet_ov_mlperf" >> ${CUR_DIR}/setup_envs.sh
 		echo "export DATA_DIR=${CUR_DIR}/datasets"  >> ${CUR_DIR}/setup_envs.sh
 		echo "export MODELS_DIR=${CUR_DIR}/models"  >> ${CUR_DIR}/setup_envs.sh
 		echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh
@@ -230,7 +229,7 @@ if [ ! -f ${CUR_DIR}/preprocess.py ]; then
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/preprocess.py ${CUR_DIR}/preprocess.py
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/ov_calibrate.py ${CUR_DIR}/ov_calibrate.py
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/Task043_BraTS_2019.py ${CUR_DIR}/Task043_BraTS_2019.py
-    sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
+    sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
     echo -e "\e[0;32m Copied 3d-unet preprocess python script file!!\e[0m"
 else
     echo -e "\e[0;32m 3d-unet preprocess python file detected!!\e[0m"
