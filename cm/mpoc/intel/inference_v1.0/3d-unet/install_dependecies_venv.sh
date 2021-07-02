@@ -158,8 +158,7 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 		make
 		cp libmlperf_loadgen.a ../
 	fi
-	
-	sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet-brats19/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
+	sudo cp ${MLPERF_INFERENCE_REPO}/vision/medical_imaging/3d-unet/brats_QSL.py /usr/local/lib/python3.8/dist-packages/
 	cd ${MLPERF_DIR}
 
 # =============================================================
