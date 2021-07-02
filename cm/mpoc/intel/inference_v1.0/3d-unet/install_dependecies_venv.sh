@@ -21,7 +21,6 @@ echo ${SKIPS}
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3-venv unzip cmake
 
-mkdir -p 3d-unet
 python3 -m venv 3d-unet
 source 3d-unet/bin/activate
 
