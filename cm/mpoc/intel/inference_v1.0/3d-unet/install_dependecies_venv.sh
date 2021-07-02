@@ -19,7 +19,7 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3_venv unzip cmake
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3-venv unzip cmake
 
 mkdir -p 3d-unet
 python3 -m venv 3d-unet
@@ -46,10 +46,10 @@ else
 	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
 fi
 
-sudo python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
-sudo python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
-sudo python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
-sudo python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
+python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
+python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
+python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
+python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.17 ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
