@@ -42,6 +42,7 @@ echo ${SKIPS}
 
 ## Download 3D-Unet Fold file data
 if [ ! -f build/result/nnUNet/3d_fullres/Task043_BraTS2019/nnUNetTrainerV2__nnUNetPlansv2.mlperf.1/plans.pkl ]; then
+    mkdir -p ${CUR_DIR}/build/result
     wget https://zenodo.org/record/3904106/files/fold_1.zip
     unzip fold_1.zip ${CUR_DIR}/build/result/nnUNet/
     echo -e "\e[0;32m Created 3d-unet fold data!!\e[0m"
@@ -72,6 +73,7 @@ if [ ! -f ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml ]; then
 else
     echo -e "\e[0;32m 3d-unet IR files detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 ## Prepare calibration file 
 if [ ! -f ${CUR_DIR}/datasets/3d-unet/BraTS/brats_cal_images_list.txt ]; then
