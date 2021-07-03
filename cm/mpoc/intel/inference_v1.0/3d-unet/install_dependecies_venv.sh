@@ -28,7 +28,7 @@ CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
 echo ${SKIPS}
-echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
+echo -e "\e[0;34m ========== Installing Full packages of OpenVino Toolkit =========== \e[0m"
 echo ${SKIPS}
 if [ ! -d /opt/intel/openvino_2021 ]; then
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
@@ -40,9 +40,9 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 	rm -rf l_openvino_toolkit_p_2021.3.394*
 	sudo ln -sf /opt/intel/openvino_2021.3.394 /opt/intel/openvino_2021
 	source /opt/intel/openvino_2021/bin/setupvars.sh
-	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+	echo -e "\e[0;32m Openvino Toolkit has installed!!\e[0m"
 else
-	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
+	echo -e "\e[0;32m Openvino Toolkit installed!!\e[0m"
 fi
 
 python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
