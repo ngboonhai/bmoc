@@ -27,10 +27,10 @@ source 3d-unet/bin/activate
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
+echo ${SKIPS}
+echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
+echo ${SKIPS}
 if [ ! -d /opt/intel/openvino_2021 ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
-	echo ${SKIPS}
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
 	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
 	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
@@ -70,11 +70,10 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #   Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
+echo ${SKIPS}
+echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
+echo ${SKIPS}
 if [ ! -d ${OPENVINO_DIR} ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
-	echo ${SKIPS}
-	
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
 	cd ${OPENVINO_DIR}
 	git checkout releases/2021/2
@@ -106,11 +105,10 @@ fi
 #   Build Gflags
 #=============================================================
 GFLAGS_DIR=${DEPS_DIR}/gflags
+echo ${SKIPS}
+echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
+echo ${SKIPS}
 if [ ! -d ${GFLAGS_DIR} ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
-	echo ${SKIPS}
-
 	git clone https://github.com/gflags/gflags.git ${GFLAGS_DIR}
 	cd ${GFLAGS_DIR}
 	mkdir gflags-build && cd gflags-build
@@ -123,10 +121,10 @@ fi
 #   Build boost
 #=============================================================
 BOOST_DIR=${DEPS_DIR}/boost
+echo ${SKIPS}
+echo -e "\e[0;34m ========= Building Boost v1.72.0 ========== \e[0m"
+echo ${SKIPS}
 if [ ! -d ${BOOST_DIR} ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========= Building Boost ========== \e[0m"
-	echo ${SKIPS}
 	mkdir ${BOOST_DIR}
 	cd ${BOOST_DIR}
 	wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
@@ -142,6 +140,8 @@ fi
 #   Build loadgen
 #===============================================================
 MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
+echo ${SKIPS}
+echo -e "\e[0;34m =========== Check MLPerf Load Generator ========== \e[0m"
 if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	echo ${SKIPS}
 	echo -e "\e[0;34m =========== Building MLPerf Load Generator ========== \e[0m"
@@ -167,9 +167,9 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 #        Build ov_mlperf
 #==============================================================
 
-echo ${SKIPS}
-echo -e "\e[0;34m ========== Building ov_mlperf =========== \e[0m"
-echo ${SKIPS}
+	echo ${SKIPS}
+	echo -e "\e[0;34m ========== Building ov_mlperf binary file =========== \e[0m"
+	echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v1.0.git 
 	cp -r inference_results_v1.0/closed/Intel/code/3d-unet-99.9/openvino ${CUR_DIR}
@@ -228,7 +228,7 @@ echo ${SKIPS}
 		echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh
 	fi
 else
-        echo -e "\e[0;32m Existing ov_mlperf binary detected, no build is needed. \e[0m"
+        echo -e "\e[0;32m Existing MLPerf Load Generator and ov_mlperf binary detected. \e[0m"
 fi
 
 ## copy preprocess and other python script needed.
