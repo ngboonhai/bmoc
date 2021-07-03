@@ -51,8 +51,8 @@ python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cy
 python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 
-echo -e "\e[0;34m ========== Installing CMAKE >= 3.17 dependencies =========== \e[0m"
-if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17" ]; then
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
+if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
 	sudo apt purge -y cmake
 	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
  	tar -xzf cmake-3.17.3.tar.gz
