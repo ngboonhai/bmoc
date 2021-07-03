@@ -44,7 +44,8 @@ echo ${SKIPS}
 if [ ! -f build/result/nnUNet/3d_fullres/Task043_BraTS2019/nnUNetTrainerV2__nnUNetPlansv2.mlperf.1/plans.pkl ]; then
     mkdir -p ${CUR_DIR}/build/result
     wget https://zenodo.org/record/3904106/files/fold_1.zip
-    unzip fold_1.zip ${CUR_DIR}/build/result/nnUNet/
+    unzip fold_1.zip -d ${CUR_DIR}/build/result/nnUNet/
+    rm fold_1.zip
     echo -e "\e[0;32m Created 3d-unet fold data!!\e[0m"
 else
     echo -e "\e[0;32m Existing 3d-unet fold data detected!!\e[0m"
