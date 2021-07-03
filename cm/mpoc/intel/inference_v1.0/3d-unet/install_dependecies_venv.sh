@@ -19,7 +19,7 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3-venv unzip cmake
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3-venv unzip cmake libssl-dev
 
 python3 -m venv 3d-unet
 source 3d-unet/bin/activate
