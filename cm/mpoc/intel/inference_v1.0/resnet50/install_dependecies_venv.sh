@@ -20,7 +20,7 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv libssl-dev
 
 python3 -m venv resnet50
 source resnet50/bin/activate
@@ -34,7 +34,7 @@ echo ${SKIPS}
 if [ ! -d /opt/intel/openvino_2021 ]; then
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
 	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
-	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
+	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/scripts/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
 	cd l_openvino_toolkit_p_2021.3.394
 	sudo ./install.sh -s silent.cfg
 	cd ${CUR_DIR}
