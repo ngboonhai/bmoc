@@ -53,15 +53,15 @@ python3 -m pip install torch torchvision batchgenerators nnunet texttable progre
 
 echo -e "\e[0;34m ========== Installing CMAKE >= 3.17 dependencies =========== \e[0m"
 if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17" ]; then
-	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
-	echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-	sudo apt-get update
-	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/  main'
-	sudo apt-get update
-	sudo apt-get install -y kitware-archive-keyring
-	sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
-	sudo apt-get update
-	sudo apt-get install -y cmake
+	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz \
+ 	tar -xzf cmake-3.17.3.tar.gz \
+ 	rm cmake-3.17.3.tar.gz \
+ 	cd cmake-3.17.3 \
+ 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release \
+ 	make -j8 \
+ 	sudo make install \
+ 	cd /tmp \
+	rm -rf cmake-3.17*	
 	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
 	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
 else
