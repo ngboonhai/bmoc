@@ -45,6 +45,7 @@ else
 	echo -e "\e[0;32m Openvino Toolkit installed!!\e[0m"
 fi
 
+echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
 python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
 python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
 python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
