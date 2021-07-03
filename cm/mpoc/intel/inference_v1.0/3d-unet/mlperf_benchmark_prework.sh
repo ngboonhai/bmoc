@@ -57,7 +57,7 @@ fi
 echo ${SKIPS}
 
 ## Download 3d-unet model file
-
+echo -e "\e[0;34m========== Check 3d-unet Model been optimized? =============\e[0m"
 if [ ! -f ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml ]; then
     if [ ! -f ${CUR_DIR}/build/model/3d-unet/224_224_160.onnx ]; then
     	echo -e "\e[0;34m========== Downloading 3d-unet Model format (onnx) files=============\e[0m"
@@ -81,14 +81,6 @@ else
     echo -e "\e[0;32m 3d-unet IR files detected!!\e[0m"
 fi
 echo ${SKIPS}
-
-## Prepare calibration file 
-if [ ! -f ${CUR_DIR}/datasets/3d-unet/BraTS/brats_cal_images_list.txt ]; then
-    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
-    echo -e "\e[0;32m Copied 3d-unet calibration txt file!!\e[0m"
-else
-    echo -e "\e[0;32m 3d-unet calibration txt detected!!\e[0m"
-fi
 
 echo -e "\e[0;34m========== Reading 3d-unet images data =============\e[0m"
 python3 Task043_BraTS_2019.py \
