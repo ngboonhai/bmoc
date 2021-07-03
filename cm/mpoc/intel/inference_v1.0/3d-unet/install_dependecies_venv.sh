@@ -50,7 +50,9 @@ python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflo
 python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
 python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
-if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.17 ]; then
+
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17:q dependencies =========== \e[0m"
+if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17" ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
 	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
 	sudo apt-get update
@@ -61,7 +63,7 @@ if [ ! `cmake --version | head -1 | awk '{print $3}'` -gt 3.17 ]; then
 	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
 	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
 else
-	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
+	echo -e "\e[0;32m Cmake >=3.16 installed!!\e[0m"
 fi
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
