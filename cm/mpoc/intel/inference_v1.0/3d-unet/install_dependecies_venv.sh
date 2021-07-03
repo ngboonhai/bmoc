@@ -53,6 +53,7 @@ python3 -m pip install torch torchvision batchgenerators nnunet texttable progre
 
 echo -e "\e[0;34m ========== Installing CMAKE >= 3.17 dependencies =========== \e[0m"
 if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17" ]; then
+	sudo apt purge -y cmake
 	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
  	tar -xzf cmake-3.17.3.tar.gz
  	rm cmake-3.17.3.tar.gz
