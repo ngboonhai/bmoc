@@ -51,10 +51,12 @@ python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cy
 python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 
-echo -e "\e[0;34m ========== Installing CMAKE >= 3.17:q dependencies =========== \e[0m"
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17 dependencies =========== \e[0m"
 if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17" ]; then
 	wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
-	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main'
+	echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(. /etc/os-release && echo ${VERSION_CODENAME-stretch}) main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+	sudo apt-get update
+	sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/  main'
 	sudo apt-get update
 	sudo apt-get install -y kitware-archive-keyring
 	sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
