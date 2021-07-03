@@ -19,7 +19,7 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3-venv unzip cmake libssl-dev
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip python3-venv unzip cmake python3.8-venv libssl-dev 
 
 python3 -m venv 3d-unet
 source 3d-unet/bin/activate
@@ -187,14 +187,14 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 
 	mkdir build && cd build
 	. /opt/intel/openvino_2021/bin/setupvars.sh
-	#cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
-	cmake -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
-		  -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
-		  -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
-          -DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
-          -DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
-          -DCMAKE_BUILD_TYPE=Release \
-          -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
+	cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
+	       -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
+	       -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
+	       -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
+               -DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
+               -DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
+               -DCMAKE_BUILD_TYPE=Release \
+               -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
           ..
 	make
 	if [ "$?" -ne "0" ]; then
