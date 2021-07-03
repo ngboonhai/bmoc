@@ -15,6 +15,9 @@ error() {
 }
 trap 'error ${LINENO}' ERR
 
+echo ${SKIPS}
+echo -e "\e[0;34m ========= Check and installing workload dependencis ========= \e[0m"
+echo ${SKIPS}
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv
@@ -25,10 +28,10 @@ source resnet50/bin/activate
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
+echo ${SKIPS}
+echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
+echo ${SKIPS}
 if [ ! -d /opt/intel/openvino_2021 ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
-	echo ${SKIPS}
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
 	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
 	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
@@ -38,11 +41,12 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 	rm -rf l_openvino_toolkit_p_2021.3.394*
 	sudo ln -sf /opt/intel/openvino_2021.3.394 /opt/intel/openvino_2021
 	source /opt/intel/openvino_2021/bin/setupvars.sh
-	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+	echo -e "\e[0;32m OpenVino Toolkit installed!!\e[0m"
 else
-	echo -e "\e[0;32m Cmake >=3.10 installed!!\e[0m"
+	echo -e "\e[0;32m OpenVino Toolkit installed!!\e[0m"
 fi
 
+echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
 python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.2.0rc1 onnx==1.7.0
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
 if [ "${DIST}" == "focal" ]; then
@@ -75,11 +79,10 @@ DEPS_DIR=${MLPERF_DIR}/dependencies
 #   Build OpenVINO library (If not using publicly available openvino)
 #====================================================================
 OPENVINO_DIR=${DEPS_DIR}/openvino-repo
-if [ ! -d ${OPENVINO_DIR} ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
-	echo ${SKIPS}
-	
+echo ${SKIPS}
+echo -e "\e[0;34m ========== Building OpenVINO Libraries =========== \e[0m"
+echo ${SKIPS}
+if [ ! -d ${OPENVINO_DIR} ]; then	
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
 	cd ${OPENVINO_DIR}
 	git checkout releases/2021/2
@@ -111,11 +114,10 @@ fi
 #   Build Gflags
 #=============================================================
 GFLAGS_DIR=${DEPS_DIR}/gflags
+echo ${SKIPS}
+echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
+echo ${SKIPS}
 if [ ! -d ${GFLAGS_DIR} ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ============ Building Gflags =========== \e[0m"
-	echo ${SKIPS}
-
 	git clone https://github.com/gflags/gflags.git ${GFLAGS_DIR}
 	cd ${GFLAGS_DIR}
 	mkdir gflags-build && cd gflags-build
@@ -128,10 +130,10 @@ fi
 #   Build boost
 #=============================================================
 BOOST_DIR=${DEPS_DIR}/boost
+echo ${SKIPS}
+echo -e "\e[0;34m ========= Building Boost ========== \e[0m"
+echo ${SKIPS}
 if [ ! -d ${BOOST_DIR} ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========= Building Boost ========== \e[0m"
-	echo ${SKIPS}
 	mkdir ${BOOST_DIR}
 	cd ${BOOST_DIR}
 	wget https://boostorg.jfrog.io/artifactory/main/release/1.72.0/source/boost_1_72_0.tar.gz
@@ -147,6 +149,9 @@ fi
 #   Build loadgen
 #===============================================================
 MLPERF_INFERENCE_REPO=${DEPS_DIR}/mlperf-inference
+echo ${SKIPS}
+echo -e "\e[0;34m =========== Check MLPerf Load Generator ========== \e[0m"
+echo ${SKIPS}
 if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
 	echo ${SKIPS}
 	echo -e "\e[0;34m =========== Building MLPerf Load Generator ========== \e[0m"
@@ -169,9 +174,9 @@ if [ ! -f ${CUR_DIR}/bin/ov_mlperf ]; then
 #        Build ov_mlperf
 #==============================================================
 
-echo ${SKIPS}
-echo -e "\e[0;34m ========== Building ov_mlperf =========== \e[0m"
-echo ${SKIPS}
+	echo ${SKIPS}
+	echo -e "\e[0;34m ========== Building ov_mlperf =========== \e[0m"
+	echo ${SKIPS}
 
 	git clone https://github.com/mlcommons/inference_results_v1.0.git 
 	cp -r inference_results_v1.0/closed/Intel/code/resnet50/openvino/src ${CUR_DIR}
@@ -197,7 +202,7 @@ echo ${SKIPS}
         	echo -e "\e[0;31m [Error]: ov_mlperf not built. Please check logs on screen!!\e[0m"
 		exit 1
     	else
-        	echo -e "\e[1;32m ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
+        	echo -e "\e[1;32m MLPerf Load Generator and ov_mlperf built and copy to ${CUR_DIR}/bin/ov_mlperf          \e[0m"
     	fi
 	echo ${SKIPS}
 	echo ${DASHES}
@@ -231,7 +236,7 @@ echo ${SKIPS}
 		echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh
 	fi
 else
-        echo -e "\e[0;32m Existing ov_mlperf binary detected, no build is needed. \e[0m"
+        echo -e "\e[0;32m Existing MLPerf Load Generator and ov_mlperf binary detected, no build is needed. \e[0m"
 fi
 
 if [ -d ${SOURCE_DIR} ]; then
