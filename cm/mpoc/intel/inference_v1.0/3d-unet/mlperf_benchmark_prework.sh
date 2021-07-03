@@ -6,6 +6,7 @@ SKIPS=" "
 sudo python3 -m pip install numpy==1.19.5
 sudo python3 -m pip install torch torchvision batchgenerators nnunet pandas
 ## Download dataset from Image-net Org.
+echo -e "\e[0;34m========== Downloading 3d-unet datasets files =============\e[0m"
 if [ ! -d ${CUR_DIR}/build/data/3d-unet ]; then
     mkdir -p ${CUR_DIR}/build/data/3d-unet/BraTS
     curl -L -O https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/2019/MICCAI_BraTS_2019_Data_Training.zip
@@ -18,6 +19,7 @@ fi
 echo ${SKIPS}
 
 ## Create 3D-unet imagenet calibtration text file
+echo -e "\e[0;34m========== Copying 3d-unet calibration files =============\e[0m"
 if [ ! -f ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt ]; then
     mkdir -p ${CUR_DIR}/build/data/calibration/
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
@@ -28,6 +30,7 @@ fi
 echo ${SKIPS}
 
 ## Check 3d-unet model folder..
+echo -e "\e[0;34m========== Copying 3d-unet existing models files =============\e[0m"
 if [ ! -d ${CUR_DIR}/build/model/3d-unet ]; then
     mkdir -p ${CUR_DIR}/build/model/3d-unet
     #cp -r ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/model/* ${CUR_DIR}/models/3d-unet/
@@ -41,18 +44,23 @@ fi
 echo ${SKIPS}
 
 ## Download 3D-Unet Fold file data
+echo -e "\e[0;34m========== Downloading 3d-unet fold1 data files =============\e[0m"
 if [ ! -f build/result/nnUNet/3d_fullres/Task043_BraTS2019/nnUNetTrainerV2__nnUNetPlansv2.mlperf.1/plans.pkl ]; then
+    mkdir -p ${CUR_DIR}/build/result
     wget https://zenodo.org/record/3904106/files/fold_1.zip
-    unzip fold_1.zip ${CUR_DIR}/build/result/nnUNet/
-    echo -e "\e[0;32m Created 3d-unet fold data!!\e[0m"
+    unzip fold_1.zip -d ${CUR_DIR}/build/result/
+    rm fold_1.zip
+    echo -e "\e[0;32m Created 3d-unet fold1 data!!\e[0m"
 else
-    echo -e "\e[0;32m Existing 3d-unet fold data detected!!\e[0m"
+    echo -e "\e[0;32m Existing 3d-unet fold1 data detected!!\e[0m"
 fi
 echo ${SKIPS}
 
 ## Download 3d-unet model file
+echo -e "\e[0;34m========== Check 3d-unet Model been optimized? =============\e[0m"
 if [ ! -f ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml ]; then
     if [ ! -f ${CUR_DIR}/build/model/3d-unet/224_224_160.onnx ]; then
+    	echo -e "\e[0;34m========== Downloading 3d-unet Model format (onnx) files=============\e[0m"
         cd ${CUR_DIR}/build/model/3d-unet
         wget https://zenodo.org/record/3928973/files/224_224_160.onnx
     fi
@@ -72,16 +80,9 @@ if [ ! -f ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml ]; then
 else
     echo -e "\e[0;32m 3d-unet IR files detected!!\e[0m"
 fi
+echo ${SKIPS}
 
-## Prepare calibration file 
-if [ ! -f ${CUR_DIR}/datasets/3d-unet/BraTS/brats_cal_images_list.txt ]; then
-    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
-    echo -e "\e[0;32m Copied 3d-unet calibration txt file!!\e[0m"
-else
-    echo -e "\e[0;32m 3d-unet calibration txt detected!!\e[0m"
-fi
-
-echo -e "\e[0;34m========== Reading 3d-unet Patients data =============\e[0m"
+echo -e "\e[0;34m========== Reading 3d-unet images data =============\e[0m"
 python3 Task043_BraTS_2019.py \
     --downloaded_data_dir ${CUR_DIR}/build/data/3d-unet/BraTS/MICCAI_BraTS_2019_Data_Training
 if [ "$?" -ne "0" ]; then
