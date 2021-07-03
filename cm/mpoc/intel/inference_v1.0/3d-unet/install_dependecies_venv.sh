@@ -77,7 +77,7 @@ echo ${SKIPS}
 if [ ! -d ${OPENVINO_DIR} ]; then
 	git clone https://github.com/openvinotoolkit/openvino.git ${OPENVINO_DIR}
 	cd ${OPENVINO_DIR}
-	git checkout releases/2021/2
+	git checkout releases/2021/3
 	git submodule update --init --recursive
 	mkdir build && cd build
 	cmake -DENABLE_VPU=OFF \
