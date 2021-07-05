@@ -13,8 +13,7 @@ trap 'error ${LINENO}' ERR
 
 error_model_finding()
 {
-	echo ${SKIPS}
-  	echo -e "\e[0;31m ========= Faile to downloading benchmark models ========= \e[0m" 1>&2
+  	echo -e "\e[0;31m    [ERROR]: Benchmark models not found !!! \e[0m" 1>&2
 	echo ${SKIPS}
   	exit 1
 }
