@@ -20,6 +20,7 @@ if [ ! -d ${CUR_DIR}/nnUNet ]; then
 else
 	echo -e "\e[0;32m Existing nnUNet dependency detected!!\e[0m"
 fi
+echo ${SKIPS}
 
 ## Download dataset from Image-net Org.
 echo -e "\e[0;34m========== Downloading 3d-unet datasets files =============\e[0m"
