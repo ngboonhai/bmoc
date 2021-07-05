@@ -78,7 +78,9 @@ echo -e "\e[0;34m ========= Optimizing benchmark models ========= \e[0m"
 echo ${SKIPS} 
 if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
+	echo $MODEL_FILE
 	FRAME_WORK=`jq -r '."'"${MODEL}"'"'.frame_work ${CUR_DIR}/Configs/models_config.json`
+	echo $FRAME_WORK
 	MODEL_FILE_PATH=`find /workload/benchmark -name $MODEL_FILE`
 	case ${FRAME_WORK} in
 	caffe)
