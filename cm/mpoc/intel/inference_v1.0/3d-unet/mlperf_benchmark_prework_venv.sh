@@ -8,6 +8,19 @@ SKIPS=" "
 
 sudo python3 -m pip install numpy==1.19.5
 sudo python3 -m pip install torch torchvision batchgenerators nnunet pandas
+
+## Download dataset from Image-net Org.
+echo -e "\e[0;34m========== Downloading nnUNet 3d-unet dependency =============\e[0m"
+if [ ! -d ${CUR_DIR}/nnUNet ]; then
+	git clone https://github.com/MIC-DKFZ/nnUNet.git
+	cd nnUNet
+	python3 -m pip install -e .
+	cd ${CUR_DIR}
+	echo -e "\e[0;32m Install nnUNet complete!!\e[0m"
+else
+	echo -e "\e[0;32m Existing nnUNet dependency detected!!\e[0m"
+fi
+
 ## Download dataset from Image-net Org.
 echo -e "\e[0;34m========== Downloading 3d-unet datasets files =============\e[0m"
 if [ ! -d ${CUR_DIR}/build/data/3d-unet ]; then
@@ -26,6 +39,7 @@ echo -e "\e[0;34m========== Copying 3d-unet calibration files =============\e[0m
 if [ ! -f ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt ]; then
     mkdir -p ${CUR_DIR}/build/data/calibration/
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_QSL.py ${CUR_DIR}/
     echo -e "\e[0;32m Copied 3d-unet imagenet calibration file!!\e[0m"
 else
     echo -e "\e[0;32m Existing 3d-unet calibration file detected!!\e[0m"
