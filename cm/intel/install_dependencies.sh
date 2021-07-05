@@ -52,6 +52,6 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 else
 	echo -e "\e[0;32m Existing OpenVino Toolkit & Dependencies detected!!\e[0m"
 fi
-
+echo ${SKIPS}
 
 echo -e "\e[0;32m ========== Dependencies install completed =========== \e[0m"
