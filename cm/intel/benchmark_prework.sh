@@ -16,7 +16,7 @@ BUILD_DIRECTORY=${CUR_DIR}
 SKIPS=" "
 DASHES="================================================"
 
-## Config mlperf benchmark scenario and Test mode default values
+## Configure of benchmark scenario and precision default values
 MODEL=$1
 if [ "${MODEL}" == "" ]; then
     echo -e "\e[0;31m [Error}: Model name is require for benchmarking !!! \e[0m"
@@ -65,6 +65,7 @@ if [ ! -d `find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null` ]; then
 	echo -e "\e[0;32m ========== Benchmark models download and extract completed =========== \e[0m"
 else
 	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
+	echo $MODEL_DIR
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
 fi
 
