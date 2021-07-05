@@ -23,6 +23,7 @@ echo ${SKIPS}
 sudo apt-get update
 sudo apt install -y python3-opencv nvidia-cuda-toolkit jq
 sudo python3 -m pip install networkx defusedxml progress
+sudo python3 -m pip install requests --upgrade
 sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 
 if [ ! -d /opt/intel/openvino_2021 ]; then
