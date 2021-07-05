@@ -26,10 +26,11 @@ sudo python3 -m pip install networkx defusedxml progress
 sudo python3 -m pip install requests --upgrade
 sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 
+echo ${SKIPS}
+echo -e "\e[0;34m ========== Installing OpenVino Toolkit for Benchmark Tools=========== \e[0m"
+echo ${SKIPS}
+	
 if [ ! -d /opt/intel/openvino_2021 ]; then
-	echo ${SKIPS}
-	echo -e "\e[0;34m ========== Installing OpenVino Toolkit for Benchmark Tools=========== \e[0m"
-	echo ${SKIPS}
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/l_openvino_toolkit_p_2021.3.394.tgz
 	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
 	cat ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/silent.cfg > l_openvino_toolkit_p_2021.3.394/silent.cfg
@@ -51,6 +52,6 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 else
 	echo -e "\e[0;32m Existing OpenVino Toolkit & Dependencies detected!!\e[0m"
 fi
-
+echo ${SKIPS}
 
 echo -e "\e[0;32m ========== Dependencies install completed =========== \e[0m"
