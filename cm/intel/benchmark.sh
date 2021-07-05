@@ -40,7 +40,8 @@ echo ${SKIPS}
 echo -e "\e[0;34m ========= Start running benchmark for ${MODEL} ========= \e[0m"
 echo ${SKIPS}
 
-python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /workload/benchmark/models/public/mobilenet-ssd/${MODEL}_${PRECISION}.xml -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
+MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
+python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_DIR}/${MODEL}_${PRECISION}.xml -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
 
 echo ${SKIPS}
 echo -e "\e[0;32m ========= Benchmark for ${MODEL} is completed ========= \e[0m"
