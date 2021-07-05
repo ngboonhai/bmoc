@@ -21,8 +21,8 @@ echo ${SKIPS}
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv libssl-dev
 
-python3 -m venv resnet50
-source resnet50/bin/activate
+python3 -m venv ssd-resnet34
+source ssd-resnet34/bin/activate
 
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
