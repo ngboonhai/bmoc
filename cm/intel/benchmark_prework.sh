@@ -59,11 +59,10 @@ echo ${SKIPS}
 echo -e "\e[0;34m ========= Downloading benchmark models ========= \e[0m"
 echo ${SKIPS}
 MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
-echo ${MODEL_DIR}
 if [ "${MODEL_DIR}" == "" ]; then
 	mkdir -p ${CUR_DIR}/models
-	python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --print_all | grep ${MODEL}
-	if [ "$?" -ne "0" ]; then
+	DETECTED=`python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --print_all | grep ${MODEL}`
+	if [ "${DETECTED}" == "" ]; then
         	echo -e "\e[0;31m [Error]: Didn't find the model input, please check is correct model give!!  \e[0m"
 		exit 1
 	else
@@ -72,7 +71,6 @@ if [ "${MODEL_DIR}" == "" ]; then
 		echo -e "\e[0;32m ========== Benchmark models download and extract completed =========== \e[0m"
     	fi
 else
-	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
 fi
 
