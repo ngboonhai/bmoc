@@ -19,7 +19,26 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv libssl-dev
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip python3.8-venv libssl-dev
+if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "" ]; then
+	if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "3.17.3" ]; then
+		echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
+		sudo apt purge -y cmake
+		wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
+ 		tar -xzf cmake-3.17.3.tar.gz
+ 		rm cmake-3.17.3.tar.gz
+ 		cd cmake-3.17.3
+ 		./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
+ 		make -j8
+ 		make install
+		rm -rf cmake-3.17*	
+		cmake_version=`cmake --version | head -1 | awk '{print $3}'`
+		echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+	else
+		echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
+	fi
+fi
+		
 
 python3 -m venv ssd-resnet34
 source ssd-resnet34/bin/activate
@@ -52,23 +71,6 @@ if [ "${DIST}" == "focal" ]; then
         sudo python3 -m pip install tensorflow==2.2.0rc1
 else
         sudo python3 -m pip install tensorflow==2.0.0a0
-fi
-
-echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
-if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
-	sudo apt purge -y cmake
-	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
- 	tar -xzf cmake-3.17.3.tar.gz
- 	rm cmake-3.17.3.tar.gz
- 	cd cmake-3.17.3
- 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
- 	make -j8
- 	sudo make install
-	rm -rf cmake-3.17*	
-	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
-	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
-else
-	echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
 fi
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
