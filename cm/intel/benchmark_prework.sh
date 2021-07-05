@@ -91,7 +91,7 @@ if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	FRAME_WORK_TOOL=mo_tf.py
 	;;
 	
-	echo python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
+	python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
 	echo -e "\e[0;32m ========== Benchmark models has been optimized and IR files generated =========== \e[0m"
 else
 	echo -e "\e[0;32m Existing benchmark models IR files detected!!\e[0m"
