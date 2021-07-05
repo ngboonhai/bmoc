@@ -64,6 +64,7 @@ if [ ! -d `find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null` ]; then
 	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 	echo -e "\e[0;32m ========== Benchmark models download and extract completed =========== \e[0m"
 else
+	echo find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null
 	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 	echo $MODEL_DIR
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
