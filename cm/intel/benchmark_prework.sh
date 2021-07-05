@@ -20,6 +20,7 @@ DASHES="================================================"
 MODEL=$1
 if [ "${MODEL}" == "" ]; then
     echo -e "\e[0;31m [Error}: Model name is require for benchmarking !!! \e[0m"
+	exit 1
 else
     MODEL=${MODEL}
 fi
@@ -70,7 +71,8 @@ fi
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Optimizing benchmark models ========= \e[0m"
 echo ${SKIPS}
-if [ ! -f ${MODEL_DIR}/mobilenet-ssd_${PRECISION}.xml ]; then
+echoh ${MODEL_DIR}/${MODEL}_${PRECISION}.xml
+if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
 	FRAME_WORK=`jq -r '."'"${MODEL}"'"'.frame_work ${CUR_DIR}/Configs/models_config.json`
 	MODEL_FILE_PATH=`find /workload/benchmark -name $MODEL_FILE`
