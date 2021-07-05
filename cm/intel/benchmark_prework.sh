@@ -13,8 +13,10 @@ trap 'error ${LINENO}' ERR
 
 error_model_finding()
 {
-  echo -e "\e[0;31m $1 \e[0m" 1>&2
-  exit 1
+	echo ${SKIPS}
+  	echo -e "\e[0;31m ========= Faile to downloading benchmark models ========= \e[0m" 1>&2
+	echo ${SKIPS}
+  	exit 1
 }
 
 CUR_DIR=`pwd`
