@@ -65,11 +65,13 @@ fi
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Downloading benchmark models ========= \e[0m"
 echo ${SKIPS}
-find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null || MODEL_DIR_DETECTED="NO_FOUND"
-if [ "${MODEL_DIR_DETECTED}" == "NO_FOUND" ]; then
+MODEL_DIR_DETECTED=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
+if [ "${MODEL_DIR_DETECTED}" == "" ]; then
 	mkdir -p ${CUR_DIR}/models
 	python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --name ${MODEL} -o ${CUR_DIR}/models/ 2>/dev/null || error_model_finding
+	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 else
+	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
 fi
 
@@ -78,10 +80,8 @@ echo -e "\e[0;34m ========= Optimizing benchmark models ========= \e[0m"
 echo ${SKIPS} 
 if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
-	echo $MODEL_FILE
 	FRAME_WORK=`jq -r '."'"${MODEL}"'"'.frame_work ${CUR_DIR}/Configs/models_config.json`
-	echo $FRAME_WORK
-	MODEL_FILE_PATH=`find /workload/benchmark -name $MODEL_FILE`
+	MODEL_FILE_PATH=`find ${MODEL_DIR} -name $MODEL_FILE`
 	case ${FRAME_WORK} in
 	caffe)
 	FRAME_WORK_TOOL=mo_caffe.py
@@ -92,9 +92,12 @@ if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	tensorflow)
 	FRAME_WORK_TOOL=mo_tf.py
 	;;
+	*)
+	FRAME_WORK_TOOL=mo.py
+	;;
 	esac
 	
-	echo python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
+	python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
 	echo -e "\e[0;32m ========== Benchmark models has been optimized and IR files generated =========== \e[0m"
 else
 	echo -e "\e[0;32m Existing benchmark models IR files detected!!\e[0m"
