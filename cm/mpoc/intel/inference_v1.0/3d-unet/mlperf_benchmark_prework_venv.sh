@@ -6,8 +6,8 @@ source 3d-unet/bin/activate
 CUR_DIR=`pwd`
 SKIPS=" "
 
-sudo python3 -m pip install numpy==1.19.5
-sudo python3 -m pip install torch torchvision batchgenerators nnunet pandas
+python3 -m pip install numpy==1.19.5
+python3 -m pip install torch torchvision batchgenerators nnunet pandas addict texttable
 
 ## Download dataset from Image-net Org.
 echo -e "\e[0;34m========== Downloading nnUNet 3d-unet dependency =============\e[0m"
@@ -123,6 +123,7 @@ fi
 echo ${SKIPS}
 
 echo -e "\e[0;34m========== Calibrate 3D-Unet Datasets to INT8 Precision =============\e[0m"
+source 
 python3 ov_calibrate.py \
     --model ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml \
     --model_name 3d-unet_int8 \
