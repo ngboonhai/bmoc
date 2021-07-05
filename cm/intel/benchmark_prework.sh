@@ -11,10 +11,6 @@ error() {
 }
 trap 'error ${LINENO}' ERR
 
-error_model_finding() {
-	echo -e "\e[0;32m ========== Benchmark models download and extract completed =========== \e[0m"
-	exit 1
-}
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 SKIPS=" "
@@ -65,7 +61,7 @@ echo ${SKIPS}
 MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 if [ "${MODEL_DIR}" == "" ]; then
 	mkdir -p ${CUR_DIR}/models
-	python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --name ${MODEL} -o ${CUR_DIR}/models/ 2>/dev/null || error_model_finding
+	python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --name ${MODEL} -o ${CUR_DIR}/models/ 2>/dev/null || exit 1
 else
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
 fi
