@@ -37,7 +37,7 @@ if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "" ]; 
  		cd cmake-3.17.3
  		./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
  		make -j8
- 		make install
+ 		sudo make install
 		rm -rf cmake-3.17*	
 		cmake_version=`cmake --version | head -1 | awk '{print $3}'`
 		echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
@@ -69,9 +69,9 @@ echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========
 python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.2.0rc1 onnx==1.7.0
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
 if [ "${DIST}" == "focal" ]; then
-        sudo python3 -m pip install tensorflow==2.2.0rc1
+        python3 -m pip install tensorflow==2.2.0rc1
 else
-        sudo python3 -m pip install tensorflow==2.0.0a0
+        python3 -m pip install tensorflow==2.0.0a0
 fi
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
