@@ -80,7 +80,18 @@ if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
 	FRAME_WORK=`jq -r '."'"${MODEL}"'"'.frame_work ${CUR_DIR}/Configs/models_config.json`
 	MODEL_FILE_PATH=`find /workload/benchmark -name $MODEL_FILE`
-	echo python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/mo_caffe.py --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
+	case ${FRAME_WORK} in
+	caffe)
+	FRAME_WORK_TOOL=mo_caffe.py
+	;;
+	onnx)
+	FRAME_WORK_TOOL=mo_onnx.py
+	;;
+	tensorflow)
+	FRAME_WORK_TOOL=mo_tf.py
+	;;
+	
+	echo python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
 	echo -e "\e[0;32m ========== Benchmark models has been optimized and IR files generated =========== \e[0m"
 else
 	echo -e "\e[0;32m Existing benchmark models IR files detected!!\e[0m"
