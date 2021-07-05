@@ -1,0 +1,10 @@
+{
+        "mobilenet-ssd": {
+                "model_file" : "mobilenet-ssd.caffemodel",
+                "frame_work" : "caffe"
+        },
+        "ssd_mobilenet_v1_coco" : {
+                "model_file" : "frozen_inference_graph.pb",
+                "frame_work" : "onnx"
+        }
+}
