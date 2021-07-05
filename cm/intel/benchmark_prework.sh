@@ -58,13 +58,13 @@ fi
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Downloading benchmark models ========= \e[0m"
 echo ${SKIPS}
-if [ ! -d `find ${CUR_DIR} -type d -name "$1"  2>/dev/null` ]; then
+if [ ! -d `find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null` ]; then
 	mkdir -p ${CUR_DIR}/models
 	python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --name ${MODEL} -o ${CUR_DIR}/models/
-	MODEL_DIR=`find ${CUR_DIR} -type d -name "$1"  2>/dev/null`
+	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 	echo -e "\e[0;32m ========== Benchmark models download and extract completed =========== \e[0m"
 else
-	MODEL_DIR=`find ${CUR_DIR} -type d -name "$1"  2>/dev/null`
+	MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
 fi
 
@@ -79,6 +79,5 @@ if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	echo python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/mo_caffe.py --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name mobilenet-ssd_${PRECISION}
 	echo -e "\e[0;32m ========== Benchmark models has been optimized and IR files generated =========== \e[0m"
 else
-	MODEL_DIR=`find ${CUR_DIR} -type d -name "$1"  2>/dev/null`
 	echo -e "\e[0;32m Existing benchmark models IR files detected!!\e[0m"
 fi
