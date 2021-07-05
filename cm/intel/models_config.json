@@ -10,5 +10,13 @@
         "ssd_mobilenet_v1_coco" : {
                 "model_file" : "frozen_inference_graph.pb",
                 "frame_work" : "onnx"
+        },
+        "ssdlite_mobilenet_v2" : {
+                "model_file" : "frozen_inference_graph.pb",
+                "frame_work" : "onnx"
+        },
+        "mobilenet-v1-0.25-128" : {
+                "model_file" : "mobilenet_v1_0.25_128_frozen.pb",
+                "frame_work" : "onnx"
         }
 }
