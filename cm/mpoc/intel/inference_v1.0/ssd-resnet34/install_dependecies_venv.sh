@@ -20,6 +20,13 @@ echo ${SKIPS}
 
 sudo apt update
 sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip python3.8-venv libssl-dev
+
+python3 -m venv ssd-resnet34
+source ssd-resnet34/bin/activate
+
+CUR_DIR=`pwd`
+BUILD_DIRECTORY=${CUR_DIR}
+
 if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "" ]; then
 	if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "3.17.3" ]; then
 		echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
@@ -38,14 +45,8 @@ if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "" ]; 
 		echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
 	fi
 fi
-		
 
-python3 -m venv ssd-resnet34
-source ssd-resnet34/bin/activate
-
-CUR_DIR=`pwd`
-BUILD_DIRECTORY=${CUR_DIR}
-
+cd ${CUR_DIR}
 echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
 echo ${SKIPS}
