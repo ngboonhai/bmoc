@@ -65,8 +65,8 @@ fi
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Downloading benchmark models ========= \e[0m"
 echo ${SKIPS}
-MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
-if [ "${MODEL_DIR}" == "" ]; then
+find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null || MODEL_DIR_DETECTED="NO_FOUND"
+if [ "${MODEL_DIR_DETECTED}" == "NO_FOUND" ]; then
 	mkdir -p ${CUR_DIR}/models
 	python3 /opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py --name ${MODEL} -o ${CUR_DIR}/models/ 2>/dev/null || error_model_finding
 else
