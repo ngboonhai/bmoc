@@ -80,23 +80,31 @@ echo ${SKIPS}
 echo -e "\e[0;34m ========= Optimizing benchmark models ========= \e[0m"
 echo ${SKIPS} 
 if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
-	MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
-	FRAME_WORK=`jq -r '."'"${MODEL}"'"'.frame_work ${CUR_DIR}/Configs/models_config.json`
-	MODEL_FILE_PATH=`find ${MODEL_DIR} -name $MODEL_FILE`
-	case ${FRAME_WORK} in
-	caffe)
-	FRAME_WORK_TOOL=mo_caffe.py
-	;;
-	onnx)
-	FRAME_WORK_TOOL=mo_onnx.py
-	;;
-	tensorflow)
-	FRAME_WORK_TOOL=mo_tf.py
-	;;
-	*)
-	FRAME_WORK_TOOL=mo.py
-	;;
-	esac
+	MODEL_FIND=`jq -r '."'"${MODEL}"'"' ${CUR_DIR}/Configs/models_config.json`
+	if [ ! "${MODEL_FIND}" == null ]; then
+		MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
+		FRAME_WORK=`jq -r '."'"${MODEL}"'"'.frame_work ${CUR_DIR}/Configs/models_config.json`
+		MODEL_FILE_PATH=`find ${MODEL_DIR} -name $MODEL_FILE`
+		case ${FRAME_WORK} in
+			caffe)
+			FRAME_WORK_TOOL=mo_caffe.py
+			;;
+			onnx)
+			FRAME_WORK_TOOL=mo_onnx.py
+			;;
+			tensorflow)
+			FRAME_WORK_TOOL=mo_tf.py
+			;;
+			*)
+			FRAME_WORK_TOOL=mo.py
+			;;
+		esac
+		echo -e "\e[0;32m Loaded ${MODEL} configurstion from models_condif.json file. \e[0m"
+	else
+		echo -e "\e[0;31m Benchmark models yet add into models_condif.json file, please check !!! \e[0m"
+		exit 1
+	fi
+		
 	
 	python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
 	echo -e "\e[0;32m ========== Benchmark models has been optimized and IR files generated =========== \e[0m"
