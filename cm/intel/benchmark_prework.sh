@@ -21,8 +21,6 @@ error_model_finding()
   	exit 1
 }
 
-python3 -m venv benchmark
-source benchmark/bin/activate
 
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
