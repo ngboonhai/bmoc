@@ -99,14 +99,15 @@ if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 			FRAME_WORK_TOOL=mo.py
 			;;
 		esac
-		echo -e "\e[0;32m Loaded ${MODEL} configurstion from models_condif.json file. \e[0m"
+		echo -e "\e[0;32m Loaded ${MODEL} configuration from models_condif.json file. Optimizing the model now... \e[0m"
 	else
 		echo -e "\e[0;31m Benchmark models yet add into models_condif.json file, please check !!! \e[0m"
 		exit 1
 	fi
-		
+	echo ${SKIPS} 	
 	
 	python3 /opt/intel/openvino_2021/deployment_tools/model_optimizer/${FRAME_WORK_TOOL} --input_model ${MODEL_FILE_PATH} --data_type half --output_dir ${MODEL_DIR} --model_name ${MODEL}_${PRECISION}
+	echo ${SKIPS} 
 	echo -e "\e[0;32m ========== Benchmark models has been optimized and IR files generated =========== \e[0m"
 else
 	echo -e "\e[0;32m Existing benchmark models IR files detected!!\e[0m"
