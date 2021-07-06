@@ -14,10 +14,6 @@ error() {
 }
 trap 'error ${LINENO}' ERR
 
-
-python3 -m venv benchmark
-source benchmark/bin/activate
-
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
