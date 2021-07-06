@@ -1,5 +1,8 @@
 #set -eo pipefail
 
+SKIPS=" "
+DASHES="================================================"
+
 error() {
     local code="${3:-1}"
     if [[ -n "$2" ]];then
@@ -18,10 +21,11 @@ error_model_finding()
   	exit 1
 }
 
+python3 -m venv benchmark
+source benchmark/bin/activate
+
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
-SKIPS=" "
-DASHES="================================================"
 
 ## Configure of benchmark scenario and precision default values
 MODEL=$1

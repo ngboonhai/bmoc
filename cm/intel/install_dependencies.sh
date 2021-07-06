@@ -1,5 +1,8 @@
 #set -eo pipefail
 
+SKIPS=" "
+DASHES="================================================"
+
 error() {
     local code="${3:-1}"
     if [[ -n "$2" ]];then
@@ -11,19 +14,22 @@ error() {
 }
 trap 'error ${LINENO}' ERR
 
-CUR_DIR=`pwd`
-BUILD_DIRECTORY=${CUR_DIR}
-SKIPS=" "
-DASHES="================================================"
-
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Check and installing workload dependencis ========= \e[0m"
 echo ${SKIPS}
 
 sudo apt-get update
-sudo apt install -y python3-opencv nvidia-cuda-toolkit jq
-sudo python3 -m pip install networkx defusedxml progress
-sudo python3 -m pip install requests --upgrade
+sudo apt install -y python3-opencv nvidia-cuda-toolkit jq python3.8-venv libssl-dev
+
+
+python3 -m venv benchmark
+source benchmark/bin/activate
+
+CUR_DIR=`pwd`
+BUILD_DIRECTORY=${CUR_DIR}
+
+python3 -m pip install networkx defusedxml progress
+python3 -m pip install requests --upgrade
 sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 
 echo ${SKIPS}
