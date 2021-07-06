@@ -21,7 +21,6 @@ error_model_finding()
   	exit 1
 }
 
-
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
