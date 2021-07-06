@@ -2,6 +2,8 @@
 
 SKIPS=" "
 DASHES="================================================"
+CUR_DIR=`pwd`
+BUILD_DIRECTORY=${CUR_DIR}
 
 error() {
     local code="${3:-1}"
@@ -20,16 +22,8 @@ echo ${SKIPS}
 
 sudo apt-get update
 sudo apt install -y python3-opencv nvidia-cuda-toolkit jq python3.8-venv libssl-dev
-
-
-python3 -m venv benchmark
-source benchmark/bin/activate
-
-CUR_DIR=`pwd`
-BUILD_DIRECTORY=${CUR_DIR}
-
-python3 -m pip install networkx defusedxml progress numpy google protobuf
-python3 -m pip install requests --upgrade
+sudo python3 -m pip install networkx defusedxml progress numpy google protobuf
+sudo python3 -m pip install requests --upgrade
 sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 
 echo ${SKIPS}
