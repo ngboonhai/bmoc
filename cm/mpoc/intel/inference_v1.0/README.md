@@ -1,4 +1,8 @@
-# MLPerf Benchmarking for Inference Models
+# ResNet50 MLPerf Benchmark workload
+## There are 3 simplify steps to help to complete the workload execution.
+###1. Install workload dependencies into becnhmark machine
+###2. Run the pre-work script for Datasets and Model files preparation.
+###3. Run MLPerf Benchmark workload on on machine. 
 - To have benchmarking for each of Models, please clone Inference_results_v1.0 repo
 - Setup each model environment on your Test unit or you can create container images on top of Test Unit as well. To have container images create, please refers to below section "To create baseline Ubuntu 20.04"
 - Check carefully when modify any of files required from any models' step give from repo. e.g. <this/repo>
