@@ -20,7 +20,7 @@
                 "frame_work" : "tf"
         },
         "ssd-resnet34-1200-onnx" : {
-                "model_file" : "ssd-resnet34-1200-onnx.onnx",
+                "model_file" : "resnet34-ssd1200.onnx",
                 "frame_work" : "onnx"
         }
 }
