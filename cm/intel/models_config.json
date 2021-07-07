@@ -26,5 +26,9 @@
         "mobilenet-v1-1.0-224":{
                 "model_file" : "mobilenet-v1-1.0-224.caffemodel",
                 "frame_work" : "caffe"
-        }
+        },
+        "se-resnet-152":{
+        "model_file" : "se-resnet-152.caffemodel", 
+        "frame_work" : "caffe"
+    }
 }
