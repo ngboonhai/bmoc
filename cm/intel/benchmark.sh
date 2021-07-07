@@ -42,7 +42,13 @@ echo -e "\e[0;34m ========= Start running benchmark for ${MODEL} ========= \e[0m
 echo ${SKIPS}
 
 MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
-python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_DIR}/${MODEL}_${PRECISION}.xml -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
+IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" | grep INT8`
+if [ ! "${IR_FILE_PATH}" == "" ]; then
+	MODEL_FILE_PATH=${IR_FILE_PATH}
+else
+	MODEL_FILE_PATH=${MODEL_DIR}/${MODEL}_${PRECISION}.xml
+fi 
+python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
 
 echo ${SKIPS}
 echo -e "\e[0;32m ========= Benchmark for ${MODEL} is completed ========= \e[0m"
