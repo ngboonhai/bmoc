@@ -1,34 +1,442 @@
 {
-        "mobilenet-ssd": {
-                "model_file" : "mobilenet-ssd.caffemodel",
-                "frame_work" : "caffe"
-        },
-        "mobilenet-v2": {
-                "model_file" : "mobilenet-v2.caffemodel",
-                "frame_work" : "caffe"
-        },
-        "ssd_mobilenet_v1_coco" : {
-                "model_file" : "frozen_inference_graph.pb",
-                "frame_work" : "tf"
-        },
-        "ssdlite_mobilenet_v2" : {
-                "model_file" : "frozen_inference_graph.pb",
-                "frame_work" : "tf"
-        },
-        "mobilenet-v1-0.25-128" : {
-                "model_file" : "mobilenet_v1_0.25_128_frozen.pb",
-                "frame_work" : "tf"
-        },
-        "ssd-resnet34-1200-onnx" : {
-                "model_file" : "resnet34-ssd1200.onnx",
-                "frame_work" : "onnx"
-        },
-        "mobilenet-v1-1.0-224":{
-                "model_file" : "mobilenet-v1-1.0-224.caffemodel",
-                "frame_work" : "caffe"
-        },
-        "se-resnet-152":{
+    "aclnet":{
+        "model_file" : "aclnet_des_53.onnx", 
+        "frame_work" : "onnx"
+    },
+    "aclnet-int8":{
+        "model_file" : "aclnet_des_53_int8.onnx", 
+        "frame_work" : "onnx"
+    },
+    "alexnet":{
+        "model_file" : "alexnet.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "anti-spoof-mn3":{
+        "model_file" : "anti-spoof-mn3.onnx", 
+        "frame_work" : "onnx"
+    },
+    "brain-tumor-segmentation-0002":{
+        "model_file" : "brain-tumor-segmentation-0002.onnx", 
+        "frame_work" : "onnx"
+    },
+    "caffenet":{
+        "model_file" : "bvlc_reference_caffenet.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "cocosnet":{
+        "model_file" : "latest_net_Corr.pth", 
+        "frame_work" : "pt"
+    },
+    "colorization-siggraph":{
+        "model_file" : "colorization-siggraph.pth", 
+        "frame_work" : "pt"
+    },
+    "colorization-v2":{
+        "model_file" : "colorization-v2-eccv16.pth", 
+        "frame_work" : "pt"
+    },
+    "common-sign-language-0001":{
+        "model_file" : "s3d-rgb-mobilenet-v3-large-stream-jester.onnx", 
+        "frame_work" : "onnx"
+    },
+    "ctdet_coco_dlav0_384":{
+        "model_file" : "ctdet_coco_dlav0_1x.pth", 
+        "frame_work" : "pt"
+    },
+    "ctdet_coco_dlav0_512":{
+        "model_file" : "ctdet_coco_dlav0_1x.pth", 
+        "frame_work" : "pt"
+    },
+    "ctpn":{
+        "model_file" : "ctpn.pb", 
+        "frame_work" : "tf"
+    },
+    "deeplabv3":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "densenet-121":{
+        "model_file" : "densenet-121.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "densenet-121-caffe2":{
+        "model_file" : "predict_net.pb", 
+        "frame_work" : "tf"
+    },
+    "densenet-121-tf":{
+        "model_file" : "densenet121_weights_tf_dim_ordering_tf_kernels.h5", 
+        "frame_work" : ""
+    },
+    "densenet-161":{
+        "model_file" : "densenet-161.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "densenet-169":{
+        "model_file" : "densenet-169.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "densenet-201":{
+        "model_file" : "densenet-201.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "densenet-201-tf":{
+        "model_file" : "densenet201_weights_tf_dim_ordering_tf_kernels.h5", 
+        "frame_work" : ""
+    },
+    "dla-34":{
+        "model_file" : "dla34.pth", 
+        "frame_work" : "pt"
+    },
+    "efficientnet-b0-pytorch":{
+        "model_file" : "efficientnet-b0.pth", 
+        "frame_work" : "pt"
+    },
+    "efficientnet-b5-pytorch":{
+        "model_file" : "tf-efficientnet-b5.pth", 
+        "frame_work" : "pt"
+    },
+    "efficientnet-b7-pytorch":{
+        "model_file" : "tf-efficientnet-b7.pth", 
+        "frame_work" : "pt"
+    },
+    "faceboxes-pytorch":{
+        "model_file" : "FaceBoxesProd.pth", 
+        "frame_work" : "pt"
+    },
+    "face-detection-retail-0044":{
+        "model_file" : "face-detection-retail-0044.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "facenet-20180408-102900":{
+        "model_file" : "20180408-102900.pb", 
+        "frame_work" : "tf"
+    },
+    "faster_rcnn_inception_resnet_v2_atrous_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "faster_rcnn_inception_v2_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "faster_rcnn_resnet101_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "faster_rcnn_resnet50_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "fast-neural-style-mosaic-onnx":{
+        "model_file" : "fast-neural-style-mosaic-onnx.onnx", 
+        "frame_work" : "onnx"
+    },
+    "fastseg-large":{
+        "model_file" : "mobilev3large-lraspp-f128-9cbabfde.pt", 
+        "frame_work" : "pt"
+    },
+    "fastseg-small":{
+        "model_file" : "mobilev3small-lraspp-f128-a39a1e4b.pt", 
+        "frame_work" : "pt"
+    },
+    "forward-tacotron":{
+        "model_file" : "forward_tacotron_duration_prediction.onnx", 
+        "frame_work" : "onnx"
+    },
+    "gmcnn-places2-tf":{
+        "model_file" : "frozen_model.pb", 
+        "frame_work" : "tf"
+    },
+    "googlenet-v1":{
+        "model_file" : "googlenet-v1.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "googlenet-v2":{
+        "model_file" : "googlenet-v2.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "googlenet-v3":{
+        "model_file" : "inception_v3_2016_08_28_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "googlenet-v3-pytorch":{
+        "model_file" : "inception_v3_google-1a9a5a14.pth", 
+        "frame_work" : "pt"
+    },
+    "hbonet-0.25":{
+        "model_file" : "hbonet_0_25.pth", 
+        "frame_work" : "pt"
+    },
+    "hbonet-0.5":{
+        "model_file" : "hbonet_0_5.pth", 
+        "frame_work" : "pt"
+    },
+    "hbonet-1.0":{
+        "model_file" : "hbonet_1_0.pth", 
+        "frame_work" : "pt"
+    },
+    "hrnet-v2-c1-segmentation":{
+        "model_file" : "encoder_epoch_30.pth", 
+        "frame_work" : "pt"
+    },
+    "human-pose-estimation-3d-0001":{
+        "model_file" : "human-pose-estimation-3d-0001.pth", 
+        "frame_work" : "pt"
+    },
+    "i3d-rgb-tf":{
+        "model_file" : "i3d-rgb.frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "inception-resnet-v2-tf":{
+        "model_file" : "inception_resnet_v2.pb", 
+        "frame_work" : "tf"
+    },
+    "mask_rcnn_inception_resnet_v2_atrous_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "mask_rcnn_inception_v2_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "mask_rcnn_resnet101_atrous_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "mask_rcnn_resnet50_atrous_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "midasnet":{
+        "model_file" : "model.pt", 
+        "frame_work" : "pt"
+    },
+    "mobilenet-ssd":{
+        "model_file" : "mobilenet-ssd.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "mobilenet-v1-0.25-128":{
+        "model_file" : "mobilenet_v1_0.25_128_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v1-0.50-160":{
+        "model_file" : "mobilenet_v1_0.5_160_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v1-0.50-224":{
+        "model_file" : "mobilenet_v1_0.5_224_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v1-1.0-224":{
+        "model_file" : "mobilenet-v1-1.0-224.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "mobilenet-v1-1.0-224-tf":{
+        "model_file" : "mobilenet_v1_1.0_224_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v2":{
+        "model_file" : "mobilenet-v2.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "mobilenet-v2-1.0-224":{
+        "model_file" : "mobilenet_v2_1.0_224_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v2-1.4-224":{
+        "model_file" : "mobilenet_v2_1.4_224_frozen.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v2-pytorch":{
+        "model_file" : "mobilenet_v2-b0353104.pth", 
+        "frame_work" : "pt"
+    },
+    "mobilenet-v3-large-1.0-224-tf":{
+        "model_file" : "v3-large_224_1.0_float.pb", 
+        "frame_work" : "tf"
+    },
+    "mobilenet-v3-small-1.0-224-tf":{
+        "model_file" : "v3-small_224_1.0_float.pb", 
+        "frame_work" : "tf"
+    },
+    "mozilla-deepspeech-0.6.1":{
+        "model_file" : "output_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "mtcnn":{
+        "model_file" : "mtcnn-r.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "open-closed-eye-0001":{
+        "model_file" : "open-closed-eye.onnx", 
+        "frame_work" : "onnx"
+    },
+    "pelee-coco":{
+        "model_file" : "pelee_coco_304x304_acc3889.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "regnetx-3.2gf":{
+        "model_file" : "regnetx-3.2gf.pyth", 
+        "frame_work" : "pt"
+    },
+    "resnet-18-pytorch":{
+        "model_file" : "resnet18-5c106cde.pth", 
+        "frame_work" : "pt"
+    },
+    "resnet-34-pytorch":{
+        "model_file" : "resnet34-333f7ec4.pth", 
+        "frame_work" : "pt"
+    },
+    "resnet-50-caffe2":{
+        "model_file" : "predict_net.pb", 
+        "frame_work" : "tf"
+    },
+    "resnet-50-pytorch":{
+        "model_file" : "resnet50-19c8e357.pth", 
+        "frame_work" : "pt"
+    },
+    "resnet-50-tf":{
+        "model_file" : "resnet_v1-50.pb", 
+        "frame_work" : "tf"
+    },
+    "retinanet-tf":{
+        "model_file" : "retinanet_resnet50_coco_best_v2.1.0.pb", 
+        "frame_work" : "tf"
+    },
+    "rexnet-v1-x1.0":{
+        "model_file" : "rexnetv1_1.0x.pth", 
+        "frame_work" : "pt"
+    },
+    "rfcn-resnet101-coco-tf":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "se-inception":{
+        "model_file" : "se-inception.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "se-resnet-101":{
+        "model_file" : "se-resnet-101.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "se-resnet-152":{
         "model_file" : "se-resnet-152.caffemodel", 
         "frame_work" : "caffe"
+    },
+    "se-resnet-50":{
+        "model_file" : "se-resnet-50.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "se-resnext-101":{
+        "model_file" : "se-resnext-101.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "se-resnext-50":{
+        "model_file" : "se-resnext-50.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "shufflenet-v2-x1.0":{
+        "model_file" : "shufflenetv2_x1-5666bf0f80.pth", 
+        "frame_work" : "pt"
+    },
+    "single-human-pose-estimation-0001":{
+        "model_file" : "single-human-pose-estimation-0001.pth", 
+        "frame_work" : "pt"
+    },
+    "Sphereface":{
+        "model_file" : "Sphereface.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "squeezenet1.0":{
+        "model_file" : "squeezenet1.0.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "squeezenet1.1":{
+        "model_file" : "squeezenet1.1.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "squeezenet1.1-caffe2":{
+        "model_file" : "predict_net.pb", 
+        "frame_work" : "tf"
+    },
+    "ssd_mobilenet_v1_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "ssd_mobilenet_v1_fpn_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "ssd_mobilenet_v2_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "ssd_resnet50_v1_fpn_coco":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "ssd300":{
+        "model_file" : "VGG_VOC0712Plus_SSD_300x300_ft_iter_160000.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "ssd512":{
+        "model_file" : "VGG_VOC0712Plus_SSD_512x512_iter_240000.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "ssdlite_mobilenet_v2":{
+        "model_file" : "frozen_inference_graph.pb", 
+        "frame_work" : "tf"
+    },
+    "ssd-resnet34-1200-onnx":{
+        "model_file" : "resnet34-ssd1200.onnx", 
+        "frame_work" : "onnx"
+    },
+    "vehicle-reid-0001":{
+        "model_file" : "osnet_ain_x1_0_vehicle_reid.onnx", 
+        "frame_work" : "onnx"
+    },
+    "vgg16":{
+        "model_file" : "vgg16.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "vgg19":{
+        "model_file" : "vgg19.caffemodel", 
+        "frame_work" : "caffe"
+    },
+    "vgg19-caffe2":{
+        "model_file" : "predict_net.pb", 
+        "frame_work" : "tf"
+    },
+    "wavernn":{
+        "model_file" : "wavernn_rnn.onnx", 
+        "frame_work" : "onnx"
+    },
+    "yolact-resnet50-fpn-pytorch":{
+        "model_file" : "yolact_resnet50_54_800000.pth", 
+        "frame_work" : "pt"
+    },
+    "yolo-v1-tiny-tf":{
+        "model_file" : "yolo-v1-tiny.pb", 
+        "frame_work" : "tf"
+    },
+    "yolo-v2-tf":{
+        "model_file" : "yolo-v2.pb", 
+        "frame_work" : "tf"
+    },
+    "yolo-v2-tiny-tf":{
+        "model_file" : "yolov2-tiny.weights", 
+        "frame_work" : "pt"
+    },
+    "yolo-v3-tf":{
+        "model_file" : "yolo-v3.pb", 
+        "frame_work" : "tf"
+    },
+    "yolo-v3-tiny-tf":{
+        "model_file" : "yolo-v3-tiny-tf.pb", 
+        "frame_work" : "tf"
+    },
+    "yolo-v4-tf":{
+        "model_file" : "yolov4.weights", 
+        "frame_work" : ""
     }
 }
