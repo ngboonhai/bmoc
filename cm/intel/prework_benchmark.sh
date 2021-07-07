@@ -87,16 +87,19 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
 			MODEL_FILE_PATH=$file_path
 			FOUND="true"
 			echo -e "\e[0;32m IR files of ${MODEL} has been ready to benchmark \e[0m"
+			echo ${SKIPS} 
 			break
 		elif [[ $file_path =~ "FP16" ]]; then
 			MODEL_FILE_PATH=$file_path
 			FOUND="true"
 			echo -e "\e[0;32m IR files of ${MODEL} has been ready to benchmark \e[0m"
+			echo ${SKIPS} 
 			break
 		elif [[ $file_path =~ "FP32" ]]; then
 			MODEL_FILE_PATH=$file_path
 			FOUND="true"
 			echo -e "\e[0;32m IR files of ${MODEL} has been ready to benchmark \e[0m"
+			echo ${SKIPS} 
 			break
 		fi
 		
@@ -104,6 +107,7 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
 		       echo -e "\e[0;31m The INT8 of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
 		       exit 1
 		fi
+		echo ${SKIPS} 
 	done
 else
 	MODEL_FIND=`jq -r '."'"${MODEL}"'"' ${CUR_DIR}/Configs/models_config.json`
