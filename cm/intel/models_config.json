@@ -22,5 +22,9 @@
         "ssd-resnet34-1200-onnx" : {
                 "model_file" : "resnet34-ssd1200.onnx",
                 "frame_work" : "onnx"
+        },
+        "mobilenet-v1-1.0-224":{
+                "model_file" : "mobilenet-v1-10-224.caffemodel",
+                "frame_work" : "caffe"
         }
 }
