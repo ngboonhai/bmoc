@@ -100,6 +100,8 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
 		if [ ! $FOUND == "true" ]; then
 		       echo -e "\e[0;31m The INT8 of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
 		       exit 1
+		else
+			echo -e "\e[0;32m IR files of ${MODEL} has been ready to benchmark \e[0m"
 		fi
 	done
 else
