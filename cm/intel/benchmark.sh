@@ -42,9 +42,15 @@ echo -e "\e[0;34m ========= Start running benchmark for ${MODEL} ========= \e[0m
 echo ${SKIPS}
 
 MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
-IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" | grep INT8`
+IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" 2>/dev/null`
 if [ ! "${IR_FILE_PATH}" == "" ]; then
-	MODEL_FILE_PATH=${IR_FILE_PATH}
+	INT8_IR_FILE=`find ${MODEL_DIR} -name "*.xml" | grep INT8`
+	if [ ! ${INT8_IR_FILE} == "" ]; then
+		MODEL_FILE_PATH=${IR_FILE_PATH}
+		echo -e "\e[0;32m ${MODEL} been optimized and IR files detected \e[0m"
+	else
+		echo -e "\e[0;31m The INT8 of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
+	fi
 else
 	MODEL_FILE_PATH=${MODEL_DIR}/${MODEL}_${PRECISION}.xml
 fi 
