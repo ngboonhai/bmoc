@@ -46,16 +46,17 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
                         break
 		elif [[ $file_path =~ "FP16" ]]; then
 			MODEL_FILE_PATH=$file_path
+			PRECISION="FP16"
                         FOUND="true"
                         break
 		elif [[ $file_path =~ "FP32" ]]; then
 			MODEL_FILE_PATH=$file_path
-			PRECISION="FP16"
+			PRECISION="FP32"
                         FOUND="true"
                         break
 		elif [[ $file_path =~ "fp16" ]]; then
 			MODEL_FILE_PATH=$file_path
-			PRECISION="FP32"
+			PRECISION="FP16"
                         FOUND="true"
                         break
                 fi
