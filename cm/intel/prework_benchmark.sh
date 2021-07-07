@@ -83,13 +83,23 @@ IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" 2>/dev/null`
 if [ ! "${IR_FILE_PATH}" == "" ]; then
 	for file_path in `echo $IR_FILE_PATH`
        	do
-		if [[ $file_path =~ "INT8" ]]; then
+		if [[ $file_path =~ "FP16-INT8" ]]; then
+			MODEL_FILE_PATH=$file_path
+			FOUND="true"
+			break
+		elif [[ $file_path =~ "FP16" ]]; then
+			MODEL_FILE_PATH=$file_path
+			FOUND="true"
+			break
+		elif [[ $file_path =~ "FP32" ]]; then
 			MODEL_FILE_PATH=$file_path
 			FOUND="true"
 			break
 		fi
+		
 		if [ ! $FOUND == "true" ]; then
 		       echo -e "\e[0;31m The INT8 of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
+		       exit 1
 		fi
 	done
 else
