@@ -26,13 +26,6 @@ else
     MODEL=${MODEL}
 fi
 
-PRECISION=$2
-if [ "${PRECISION}" == "" ]; then
-    PRECISION="fp16"
-else
-    PRECISION=${PRECISION}
-fi
-
 source /opt/intel/openvino_2021/bin/setupvars.sh
 export PATH=/usr/lib/x86_64-linux-gnu${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
@@ -48,6 +41,7 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
         do
                 if [[ $file_path =~ "FP16-INT8" ]]; then
                         MODEL_FILE_PATH=$file_path
+			PRECISION="INT8"
                         FOUND="true"
                         break
 		elif [[ $file_path =~ "FP16" ]]; then
@@ -56,10 +50,12 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
                         break
 		elif [[ $file_path =~ "FP32" ]]; then
 			MODEL_FILE_PATH=$file_path
+			PRECISION="FP16"
                         FOUND="true"
                         break
 		elif [[ $file_path =~ "fp16" ]]; then
 			MODEL_FILE_PATH=$file_path
+			PRECISION="FP32"
                         FOUND="true"
                         break
                 fi
@@ -71,7 +67,7 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
 
 fi 
 python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
-
+echo -n "Precision: $PRECISION"
 echo ${SKIPS}
 echo -e "\e[0;32m ========= Benchmark for ${MODEL} is completed ========= \e[0m"
 echo ${SKIPS}
