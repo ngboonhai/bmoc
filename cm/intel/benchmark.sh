@@ -70,5 +70,6 @@ fi
 python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
 echo -n "Precision: $PRECISION"
 echo ${SKIPS}
+echo ${SKIPS}
 echo -e "\e[0;32m ========= Benchmark for ${MODEL} is completed ========= \e[0m"
 echo ${SKIPS}
