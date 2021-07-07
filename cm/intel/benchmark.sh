@@ -43,23 +43,26 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
                         MODEL_FILE_PATH=$file_path
 			PRECISION="INT8"
                         FOUND="true"
-                        break
-		elif [[ $file_path =~ "FP16" ]]; then
+                fi
+		
+		if [[ ($file_path =~ "FP16") || ! ($FOUND=="true") ]]; then
 			MODEL_FILE_PATH=$file_path
 			PRECISION="FP16"
                         FOUND="true"
-                        break
-		elif [[ $file_path =~ "FP32" ]]; then
+                fi
+		
+		if [[ ($file_path =~ "FP32") || ! ($FOUND=="true") ]]; then
 			MODEL_FILE_PATH=$file_path
 			PRECISION="FP32"
                         FOUND="true"
-                        break
-		elif [[ $file_path =~ "fp16" ]]; then
+		fi
+		
+		if [[ ($file_path =~ "fp16") || ! ($FOUND=="true") ]]; then
 			MODEL_FILE_PATH=$file_path
 			PRECISION="FP16"
                         FOUND="true"
-                        break
                 fi
+		
                 if [ ! $FOUND == "true" ]; then
                        echo -e "\e[0;31m Unable to find any of  IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
 		       exit 1
