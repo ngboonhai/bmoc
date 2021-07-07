@@ -44,15 +44,23 @@ echo ${SKIPS}
 MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" 2>/dev/null`
 if [ ! "${IR_FILE_PATH}" == "" ]; then
-	INT8_IR_FILE=`find ${MODEL_DIR} -name "*.xml" | grep INT8`
-	if [ ! ${INT8_IR_FILE} == "" ]; then
-		MODEL_FILE_PATH=${IR_FILE_PATH}
-		echo -e "\e[0;32m ${MODEL} been optimized and IR files detected \e[0m"
-	else
-		echo -e "\e[0;31m The INT8 of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
-	fi
-else
-	MODEL_FILE_PATH=${MODEL_DIR}/${MODEL}_${PRECISION}.xml
+        for file_path in `echo $IR_FILE_PATH`
+        do
+                if [[ $file_path =~ "INT8" ]]; then
+                        MODEL_FILE_PATH=$file_path
+                        FOUND="true"
+                        break
+		elif [[ $file_path =~ "fp16" ]]; then
+			MODEL_FILE_PATH=$file_path
+                        FOUND="true"
+                        break
+                fi
+                if [ ! $FOUND == "true" ]; then
+                       echo -e "\e[0;31m Unable to find any of  IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
+		       exit 1
+                fi
+        done
+
 fi 
 python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
 
