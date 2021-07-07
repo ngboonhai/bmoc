@@ -78,8 +78,13 @@ fi
 
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Optimizing benchmark models ========= \e[0m"
-echo ${SKIPS} 
-if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
+echo ${SKIPS}
+IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" | grep INT8`
+if [ ! "${IR_FILE_PATH}" == "" ]; then
+	MODEL_FILE_PATH=${IR_FILE_PATH}
+	echo -e "\e[0;32m ${MODEL} been optimized and IR files detected \e[0m"
+else
+	#if [ ! -f ${MODEL_DIR}/${MODEL}_${PRECISION}.xml ]; then
 	MODEL_FIND=`jq -r '."'"${MODEL}"'"' ${CUR_DIR}/Configs/models_config.json`
 	if [ ! "${MODEL_FIND}" == null ]; then
 		MODEL_FILE=`jq -r '."'"${MODEL}"'"'.model_file ${CUR_DIR}/Configs/models_config.json`
