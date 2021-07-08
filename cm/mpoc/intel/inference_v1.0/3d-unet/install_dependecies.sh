@@ -54,7 +54,7 @@ if [ "${DIST}" == "focal" ]; then
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 else
 	python3 -m pip install --upgrade setuptools
-        python3 -m pip install defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
+        python3 -m pip install defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0 skbuild
 	python3 -m pip install addict==2.4.0 networkx tqdm pandas Cython
 	python3 -m pip install opencv-python openvino openvino-dev
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
