@@ -34,45 +34,47 @@ echo ${SKIPS}
 echo -e "\e[0;34m ========= Start running benchmark for ${MODEL} ========= \e[0m"
 echo ${SKIPS}
 
+FOUND="false"
 MODEL_DIR=`find ${CUR_DIR} -type d -name "${MODEL}"  2>/dev/null`
 IR_FILE_PATH=`find ${MODEL_DIR} -name "*.xml" 2>/dev/null`
 if [ ! "${IR_FILE_PATH}" == "" ]; then
         for file_path in `echo $IR_FILE_PATH`
         do
-                if [[ $file_path =~ "INT8" ]]; then
+		if [[ $file_path =~ "INT8" || $file_path =~ "int8" ]]; then
                         MODEL_FILE_PATH=$file_path
 			PRECISION="INT8"
                         FOUND="true"
-                fi
-		
-		if [[ ($file_path =~ "FP16") || ! ($FOUND=="true") ]]; then
+			break
+		elif [[ ( $file_path =~ "FP16" || $file_path =~ "fp16" ) ]]; then
 			MODEL_FILE_PATH=$file_path
 			PRECISION="FP16"
                         FOUND="true"
+			break
                 fi
-		
-		if [[ ($file_path =~ "FP32") || ! ($FOUND=="true") ]]; then
-			MODEL_FILE_PATH=$file_path
-			PRECISION="FP32"
-                        FOUND="true"
-		fi
-		
-		if [[ ($file_path =~ "fp16") || ! ($FOUND=="true") ]]; then
-			MODEL_FILE_PATH=$file_path
-			PRECISION="FP16"
-                        FOUND="true"
-                fi
+		continue
 		
                 if [ ! $FOUND == "true" ]; then
-                       echo -e "\e[0;31m Unable to find any of  IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
+                       echo -e "\e[0;31m Unable to find any of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
 		       exit 1
                 fi
         done
 
 fi 
-python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
-echo -n "Precision: $PRECISION"
-echo ${SKIPS}
-echo ${SKIPS}
-echo -e "\e[0;32m ========= Benchmark for ${MODEL} is completed ========= \e[0m"
+
+for benchmark_run in {1..3}
+do
+	python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
+	echo "Precision: $PRECISION"
+	if [ $(($benchmark_run)) -lt 2 ]; then
+		echo ${SKIPS}
+		echo -e "\e[0;32m =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \e[0m"
+		echo -e "\e[0;32m ======   Next running will start in another 30 seconds   ====== \e[0m"
+		echo ${SKIPS}
+		sleep 30s
+	else
+		echo -e "\e[0;32m =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
+	fi
+done
+
+echo -e "\e[0;32m ====== Benchmark for ${MODEL} is completed ====== \e[0m"
 echo ${SKIPS}
