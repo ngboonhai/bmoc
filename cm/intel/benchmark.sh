@@ -76,9 +76,9 @@ do
 		echo ${SKIPS}
 		sleep 30s
 	else
-		echo -e "\e[0;32m =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
+		echo -e "\e[0;32m                =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
 	fi
 done
 
-echo -e "\e[0;32m ====== Benchmark for ${MODEL} is completed ====== \e[0m"
+echo -e "\e[0;32m                ====== Benchmark for ${MODEL} is completed ====== \e[0m"
 echo ${SKIPS}
