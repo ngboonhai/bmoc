@@ -71,16 +71,19 @@ if [ "${DIST}" == "focal" ]; then
 	python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 else
-	cd /tmp
-	git clone https://github.com/LibRaw/LibRaw.git libraw
-	git clone https://github.com/LibRaw/LibRaw-cmake.git libraw-cmake
-	cd libraw
-	git checkout 0.20.0
-	cp -R ../libraw-cmake/* .
-	cmake .
-	sudo make install
-	rm /tmp/libraw*
-	cd ${CUR_DIR}
+	CHECK_LIBRAW=`whereis libraw`
+	if [ ! -z ${CHECK_LIBRAW} ]; then
+		cd /tmp
+		git clone https://github.com/LibRaw/LibRaw.git libraw
+		git clone https://github.com/LibRaw/LibRaw-cmake.git libraw-cmake
+		cd libraw
+		git checkout 0.20.0
+		cp -R ../libraw-cmake/* .
+		cmake .
+		sudo make install
+		rm /tmp/libraw*
+		cd ${CUR_DIR}
+	fi
 	python3 -m pip install --upgrade setuptools
         python3 -m pip install defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
 	python3 -m pip install addict networkx tqdm pandas Cython scikit-build
