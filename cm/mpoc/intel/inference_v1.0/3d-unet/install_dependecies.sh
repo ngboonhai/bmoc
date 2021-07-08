@@ -56,7 +56,7 @@ else
 	python3 -m pip install --upgrade setuptools
         python3 -m pip install defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
 	python3 -m pip install addict networkx tqdm pandas Cython scikit-build
-	python3 -m pip install opencv-python openvino openvino-dev
+	python3 -m pip install opencv-python openvino-dev
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 fi
 
