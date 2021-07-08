@@ -67,8 +67,10 @@ do
 	echo "Precision: $PRECISION"
 	if [ $(($benchmark_run)) -lt 2 ]; then
 		echo ${SKIPS}
-		echo -e "\e[0;32m =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \e[0m"
-		echo -e "\e[0;32m ======   Next running will start in another 30 seconds   ====== \e[0m"
+		echo  -e "\033[33;5;7m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
+		echo  -e "\033[33;5;7m                ======   Next running will start in another 30 seconds   ====== \033[0m"
+		#echo -e "\e[0;32m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \e[0m"
+		#echo -e "\e[0;32m                ======   Next running will start in another 30 seconds   ====== \e[0m"
 		echo ${SKIPS}
 		sleep 30s
 	else
