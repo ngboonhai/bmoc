@@ -38,7 +38,6 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 	sudo ./install.sh -s silent.cfg
 	cd ${CUR_DIR}
 	rm -rf l_openvino_toolkit_p_2021.3.394*
-	sudo ln -sf /opt/intel/openvino_2021.3.394 /opt/intel/openvino
 	source /opt/intel/openvino_2021/bin/setupvars.sh
 	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
 
