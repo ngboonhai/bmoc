@@ -48,6 +48,7 @@ fi
 echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
 if [ "${DIST}" == "focal" ]; then
+	python3 -m pip install --upgrade setuptools
         python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.2.0rc1
 else
         python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
