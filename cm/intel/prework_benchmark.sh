@@ -76,6 +76,10 @@ else
 	echo -e "\e[0;32m Existing benchmark models detected!!\e[0m"
 fi
 
+source /opt/intel/openvino_2021/bin/setupvars.sh
+export PATH=/usr/lib/x86_64-linux-gnu${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
 echo ${SKIPS}
 echo -e "\e[0;34m ========= Optimizing benchmark models ========= \e[0m"
 echo ${SKIPS}
