@@ -19,13 +19,30 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv libssl-dev
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip python3.8-venv libssl-dev
 
 python3 -m venv ssd-mobilenet
 source ssd-mobilenet/bin/activate
 
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
+
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
+cmake_ver=`cmake --version | head -1 | awk '{print $3}'`
+if [ -z $cmake_ver ] || [ ! "${cmake_ver}" == "3.17.3" ]; then
+	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
+ 	tar -xzf cmake-3.17.3.tar.gz
+ 	rm cmake-3.17.3.tar.gz
+ 	cd cmake-3.17.3
+ 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
+ 	make -j8
+ 	sudo make install
+	rm -rf cmake-3.17*	
+	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
+	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+else
+	echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
+fi
 
 echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing OpenVino Toolkit =========== \e[0m"
@@ -52,23 +69,6 @@ if [ "${DIST}" == "focal" ]; then
 else
 	python3 -m pip install --upgrade setuptools
         python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
-fi
-
-echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
-cmake_ver=`cmake --version | head -1 | awk '{print $3}'`
-if [ -z $cmake_ver ] || [ ! "${cmake_ver}" == "3.17.3" ]; then
-	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
- 	tar -xzf cmake-3.17.3.tar.gz
- 	rm cmake-3.17.3.tar.gz
- 	cd cmake-3.17.3
- 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
- 	make -j8
- 	sudo make install
-	rm -rf cmake-3.17*	
-	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
-	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
-else
-	echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
 fi
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
