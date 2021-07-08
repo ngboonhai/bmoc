@@ -46,10 +46,24 @@ else
 fi
 
 echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
-python3 -m pip install  defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
-python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
-python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
-python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
+DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
+if [ "${DIST}" == "focal" ]; then
+        python3 -m pip install defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
+	python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
+	python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
+	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
+else
+	python3 -m pip install --upgrade setuptools
+        python3 -m pip install defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
+	python3 -m pip install addict==2.4.0 networkx tqdm pandas Cython
+	python3 -m pip install opencv-python openvino openvino-dev
+	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
+fi
+
+echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
+python3 -m pip install  
+
+
 
 echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
 if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
