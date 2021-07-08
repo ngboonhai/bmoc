@@ -65,14 +65,10 @@ for benchmark_run in {1..3}
 do
 	python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
 	echo "Precision: $PRECISION"
-	if [ $(($benchmark_run)) -lt 2 ]; then
+	if [ $(($benchmark_run)) -lt 3 ]; then
 		echo ${SKIPS}
-		printf "\e[6;33m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \e[0m"
-		printf "\e[6;33m                ======   Next running will start in another 30 seconds   ====== \e[0m"
-		#echo  -e "\033[33;5;7m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
-		#echo  -e "\033[33;5;7m                ======   Next running will start in another 30 seconds   ====== \033[0m"
-		#echo -e "\e[0;32m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \e[0m"
-		#echo -e "\e[0;32m                ======   Next running will start in another 30 seconds   ====== \e[0m"
+		echo  -e "\033[33;5m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
+		echo  -e "\033[33;5m                ======   Next running will start in another 30 seconds   ====== \033[0m"
 		echo ${SKIPS}
 		sleep 30s
 	else
