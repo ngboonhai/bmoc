@@ -48,6 +48,19 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 else
 	echo -e "\e[0;32m Existing OpenVino Toolkit & Dependencies detected!!\e[0m"
 fi
+
+DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
+if [ "${DIST}" == "Bionic" ]; then
+        wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+	sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+	wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-ubuntu1804-11-4-local_11.4.0-470.42.01-1_amd64.deb
+	sudo dpkg -i cuda-repo-ubuntu1804-11-4-local_11.4.0-470.42.01-1_amd64.deb
+	sudo apt-key add /var/cuda-repo-ubuntu1804-11-4-local/7fa2af80.pub
+	sudo apt-get update
+	sudo apt-get -y install cuda
+	rm cuda-repo-ubuntu1804-11-4-local_11.4.0-470.42.01-1_amd64.deb
+fi
+
 echo ${SKIPS}
 
 echo -e "\e[0;34m ========== Installing OpenVino Model Optimizer Dependencies on system =========== \e[0m"
