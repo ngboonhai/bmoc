@@ -19,7 +19,7 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip cmake python3.8-venv libssl-dev
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip python3.8-venv libssl-dev
 
 python3 -m venv resnet50
 source resnet50/bin/activate
@@ -55,8 +55,8 @@ else
 fi
 
 echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
-if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
-	sudo apt purge -y cmake
+cmake_ver=`cmake --version | head -1 | awk '{print $3}'`
+if [ -z $cmake_ver ] || [ ! "${cmake_ver}" == "3.17.3" ]; then
 	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
  	tar -xzf cmake-3.17.3.tar.gz
  	rm cmake-3.17.3.tar.gz
