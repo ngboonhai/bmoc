@@ -44,6 +44,22 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 else
 	echo -e "\e[0;32m Openvino Toolkit installed!!\e[0m"
 fi
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
+if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
+	sudo apt purge -y cmake
+	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
+ 	tar -xzf cmake-3.17.3.tar.gz
+ 	rm cmake-3.17.3.tar.gz
+ 	cd cmake-3.17.3
+ 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
+ 	make -j8
+ 	sudo make install
+	rm -rf cmake-3.17*	
+	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
+	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+else
+	echo -e "\e[0;32m Cmake >=3.16 installed!!\e[0m"
+fi
 
 echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
@@ -66,28 +82,6 @@ else
 	python3 -m pip install addict networkx tqdm pandas Cython scikit-build
 	python3 -m pip install opencv-python openvino-dev
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
-fi
-
-echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
-python3 -m pip install  
-
-
-
-echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
-if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
-	sudo apt purge -y cmake
-	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
- 	tar -xzf cmake-3.17.3.tar.gz
- 	rm cmake-3.17.3.tar.gz
- 	cd cmake-3.17.3
- 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
- 	make -j8
- 	sudo make install
-	rm -rf cmake-3.17*	
-	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
-	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
-else
-	echo -e "\e[0;32m Cmake >=3.16 installed!!\e[0m"
 fi
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
