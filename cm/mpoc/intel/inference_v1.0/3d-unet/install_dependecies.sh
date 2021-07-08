@@ -27,6 +27,23 @@ source 3d-unet/bin/activate
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
+cmake_ver=`cmake --version | head -1 | awk '{print $3}'`
+if [ -z $cmake_ver ] || [ ! "${cmake_ver}" == "3.17.3" ]; then
+	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
+ 	tar -xzf cmake-3.17.3.tar.gz
+ 	rm cmake-3.17.3.tar.gz
+ 	cd cmake-3.17.3
+ 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
+ 	make -j8
+ 	sudo make install
+	rm -rf cmake-3.17*	
+	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
+	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+else
+	echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
+fi
+
 echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing Full packages of OpenVino Toolkit =========== \e[0m"
 echo ${SKIPS}
@@ -44,22 +61,6 @@ if [ ! -d /opt/intel/openvino_2021 ]; then
 else
 	echo -e "\e[0;32m Openvino Toolkit installed!!\e[0m"
 fi
-echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
-if [ ! `cmake --version | head -1 | awk '{print $3}'` == "3.17.3" ]; then
-	sudo apt purge -y cmake
-	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
- 	tar -xzf cmake-3.17.3.tar.gz
- 	rm cmake-3.17.3.tar.gz
- 	cd cmake-3.17.3
- 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
- 	make -j8
- 	sudo make install
-	rm -rf cmake-3.17*	
-	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
-	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
-else
-	echo -e "\e[0;32m Cmake >=3.16 installed!!\e[0m"
-fi
 
 echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
@@ -69,6 +70,7 @@ if [ "${DIST}" == "focal" ]; then
 	python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 else
+	cd /tmp
 	git clone https://github.com/LibRaw/LibRaw.git libraw
 	git clone https://github.com/LibRaw/LibRaw-cmake.git libraw-cmake
 	cd libraw
@@ -76,10 +78,13 @@ else
 	cp -R ../libraw-cmake/* .
 	cmake .
 	sudo make install
+	rm /tmp/libraw*
 	cd ${CUR_DIR}
 	python3 -m pip install --upgrade setuptools
         python3 -m pip install defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
 	python3 -m pip install addict networkx tqdm pandas Cython scikit-build
+	python3 -m pip install --upgrade pip
+	python3 -m pip install openvino
 	python3 -m pip install opencv-python openvino-dev
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
 fi
