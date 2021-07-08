@@ -27,23 +27,21 @@ source ssd-resnet34/bin/activate
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
 
-if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "" ]; then
-	if [ ! `dpkg -l | grep cmake | head -1 | awk '{print $3}'|  cut -c1-6` == "3.17.3" ]; then
-		echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
-		sudo apt purge -y cmake
-		wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
- 		tar -xzf cmake-3.17.3.tar.gz
- 		rm cmake-3.17.3.tar.gz
- 		cd cmake-3.17.3
- 		./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
- 		make -j8
- 		sudo make install
-		rm -rf cmake-3.17*	
-		cmake_version=`cmake --version | head -1 | awk '{print $3}'`
-		echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
-	else
-		echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
-	fi
+echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
+cmake_ver=`cmake --version | head -1 | awk '{print $3}'`
+if [ -z $cmake_ver ] || [ ! "${cmake_ver}" == "3.17.3" ]; then
+	wget https://github.com/Kitware/CMake/releases/download/v3.17.3/cmake-3.17.3.tar.gz
+ 	tar -xzf cmake-3.17.3.tar.gz
+ 	rm cmake-3.17.3.tar.gz
+ 	cd cmake-3.17.3
+ 	./bootstrap --prefix=/usr -- -DCMAKE_BUILD_TYPE:STRING=Release
+ 	make -j8
+ 	sudo make install
+	rm -rf cmake-3.17*	
+	cmake_version=`cmake --version | head -1 | awk '{print $3}'`
+	echo -e "\e[0;32m Cmake ${cmake_version} installed!!\e[0m"
+else
+	echo -e "\e[0;32m Cmake >=3.17.3 installed!!\e[0m"
 fi
 
 cd ${CUR_DIR}
