@@ -46,12 +46,11 @@ else
 fi
 
 echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
-python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 tensorflow==2.2.0rc1 onnx==1.7.0
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
 if [ "${DIST}" == "focal" ]; then
-        sudo python3 -m pip install tensorflow==2.2.0rc1
+        python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.2.0rc1
 else
-        sudo python3 -m pip install tensorflow==2.0.0a0
+        python3 -m pip install networkx defusedxml numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
 fi
 
 echo -e "\e[0;34m ========== Installing CMAKE >= 3.17.3 dependencies =========== \e[0m"
