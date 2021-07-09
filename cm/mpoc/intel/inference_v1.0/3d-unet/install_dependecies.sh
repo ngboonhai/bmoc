@@ -81,7 +81,7 @@ else
 		cp -R ../libraw-cmake/* .
 		cmake .
 		sudo make install
-		rm /tmp/libraw*
+		rm -rf /tmp/libraw*
 		cd ${CUR_DIR}
 	fi
 	python3 -m pip install --upgrade setuptools
