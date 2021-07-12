@@ -49,7 +49,7 @@ echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing Cuda Toolkit for Benchmark Tools=========== \e[0m"
 echo ${SKIPS}
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
-if [ "${DIST}" == "Bionic" ]; then
+if [ "${DIST}" == "bionic" ]; then
         wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 	sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 	wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-ubuntu1804-11-4-local_11.4.0-470.42.01-1_amd64.deb
@@ -69,8 +69,8 @@ if [ "${DIST}" == "focal" ]; then
 	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 else
-	sudo apt-get install -y python-networkx python-defusedxml python-progress
-	sudo python3 -m pip install numpy google protobuf
+	sudo apt-get install -y python-networkx python-defusedxml python-progress python-google python-protobuf
+	sudo python3 -m pip install numpy
 	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 fi
