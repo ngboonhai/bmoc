@@ -59,6 +59,9 @@ if [ ! -z $cuda_ver ] && [ "${DIST}" == "bionic" ]; then
 	sudo apt-get update
 	sudo apt-get -y install cuda
 	rm cuda-repo-ubuntu1804-11-4-local_11.4.0-470.42.01-1_amd64.deb
+	echo -e "\e[0;32m ========== CUDA Toolkit & Dependencies install completed =========== \e[0m"
+else
+	echo -e "\e[0;32m Existing CUDA Toolkit & Dependencies detected!!\e[0m"
 fi
 
 echo ${SKIPS}
