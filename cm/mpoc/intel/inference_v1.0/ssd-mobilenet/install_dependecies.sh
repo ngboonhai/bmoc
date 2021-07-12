@@ -19,7 +19,7 @@ echo -e "\e[0;34m ========= Check and installing workload dependencis ========= 
 echo ${SKIPS}
 
 sudo apt update
-sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip python3.8-venv libssl-dev
+sudo apt-get install -y libglib2.0-dev libtbb-dev python3-dev python3-pip unzip python3.8-venv libssl-dev shellcheck
 
 python3 -m venv ssd-mobilenet
 source ssd-mobilenet/bin/activate
