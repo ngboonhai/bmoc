@@ -9,8 +9,8 @@
 	  "device": "CPU",
 	  "precision": "fp16",
 	  "batch_size": [1],
-	  "instances": 20,
-	  "nstreams": 10
+	  "instances": 1,
+	  "nstreams": 1
 	  }
 	]
 }
