@@ -69,7 +69,7 @@ if [ "${DIST}" == "focal" ]; then
 	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 else
-	sudo apt-get install -y python-networkx python-​defusedxml
+	sudo apt-get install -y python-networkx python-defusedxml
 	sudo python3 -m pip install progress numpy google protobuf
 	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
