@@ -26,6 +26,20 @@ else
     MODEL=${MODEL}
 fi
 
+DEVICE=$2
+if [ "${DEVICE}" == "" ]; then
+    DEVICE="CPU"
+else
+    DEVICE=${DEVICE}
+fi
+
+BATCH_SIZE=$3
+if [ "${BATCH_SIZE}" == "" ]; then
+    BATCH_SIZE=1
+else
+    BATCH_SIZE=${BATCH_SIZE}
+fi
+
 source /opt/intel/openvino_2021/bin/setupvars.sh
 export PATH=/usr/lib/x86_64-linux-gnu${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
