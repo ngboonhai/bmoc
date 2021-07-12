@@ -75,20 +75,23 @@ if [ ! "${IR_FILE_PATH}" == "" ]; then
 
 fi 
 
-for benchmark_run in {1..3}
+IFS=","
+for BATCH_VALUE in ${BATCH_SIZE}
 do
-	python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d ${DEVICE} -i /workload/benchmar/datasets/ -b ${BATCH_SIZE} -progress true
-	echo "Precision: $PRECISION"
-	if [ $(($benchmark_run)) -lt 3 ]; then
-		echo ${SKIPS}
-		echo  -e "\033[33;5m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
-		echo  -e "\033[33;5m                ======   Next running will start in another 30 seconds   ====== \033[0m"
-		echo ${SKIPS}
-		sleep 30s
-	else
-		echo -e "\e[0;32m                =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
-	fi
+	for benchmark_run in {1..3}
+	do
+		python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d ${DEVICE} -i /workload/benchmar/datasets/ -b ${BATCH_VALUE} -progress true
+		echo "Precision: $PRECISION"
+		if [ $(($benchmark_run)) -lt 3 ]; then
+			echo ${SKIPS}
+			echo  -e "\033[33;5m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
+			echo  -e "\033[33;5m                ======   Next running will start in another 30 seconds   ====== \033[0m"
+			echo ${SKIPS}
+			sleep 30s
+		else
+			echo -e "\e[0;32m                =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
+		fi
+	done
 done
-
 echo -e "\e[0;32m                ====== Benchmark for ${MODEL} is completed ====== \e[0m"
 echo ${SKIPS}
