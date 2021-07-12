@@ -22,7 +22,6 @@ echo ${SKIPS}
 
 sudo apt-get update
 sudo apt install -y python3-dev python3-pip unzip python3-opencv nvidia-cuda-toolkit jq python3.8-venv libssl-dev
-sudo -H python3 -m pip install --upgrade pip
 
 echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing OpenVino Toolkit for Benchmark Tools=========== \e[0m"
@@ -75,8 +74,8 @@ if [ "${DIST}" == "focal" ]; then
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 else
 	sudo apt-get install -y python-networkx python-defusedxml python-progress python-google-apputils python-protobuf
-	python3 -m pip install numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
-	sudo -H python3 -m pip install requests --upgrade
+	sudo python3 -m pip install numpy==1.16.4 test-generator==0.1.1 onnx==1.7.0 tensorflow==2.0.0a0
+	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 fi
 
