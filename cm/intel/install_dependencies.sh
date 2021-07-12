@@ -73,8 +73,8 @@ if [ "${DIST}" == "focal" ]; then
 	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 else
-	sudo apt-get install -y python-networkx python-defusedxml python-progress python-google-apputils python-protobuf python-numpy python-test-generator \
-	python-onnx python-tensorflow
+	sudo apt-get install -y python-networkx python-defusedxml python-progress python-google-apputils python-protobuf python-numpy \
+	python3 -m pip install test-generator tensorflow onnx
 	sudo python3 -m pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 fi
