@@ -22,6 +22,7 @@ echo ${SKIPS}
 
 sudo apt-get update
 sudo apt install -y python3-dev python3-pip unzip python3-opencv nvidia-cuda-toolkit jq python3.8-venv libssl-dev
+sudo -H python3 -m pip install --upgrade pip
 
 echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing OpenVino Toolkit for Benchmark Tools=========== \e[0m"
