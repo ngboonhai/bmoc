@@ -77,7 +77,7 @@ fi
 
 for benchmark_run in {1..3}
 do
-	python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d CPU -i /workload/benchmar/datasets/ -b 1 -progress true
+	python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d ${DEVICE} -i /workload/benchmar/datasets/ -b ${BATCH_SIZE} -progress true
 	echo "Precision: $PRECISION"
 	if [ $(($benchmark_run)) -lt 3 ]; then
 		echo ${SKIPS}
