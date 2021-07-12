@@ -22,14 +22,10 @@ echo ${SKIPS}
 
 sudo apt-get update
 sudo apt install -y python3-dev python3-pip unzip python3-opencv nvidia-cuda-toolkit jq python3.8-venv libssl-dev
-sudo python3 -m pip install networkx defusedxml progress numpy google protobuf
-sudo python3 -m pip install requests --upgrade
-sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 
 echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing OpenVino Toolkit for Benchmark Tools=========== \e[0m"
-echo ${SKIPS}
-	
+echo ${SKIPS}	
 if [ ! -d /opt/intel/openvino_2021 ]; then
 	wget https://ubit-artifactory-sh.intel.com/artifactory/esc-local/utils/openvino/2021.3/l_openvino_toolkit_p_2021.3.394.tgz
 	tar xvf l_openvino_toolkit_p_2021.3.394.tgz
@@ -49,6 +45,9 @@ else
 	echo -e "\e[0;32m Existing OpenVino Toolkit & Dependencies detected!!\e[0m"
 fi
 
+echo ${SKIPS}
+echo -e "\e[0;34m ========== Installing Cuda Toolkit for Benchmark Tools=========== \e[0m"
+echo ${SKIPS}
 DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
 if [ "${DIST}" == "Bionic" ]; then
         wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
@@ -62,7 +61,21 @@ if [ "${DIST}" == "Bionic" ]; then
 fi
 
 echo ${SKIPS}
+echo -e "\e[0;34m ========== continue Installing other(s) dependencies =========== \e[0m"
+echo ${SKIPS}
+DIST=$(. /etc/os-release && echo ${VERSION_CODENAME-stretch})
+if [ "${DIST}" == "focal" ]; then
+	sudo python3 -m pip install networkx defusedxml progress numpy google protobuf
+	sudo python3 -m pip install requests --upgrade
+	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
+else
+	sudo apt-get install -y python-networkx
+	sudo python3 -m pip install defusedxml progress numpy google protobuf
+	sudo python3 -m pip install requests --upgrade
+	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
+fi
 
+echo ${SKIPS}
 echo -e "\e[0;34m ========== Installing OpenVino Model Optimizer Dependencies on system =========== \e[0m"
 echo ${SKIPS}
 sudo bash -E /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites/install_prerequisites.sh
