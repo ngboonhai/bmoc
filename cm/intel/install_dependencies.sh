@@ -4,9 +4,6 @@ SKIPS=" "
 DASHES="================================================"
 CUR_DIR=`pwd`
 BUILD_DIRECTORY=${CUR_DIR}
-export https_proxy=http://proxy-dmz.intel.com:912
-export http_proxy=http://proxy-dmz.intel.com:911
-export no_proxy=localhost,127.0.0.1,.intel.com,intel.com
 
 error() {
     local code="${3:-1}"
