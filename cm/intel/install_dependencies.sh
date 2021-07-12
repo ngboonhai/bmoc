@@ -74,8 +74,8 @@ if [ "${DIST}" == "focal" ]; then
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 else
 	sudo apt-get install -y python-networkx python-defusedxml python-progress python-google-apputils python-protobuf
-	sudo python3 -m pip install numpy
-	sudo python3 -m pip install requests --upgrade
+	sudo python3 -m -H pip install numpy
+	sudo python3 -m -H pip install requests --upgrade
 	sudo chmod a+r /usr/lib/x86_64-linux-gnu/libcuda*
 fi
 
