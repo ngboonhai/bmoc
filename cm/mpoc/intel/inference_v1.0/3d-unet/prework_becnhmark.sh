@@ -111,8 +111,8 @@ fi
 echo ${SKIPS}
 
 echo -e "\e[0;34m========== Calibrate 3D-Unet Datasets to INT8 Precision =============\e[0m"
-#source /opt/intel/openvino_2021/bin/setupvars.sh
-source setup_envs.sh
+source /opt/intel/openvino_2021/bin/setupvars.sh
+#source setup_envs.sh
 python3 ov_calibrate.py \
     --model ${CUR_DIR}/build/model/3d-unet/3d-unet_fp32.xml \
     --model_name 3d-unet_int8 \
