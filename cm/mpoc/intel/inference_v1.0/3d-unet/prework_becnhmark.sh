@@ -10,19 +10,6 @@ python3 -m pip install numpy==1.19.5
 python3 -m pip install torch torchvision batchgenerators nnunet pandas addict texttable
 
 ## Download dataset from Image-net Org.
-echo -e "\e[0;34m========== Downloading nnUNet 3d-unet dependency =============\e[0m"
-if [ ! -d ${CUR_DIR}/nnUNet ]; then
-	git clone https://github.com/MIC-DKFZ/nnUNet.git
-	cd nnUNet
-	python3 -m pip install -e .
-	cd ${CUR_DIR}
-	echo -e "\e[0;32m Install nnUNet complete!!\e[0m"
-else
-	echo -e "\e[0;32m Existing nnUNet dependency detected!!\e[0m"
-fi
-echo ${SKIPS}
-
-## Download dataset from Image-net Org.
 echo -e "\e[0;34m========== Downloading 3d-unet datasets files =============\e[0m"
 if [ ! -d ${CUR_DIR}/build/data/3d-unet ]; then
     mkdir -p ${CUR_DIR}/build/data/3d-unet/BraTS
