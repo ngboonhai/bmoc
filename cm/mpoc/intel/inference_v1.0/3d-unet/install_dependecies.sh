@@ -172,10 +172,12 @@ echo ${SKIPS}
 #=============================================================
 echo -e "\e[0;34m========== Downloading nnUNet 3d-unet dependency =============\e[0m"
 if [ ! -d ${CUR_DIR}/nnUNet ]; then
-	git clone https://github.com/MIC-DKFZ/nnUNet.git
-	cd nnUNet
+	git clone https://github.com/MIC-DKFZ/nnUNet.git nnUnet
+	cd nnUnet
 	python3 -m pip install -e .
 	cd ${CUR_DIR}
+	cp -r nnUnet ${CUR_DIR}/3d-unet/lib/python3.8/site-packages/
+	cp -r nnUnet/nnunet ${CUR_DIR}/3d-unet/lib/python3.8/site-packages/
 	echo -e "\e[0;32m Install nnUNet complete!!\e[0m"
 else
 	echo -e "\e[0;32m Existing nnUNet dependency detected!!\e[0m"
@@ -236,14 +238,6 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	      -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
               -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
               -DCMAKE_BUILD_TYPE=Release \
-	#cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
-	#       -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
-	#       -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
-	#       -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
-        #       -DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
-        #       -DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
-        #       -DCMAKE_BUILD_TYPE=Release \
-        #       -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
           ..
 	make
 	if [ "$?" -ne "0" ]; then
