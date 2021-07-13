@@ -23,7 +23,6 @@ echo ${SKIPS}
 ## Create resnet imagenet validation text file
 if [ ! -f ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val/val_map.txt ]; then
     shuf -n 2000 bmoc/cm/mpoc/intel/inference_v1.0/ssd-mobilenet/val_map.txt > ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val/val_map.txt
-    cat ${CUR_DIR}/datasets/ssd-mobilenet/dataset-coco-2017-val/val_map.txt | wc -l
     echo -e "\e[0;32m ssd-mobilenet imagenet validation file generated!!\e[0m"
 else
     echo -e "\e[0;32m Existing ssd-mobilenet validation file detected!!\e[0m"
