@@ -200,15 +200,14 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
  		cd ${MLPERF_INFERENCE_REPO}
  		#git submodule update --init third_party/pybind
 		cd loadgen
- 		#python3 setup.py install
-		#git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
-		#cd ${MLPERF_INFERENCE_REPO}/loadgen
-		#git checkout r1.0
-		#git submodule update --init --recursive
 		mkdir build && cd build
-		cmake -DPYTHON_EXECUTABLE=`which python3` ..
+		cmake -DPYTHON_EXECUTABLE=${CUR_DIR}/3d-unet/bin/python3 ..
 		make
-		#cp libmlperf_loadgen.a ../
+		git clone https://github.com/mlperf/inference.git
+ 		cd inference
+ 		git submodule update --init third_party/pybind
+ 		cd loadgen
+		python3 setup.py install
 		echo -e "\e[0;32m MLPerf Load Generator installed!!\e[0m"
 	else
 		echo -e "\e[0;32m MLPerf Load Generator detected!!\e[0m"
