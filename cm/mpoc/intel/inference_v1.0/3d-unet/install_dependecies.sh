@@ -194,18 +194,18 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 
 	python3 -m pip install absl-py numpy pybind11
 	if [ ! -d ${MLPERF_INFERENCE_REPO} ]; then
-		git clone https://github.com/mlperf/inference.git ${MLPERF_INFERENCE_REPO}
+		git clone https://github.com/mlperf/inference.git --depth 1 ${MLPERF_INFERENCE_REPO}
  		cd ${MLPERF_INFERENCE_REPO}
- 		git submodule update --init third_party/pybind
+ 		#git submodule update --init third_party/pybind
 		cd loadgen
- 		python3 setup.py install
+ 		#python3 setup.py install
 		#git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
 		#cd ${MLPERF_INFERENCE_REPO}/loadgen
 		#git checkout r1.0
 		#git submodule update --init --recursive
-		#mkdir build && cd build
-		#cmake -DPYTHON_EXECUTABLE=`which python3` ..
-		#make
+		mkdir build && cd build
+		cmake -DPYTHON_EXECUTABLE=`which python3` ..
+		make
 		#cp libmlperf_loadgen.a ../
 		echo -e "\e[0;32m MLPerf Load Generator installed!!\e[0m"
 	else
