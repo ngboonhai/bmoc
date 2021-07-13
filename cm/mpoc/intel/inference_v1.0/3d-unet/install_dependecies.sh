@@ -90,6 +90,7 @@ else
 	python3 -m pip install openvino
 	python3 -m pip install opencv-python openvino-dev
 	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
+	python3 -m pip install wrapt --upgrade --ignore-installed
 fi
 
 MLPERF_DIR=${BUILD_DIRECTORY}/MLPerf-Intel-openvino
@@ -164,6 +165,21 @@ if [ ! -d ${BOOST_DIR} ]; then
 else
 	echo -e "\e[0;32m BOOST Tools installed!!\e[0m"
 fi
+echo ${SKIPS}
+
+#=============================================================
+#   Build nnUnet
+#=============================================================
+echo -e "\e[0;34m========== Downloading nnUNet 3d-unet dependency =============\e[0m"
+if [ ! -d ${CUR_DIR}/nnUNet ]; then
+	git clone https://github.com/MIC-DKFZ/nnUNet.git
+	cd nnUNet
+	python3 -m pip install -e .
+	cd ${CUR_DIR}
+	echo -e "\e[0;32m Install nnUNet complete!!\e[0m"
+else
+	echo -e "\e[0;32m Existing nnUNet dependency detected!!\e[0m"
+fi
 
 #===============================================================
 #   Build loadgen
@@ -178,14 +194,19 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 
 	python3 -m pip install absl-py numpy pybind11
 	if [ ! -d ${MLPERF_INFERENCE_REPO} ]; then
-		git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
-		cd ${MLPERF_INFERENCE_REPO}/loadgen
-		git checkout r1.0
-		git submodule update --init --recursive
-		mkdir build && cd build
-		cmake -DPYTHON_EXECUTABLE=`which python3` ..
-		make
-		cp libmlperf_loadgen.a ../
+		git clone https://github.com/mlperf/inference.git ${MLPERF_INFERENCE_REPO}
+ 		cd ${MLPERF_INFERENCE_REPO}
+ 		git submodule update --init third_party/pybind
+		cd loadgen
+ 		python3 setup.py install
+		#git clone --recurse-submodules https://github.com/mlcommons/inference.git ${MLPERF_INFERENCE_REPO}
+		#cd ${MLPERF_INFERENCE_REPO}/loadgen
+		#git checkout r1.0
+		#git submodule update --init --recursive
+		#mkdir build && cd build
+		#cmake -DPYTHON_EXECUTABLE=`which python3` ..
+		#make
+		#cp libmlperf_loadgen.a ../
 		echo -e "\e[0;32m MLPerf Load Generator installed!!\e[0m"
 	else
 		echo -e "\e[0;32m MLPerf Load Generator detected!!\e[0m"
@@ -211,14 +232,18 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 
 	mkdir build && cd build
 	. /opt/intel/openvino_2021/bin/setupvars.sh
-	cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
-	       -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
-	       -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
-	       -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
-               -DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
-               -DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
-               -DCMAKE_BUILD_TYPE=Release \
-               -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
+	cmake -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
+	      -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
+              #-DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
+              -DCMAKE_BUILD_TYPE=Release \
+	#cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
+	#       -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
+	#       -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
+	#       -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
+        #       -DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
+        #       -DBOOST_FILESYSTEM_LIB=${BOOST_DIR}/boost_1_72_0/stage/lib/libboost_filesystem.so \
+        #       -DCMAKE_BUILD_TYPE=Release \
+        #       -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
           ..
 	make
 	if [ "$?" -ne "0" ]; then
