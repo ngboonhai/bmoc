@@ -6,8 +6,10 @@ source 3d-unet/bin/activate
 CUR_DIR=`pwd`
 SKIPS=" "
 
+echo -e "\e[0;34m========== Sanity check Python modules for 3D-Unet =============\e[0m"
 python3 -m pip install numpy==1.19.5
 python3 -m pip install torch torchvision batchgenerators nnunet pandas addict texttable
+echo ${SKIPS}
 
 ## Download dataset from Image-net Org.
 echo -e "\e[0;34m========== Downloading 3d-unet datasets files =============\e[0m"
@@ -16,7 +18,7 @@ if [ ! -d ${CUR_DIR}/build/data/3d-unet ]; then
     curl -L -O https://www.cbica.upenn.edu/sbia/Spyridon.Bakas/MICCAI_BraTS/2019/MICCAI_BraTS_2019_Data_Training.zip
     unzip MICCAI_BraTS_2019_Data_Training.zip -d ${CUR_DIR}/build/data/3d-unet/BraTS
     rm MICCAI_BraTS_2019_Data_Training.zip
-echo -e "\e[0;32m 3d-unet datasets downloaded and extracted complete!!\e[0m"
+	echo -e "\e[0;32m 3d-unet datasets downloaded and extracted complete!!\e[0m"
 else
     echo -e "\e[0;32m 3d-unet datasets detected!!\e[0m"
 fi
