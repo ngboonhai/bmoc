@@ -27,7 +27,7 @@ echo -e "\e[0;34m========== Copying 3d-unet calibration files =============\e[0m
 if [ ! -f ${CUR_DIR}/build/data/calibration/brats_cal_images_list.txt ]; then
     mkdir -p ${CUR_DIR}/build/data/calibration/
     cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_cal_images_list.txt ${CUR_DIR}/build/data/calibration/
-    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_QSL.py ${CUR_DIR}/
+    cp ${CUR_DIR}/bmoc/cm/mpoc/intel/inference_v1.0/3d-unet/brats_QSL.py ${CUR_DIR}/3d-unet/lib/python3.8/site-packages/
     echo -e "\e[0;32m Copied 3d-unet imagenet calibration file!!\e[0m"
 else
     echo -e "\e[0;32m Existing 3d-unet calibration file detected!!\e[0m"
