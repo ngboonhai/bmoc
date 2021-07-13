@@ -234,7 +234,7 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 	. /opt/intel/openvino_2021/bin/setupvars.sh
 	cmake -DLOADGEN_DIR=${MLPERF_INFERENCE_REPO}/loadgen \
 	      -DLOADGEN_LIB_DIR=${MLPERF_INFERENCE_REPO}/loadgen/build \
-              #-DBOOST_INCLUDE_DIRS=${BOOST_DIR}/boost_1_72_0 \
+              -Dgflags_DIR=${GFLAGS_DIR}/gflags-build/ \
               -DCMAKE_BUILD_TYPE=Release \
 	#cmake -DInferenceEngine_DIR=/opt/intel/openvino_2021/deployment_tools/inference_engine/share \
 	#       -DOpenCV_DIR=${OPENCV_DIRS[0]}/opencv/cmake/ \
