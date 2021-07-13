@@ -275,6 +275,7 @@ if [ ! -f ${CUR_DIR}/bin/3d_unet_ov_mlperf ]; then
 		echo "export DATA_DIR=${CUR_DIR}/datasets"  >> ${CUR_DIR}/setup_envs.sh
 		echo "export MODELS_DIR=${CUR_DIR}/models"  >> ${CUR_DIR}/setup_envs.sh
 		echo "export CONFIGS_DIR=${CUR_DIR}/Configs" >> ${CUR_DIR}/setup_envs.sh
+		echo "source /opt/intel/openvino_2021/bin/setupvars.sh" >> ${CUR_DIR}/setup_envs.sh
 	fi
 else
         echo -e "\e[0;32m Existing MLPerf Load Generator and ov_mlperf binary detected. \e[0m"
