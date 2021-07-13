@@ -69,7 +69,7 @@ if [ "${DIST}" == "focal" ]; then
         python3 -m pip install defusedxml numpy==1.18.0 test-generator==0.1.1 tensorflow==2.3.3 onnx==1.7.0
 	python3 -m pip install addict==2.4.0 networkx==2.5 tqdm==4.54.1 pandas==1.1.5 Cython==0.29.23
 	python3 -m pip install opencv-python==4.5.2.54 openvino==2021.4.0 openvino-dev==2021.4.0
-	python3 -m pip install torch torchvision batchgenerators nnunet texttable progress
+	python3 -m pip install torch torchvision batchgenerators texttable progress
 else
 	CHECK_LIBRAW=`whereis libraw`
 	if [ ! -z ${CHECK_LIBRAW} ]; then
