@@ -8,3 +8,4 @@ sudo apt-get install -y \
   intel-media-va-driver-non-free libmfx1 \
   gstreamer1.0-vaapi \
   va-driver-all
+sudo reboot
