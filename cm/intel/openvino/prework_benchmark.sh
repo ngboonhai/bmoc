@@ -55,23 +55,23 @@ else
     PRECISION=${PRECISION}
 fi
 
-echo ${SKIPS}
-echo -e "\e[0;34m ========= Downloading benchmark imagenet datasets ========= \e[0m"
-echo ${SKIPS}
-if [ ! -d ${CUR_DIR}/datasets/input_images ]; then
-	mkdir -p ${CUR_DIR}/datasets
-	wget http://pgluint99.png.intel.com:8080//workload_installer/linux_benchmark/dataset/input_images.zip
-	unzip -q -o -d ${CUR_DIR}/datasets input_images.zip
-	echo -e "\e[0;32m ========== Benchmark imagenet datasets download and extract completed =========== \e[0m"
-else
-	echo -e "\e[0;32m Existing benchmark dataests detected!!\e[0m"
-fi
-echo ${SKIPS}
+#echo ${SKIPS}
+#echo -e "\e[0;34m ========= Downloading benchmark imagenet datasets ========= \e[0m"
+#echo ${SKIPS}
+#if [ ! -d ${CUR_DIR}/datasets/input_images ]; then
+#	mkdir -p ${CUR_DIR}/datasets
+#	wget http://pgluint99.png.intel.com:8080//workload_installer/linux_benchmark/dataset/input_images.zip
+#	unzip -q -o -d ${CUR_DIR}/datasets input_images.zip
+#	echo -e "\e[0;32m ========== Benchmark imagenet datasets download and extract completed =========== \e[0m"
+#else
+#	echo -e "\e[0;32m Existing benchmark dataests detected!!\e[0m"
+#fi
+#echo ${SKIPS}
 
 ## Download dataset from Image-net Org.
 if [ ! -d ${CUR_DIR}/datasets/val2017 ]; then
-    wget http://pgluint99.png.intel.com:8080//workload_installer/linux_benchmark/dataset/val2017.zip
-    wget http://pgluint99.png.intel.com:8080//workload_installer/linux_benchmark/dataset/annotations_trainval2017.zip
+    wget http://images.cocodataset.org/zips/val2017.zip
+    wget http://images.cocodataset.org/annotations/annotations_trainval2017.zip
     unzip val2017.zip -d ${CUR_DIR}/datasets/
     unzip annotations_trainval2017.zip -d ${CUR_DIR}/datasets/
     cp ${CUR_DIR}/datasets/annotations/instances_val2017.json ${CUR_DIR}/datasets
@@ -85,7 +85,7 @@ echo ${SKIPS}
 ## Download dataset from Image-net Org for Quantify Model files
 if [ ! -d ${CUR_DIR}/datasets/ILSVRC2012_img_val ]; then
     mkdir -p ${CUR_DIR}/datasets/ILSVRC2012_img_val
-    wget http://pgluint99.png.intel.com:8080//workload_installer/linux_benchmark/dataset/ILSVRC2012_img_val.tar
+    wget https://image-net.org/data/ILSVRC/2012/ILSVRC2012_img_val.tar
     tar xf ILSVRC2012_img_val.tar -C ${CUR_DIR}/datasets/ILSVRC2012_img_val/
     rm ${CUR_DIR}/ILSVRC2012_img_val.tar
     cp ${CUR_DIR}/cm/performance/ai/openvino/val.txt ${CUR_DIR}/datasets
