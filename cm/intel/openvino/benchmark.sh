@@ -100,9 +100,9 @@ do
 	for benchmark_run in {1..3}
 	do
 		if [ ${DEVICE} != "MULTI" ]; then
-                        python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d ${DEVICE} -i ${CUR_DIR}/datasets/input_images -b ${BATCH_VALUE} -progress true -report_type detailed_counters
+                        python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d ${DEVICE} -i ${CUR_DIR}/datasets/input_images -b ${BATCH_VALUE} -progress true
                 else
-                        python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d "MULTI:CPU,GPU" -i ${CUR_DIR}/datasets/input_images -b ${BATCH_VALUE} -progress true -report_type detailed_counters
+                        python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d "MULTI:CPU,GPU" -i ${CUR_DIR}/datasets/input_images -b ${BATCH_VALUE} -progress true
                 fi
 		echo "Precision: $PRECISION"
 		echo "Batch Size: ${BATCH_VALUE}"
