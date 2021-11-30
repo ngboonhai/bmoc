@@ -36,10 +36,10 @@ fi
         #sleep 10
         echo ''
         echo -e "\e[0;34m ========= Running codec H264 (AVC to AVC) to transcode video into MP4 ========  \e[0m"
-        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! filesink location=test3.mp4 -e > /tmp/gst_h264.log
+        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! mp4mux ! filesink location=test3.mp4 -e > /tmp/gst_h264.log
         sleep 10
         echo ''
-        echo -e "\e[0;34m ========= Running codec H265 (AVC to HECV) to transcode video into MP4  =========  \e[0m"
+        echo -e "\e[0;34m ========= Running codec H265 (AVC to HEVC) to transcode video into MP4  =========  \e[0m"
         ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x265enc ! filesink location=test4.mp4 -e > /tmp/gst_h265.log
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then        
         sleep 10
@@ -60,10 +60,10 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 echo ''
 echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
 TotalTime_h264=$(grep "Execution ended" "/tmp/gst_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-echo -e "\e[0;32m Total time to run on H264 codec: $TotalTime_h264 sec \e[0m"
+echo -e "\e[0;32m Total time to run on H264 (AVC) codec: $TotalTime_h264 sec \e[0m"
 
 TotalTime_h265=$(grep "Execution ended" "/tmp/gst_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-echo -e "\e[0;32m Total time to run on H265 codec: $TotalTime_h265 sec \e[0m"
+echo -e "\e[0;32m Total time to run on H265 (HEVC) codec: $TotalTime_h265 sec \e[0m"
 
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         TotalTime_vp8=$(grep "Execution ended" "/tmp/gst_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
@@ -95,18 +95,3 @@ fi
 echo ''
 echo -e "\e[0;32m =============== Media becnhamrk Completed =============== \e[0m"
 echo -e "\e[0;34m ========= Running video encoding and calculating performance, please wait.... =========  \e[0m"
-#SYSTEM_ARCH=`uname -p`
-#if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-#        sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! matroskamux ! filesink location=sample_output_cpu.mkv -e > /tmp/gst.log
-#else
-#        echo -e "\e[0;31m =============== This is only for CPU Benchmark!!! =============== \e[0m"
-#        echo " "
-#        exit 1
-#fi
-
-#TotalTime=$(grep "Execution ended" "/tmp/gst.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-#echo -e "\e[0;32m Total time to run: $TotalTime sec \e[0m"
-
-#Throughput=$(bc <<< "scale=2; $TotalFrame / $TotalTime")
-#echo -e "\e[0;32m Throughput is : $Throughput fps \e[0m"
-#echo -e "\e[0;34m =============== Media becnhamrk Completed =============== \e[0m"
