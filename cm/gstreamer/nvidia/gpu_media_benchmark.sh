@@ -28,7 +28,7 @@ echo " "
 echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
 SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        SUDO = "sudo"
+        SUDO="sudo"
 fi
         #sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! omxh264dec ! queue ! omxh264enc profile=8 ! matroskamux ! filesink location=sample_output_gpu1.mkv -e > /tmp/gst_h264.log
         #sleep 10
