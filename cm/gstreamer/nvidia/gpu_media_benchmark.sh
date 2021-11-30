@@ -26,8 +26,8 @@ fi
 echo -e "\e[0;34m Total frame of video to use for decode and encode is set $TotalFrame as workload buffer. \e[0m"
 echo " "
 echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
-SYSTEM_ARCH=`uname -p`
-if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
+#SYSTEM_ARCH=`uname -p`
+#if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         #sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! omxh264dec ! queue ! omxh264enc profile=8 ! matroskamux ! filesink location=sample_output_gpu1.mkv -e > /tmp/gst_h264.log
         #sleep 10
         #sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! omxh264dec ! queue ! videoconvert ! nvvidconv ! omxh265enc ! matroskamux ! filesink location=sample_output_gpu1.mkv -e > /tmp/gst_h265.log
@@ -47,9 +47,9 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         echo ''
         echo -e "\e[0;34m ========= Running codec VP9 (AVC to VP9) to transcode video into MKV =========  \e[0m"
         sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! nvvidconv ! queue ! nvv4l2vp9enc ! matroskamux ! filesink location=test6.mkv -e > /tmp/gst_v4l2_v9.log
- else
-        gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! nvv4l2h264enc profile=4 bitrate=8000 ! filesink location=sample_output_cpu.mkv -e > /tmp/gst.log
-fi
+ #else
+ #       gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! nvv4l2h264enc profile=4 bitrate=8000 ! filesink location=sample_output_cpu.mkv -e > /tmp/gst.log
+#fi
 #TotalTime_h264=$(grep "Execution ended" "/tmp/gst_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 #echo -e "\e[0;32m Total time to run on h264 codec: $TotalTime_h264 sec \e[0m"
 
