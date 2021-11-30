@@ -18,7 +18,7 @@ echo -e "\e[0;34m Total frame of video detect : $TotalFrame \e[0m"
 
 if [ "$1" == "" ]; then
         if [ $TotalFrame -gt 10000 ]; then
-                TotalFrame=1000
+                TotalFrame=500
         fi
 else
         TotalFrame=$1
@@ -36,11 +36,11 @@ fi
         #sleep 10
         echo ''
         echo -e "\e[0;34m ========= Running codec H264 (AVC to AVC) to transcode video into MP4 ========  \e[0m"
-        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! qtmux ! filesink location=test3.mp4 -e > /tmp/gst_h264.log
+        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! filesink location=test3.mp4 -e > /tmp/gst_h264.log
         sleep 10
         echo ''
         echo -e "\e[0;34m ========= Running codec H265 (AVC to HECV) to transcode video into MP4  =========  \e[0m"
-        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x265enc ! qtmux ! filesink location=test4.mp4 -e > /tmp/gst_h265.log
+        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x265enc ! filesink location=test4.mp4 -e > /tmp/gst_h265.log
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then        
         sleep 10
         echo ''
