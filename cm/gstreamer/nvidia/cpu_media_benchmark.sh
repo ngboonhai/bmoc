@@ -18,7 +18,7 @@ echo -e "\e[0;34m Total frame of video detect : $TotalFrame \e[0m"
 
 if [ "$1" == "" ]; then
         if [ $TotalFrame -gt 10000 ]; then
-                TotalFrame=10000
+                TotalFrame=1000
         fi
 else
         TotalFrame=$1
