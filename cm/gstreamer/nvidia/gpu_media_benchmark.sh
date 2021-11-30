@@ -39,38 +39,38 @@ fi
         ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! queue ! nvv4l2h264enc ! filesink location=test3.mp4 -e > /tmp/gst_v4l2_h264.log
         sleep 10
         echo ''
-        echo -e "\e[0;34m ========= Running codec H265 (AVC to HECV) to transcode video into MP4  =========  \e[0m"
+        echo -e "\e[0;34m ========= Running codec H265 (AVC to HEVC) to transcode video into MP4  =========  \e[0m"
         ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! queue ! nvv4l2h265enc ! filesink location=test4.mp4 -e > /tmp/gst_v4l2_h265.log
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then        
         #sleep 10
         #echo ''
         #echo -e "\e[0;34m ========= Running codec VP8 (AVC to VP8) transcode video into MKV =========  \e[0m"
-        #sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! queue ! nvv4l2vp8enc ! filesink location=test5.mp4 -e > /tmp/gst_v4l2_v8.log
+        #sudo gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! queue ! nvv4l2vp8enc ! filesink location=test5.mp4 -e > /tmp/gst_v4l2_vp8.log
         sleep 10
         echo ''
         echo -e "\e[0;34m ========= Running codec VP9 (AVC to VP9) to transcode video into MKV =========  \e[0m"
-        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! queue ! nvv4l2vp9enc ! matroskamux ! filesink location=test6.mkv -e > /tmp/gst_v4l2_v9.log
+        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! queue ! nvv4l2vp9enc ! matroskamux ! filesink location=test6.mkv -e > /tmp/gst_v4l2_vp9.log
  fi
 #TotalTime_h264=$(grep "Execution ended" "/tmp/gst_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-#echo -e "\e[0;32m Total time to run on h264 codec: $TotalTime_h264 sec \e[0m"
+#echo -e "\e[0;32m Total time to run on H264 (AVC) codec: $TotalTime_h264 sec \e[0m"
 
 #TotalTime_h265=$(grep "Execution ended" "/tmp/gst_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-#echo -e "\e[0;32m Total time to run on h265 codec: $TotalTime_h265 sec \e[0m"
+#echo -e "\e[0;32m Total time to run on H265 (HEVC) codec: $TotalTime_h265 sec \e[0m"
 
 echo ''
 echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
 TotalTime_v4l2_h264=$(grep "Execution ended" "/tmp/gst_v4l2_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-echo -e "\e[0;32m Total time to run on v4l2 h264 codec: $TotalTime_v4l2_h264 sec \e[0m"
+echo -e "\e[0;32m Total time to run on v4l2 h264 (AVC) codec: $TotalTime_v4l2_h264 sec \e[0m"
 
 TotalTime_v4l2_h265=$(grep "Execution ended" "/tmp/gst_v4l2_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_h265 sec \e[0m"
+echo -e "\e[0;32m Total time to run on v4l2 h265 (HEVC) codec: $TotalTime_v4l2_h265 sec \e[0m"
 
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        #TotalTime_v4l2_v8=$(grep "Execution ended" "/tmp/gst_v4l2_v8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-        #echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_v8 sec \e[0m"
+        #TotalTime_v4l2_vp8=$(grep "Execution ended" "/tmp/gst_v4l2_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+        #echo -e "\e[0;32m Total time to run on v4l2 VP8 codec: $TotalTime_v4l2_vp8 sec \e[0m"
 
-        TotalTime_v4l2_v9=$(grep "Execution ended" "/tmp/gst_v4l2_v9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-        echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_v9 sec \e[0m"
+        TotalTime_v4l2_vp9=$(grep "Execution ended" "/tmp/gst_v4l2_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+        echo -e "\e[0;32m Total time to run on v4l2 VP9 codec: $TotalTime_v4l2_vp9 sec \e[0m"
 fi
 
 echo ''
@@ -79,8 +79,8 @@ echo ''
 Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h264")
 Throughput_v4l2_h265=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h265")
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        #Throughput_v4l2_v8=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_v8")
-        Throughput_v4l2_v9=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_v9")
+        #Throughput_v4l2_vp8=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_vp8")
+        Throughput_v4l2_vp9=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_vp9")
 fi
 #echo -e "\e[0;32m Throughput of codec in h264 is : $Throughput_h264 fps \e[0m"
 #echo -e "\e[0;32m Throughput of codec in h265 is : $Throughput_h265 fps \e[0m"
@@ -89,8 +89,8 @@ echo ''
 echo -e "\e[0;32m Throughput of codec in v4l2 H264 is : $Throughput_v4l2_h264 fps \e[0m"
 echo -e "\e[0;32m Throughput of codec in v4l2 H265 is : $Throughput_v4l2_h265 fps \e[0m"
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        #echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_v4l2_v8 fps \e[0m"
-        echo -e "\e[0;32m Throughput of codec in v4l2 VP9 is : $Throughput_v4l2_v9 fps \e[0m"
+        #echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_v4l2_vp8 fps \e[0m"
+        echo -e "\e[0;32m Throughput of codec in v4l2 VP9 is : $Throughput_v4l2_vp9 fps \e[0m"
 fi
 echo ''
 echo -e "\e[0;32m =============== Media becnhamrk Completed =============== \e[0m"
