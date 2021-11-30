@@ -41,6 +41,7 @@ fi
         echo ''
         echo -e "\e[0;34m ========= Running codec H265 (AVC to HECV) to transcode video into MP4  =========  \e[0m"
         ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! nvvidconv ! queue ! nvv4l2h265enc ! filesink location=test4.mp4 -e > /tmp/gst_v4l2_h265.log
+if [ "${SYSTEM_ARCH}" == "aarch64" ]; then        
         #sleep 10
         #echo ''
         #echo -e "\e[0;34m ========= Running codec VP8 (AVC to VP8) transcode video into MKV =========  \e[0m"
@@ -49,9 +50,7 @@ fi
         echo ''
         echo -e "\e[0;34m ========= Running codec VP9 (AVC to VP9) to transcode video into MKV =========  \e[0m"
         ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! videoconvert ! nvvidconv ! queue ! nvv4l2vp9enc ! matroskamux ! filesink location=test6.mkv -e > /tmp/gst_v4l2_v9.log
- #else
- #       gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! nvv4l2h264enc profile=4 bitrate=8000 ! filesink location=sample_output_cpu.mkv -e > /tmp/gst.log
-#fi
+ fi
 #TotalTime_h264=$(grep "Execution ended" "/tmp/gst_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 #echo -e "\e[0;32m Total time to run on h264 codec: $TotalTime_h264 sec \e[0m"
 
@@ -66,26 +65,32 @@ echo -e "\e[0;32m Total time to run on v4l2 h264 codec: $TotalTime_v4l2_h264 sec
 TotalTime_v4l2_h265=$(grep "Execution ended" "/tmp/gst_v4l2_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_h265 sec \e[0m"
 
-#TotalTime_v4l2_v8=$(grep "Execution ended" "/tmp/gst_v4l2_v8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-#echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_v8 sec \e[0m"
+if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
+        #TotalTime_v4l2_v8=$(grep "Execution ended" "/tmp/gst_v4l2_v8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+        #echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_v8 sec \e[0m"
 
-TotalTime_v4l2_v9=$(grep "Execution ended" "/tmp/gst_v4l2_v9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_v9 sec \e[0m"
+        TotalTime_v4l2_v9=$(grep "Execution ended" "/tmp/gst_v4l2_v9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+        echo -e "\e[0;32m Total time to run on v4l2 h265 codec: $TotalTime_v4l2_v9 sec \e[0m"
+fi
 
 echo ''
 #Throughput_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h264")
 #Throughput_h265=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h265")
 Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h264")
 Throughput_v4l2_h265=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h265")
-#Throughput_v4l2_v8=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_v8")
-Throughput_v4l2_v9=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_v9")
+if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
+        #Throughput_v4l2_v8=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_v8")
+        Throughput_v4l2_v9=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_v9")
+fi
 #echo -e "\e[0;32m Throughput of codec in h264 is : $Throughput_h264 fps \e[0m"
 #echo -e "\e[0;32m Throughput of codec in h265 is : $Throughput_h265 fps \e[0m"
 echo -e "\e[0;32m ====================================================== \e[0m"
 echo ''
 echo -e "\e[0;32m Throughput of codec in v4l2 H264 is : $Throughput_v4l2_h264 fps \e[0m"
 echo -e "\e[0;32m Throughput of codec in v4l2 H265 is : $Throughput_v4l2_h265 fps \e[0m"
-#echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_v4l2_v8 fps \e[0m"
-echo -e "\e[0;32m Throughput of codec in v4l2 VP9 is : $Throughput_v4l2_v9 fps \e[0m"
+if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
+        #echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_v4l2_v8 fps \e[0m"
+        echo -e "\e[0;32m Throughput of codec in v4l2 VP9 is : $Throughput_v4l2_v9 fps \e[0m"
+fi
 echo ''
 echo -e "\e[0;32m =============== Media becnhamrk Completed =============== \e[0m"
