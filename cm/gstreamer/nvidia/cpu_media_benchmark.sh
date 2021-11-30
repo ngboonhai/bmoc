@@ -89,7 +89,7 @@ echo ''
 echo -e "\e[0;32m Throughput of codec in v4l2 H264 is : $Throughput_h264 fps \e[0m"
 echo -e "\e[0;32m Throughput of codec in v4l2 H265 is : $Throughput_h265 fps \e[0m"
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        #echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_vp8 fps \e[0m"
+        echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_vp8 fps \e[0m"
         echo -e "\e[0;32m Throughput of codec in v4l2 VP9 is : $Throughput_vp9 fps \e[0m"
 fi
 echo ''
