@@ -86,11 +86,11 @@ fi
 #echo -e "\e[0;32m Throughput of codec in h265 is : $Throughput_h265 fps \e[0m"
 echo -e "\e[0;32m ====================================================== \e[0m"
 echo ''
-echo -e "\e[0;32m Throughput of codec in v4l2 H264 is : $Throughput_h264 fps \e[0m"
-echo -e "\e[0;32m Throughput of codec in v4l2 H265 is : $Throughput_h265 fps \e[0m"
+echo -e "\e[0;32m Throughput of codec in H264 is : $Throughput_h264 fps \e[0m"
+echo -e "\e[0;32m Throughput of codec in H265 is : $Throughput_h265 fps \e[0m"
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        echo -e "\e[0;32m Throughput of codec in v4l2 VP8 is : $Throughput_vp8 fps \e[0m"
-        echo -e "\e[0;32m Throughput of codec in v4l2 VP9 is : $Throughput_vp9 fps \e[0m"
+        echo -e "\e[0;32m Throughput of codec in VP8 is : $Throughput_vp8 fps \e[0m"
+        echo -e "\e[0;32m Throughput of codec in VP9 is : $Throughput_vp9 fps \e[0m"
 fi
 echo ''
 echo -e "\e[0;32m =============== Media becnhamrk Completed =============== \e[0m"
