@@ -25,28 +25,25 @@ else
 fi
 echo -e "\e[0;34m Total frame of video to use for decode and encode is set $TotalFrame as workload buffer. \e[0m"
 echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
-SYSTEM_ARCH=`uname -p`
-if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        SUDO="sudo"
-fi
+
 echo ''
 echo -e "\e[0;34m ========= Running codec H264 (AVC to AVC) to transcode video into MP4 ========  \e[0m"
-${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! mp4mux ! filesink location=sample_output_h264.mp4 -e > /tmp/gst_h264.log
+gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! mp4mux ! filesink location=sample_output_h264.mp4 -e > /tmp/gst_h264.log
 sleep 10
 
 echo ''
 echo -e "\e[0;34m ========= Running codec H265 (AVC to HEVC) to transcode video into MP4  =========  \e[0m"
-${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x265enc ! filesink location=sample_output_h265.mp4 -e > /tmp/gst_h265.log      
+gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x265enc ! filesink location=sample_output_h265.mp4 -e > /tmp/gst_h265.log      
 sleep 10
 
 echo ''
 echo -e "\e[0;34m ========= Running codec VP8 (AVC to VP8) transcode video into MKV =========  \e[0m"
-${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp8enc ! matroskamux ! filesink location=sample_output_vp8.mkv -e > /tmp/gst_vp8.log
+gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp8enc ! matroskamux ! filesink location=sample_output_vp8.mkv -e > /tmp/gst_vp8.log
 sleep 10
 
 echo ''
 echo -e "\e[0;34m ========= Running codec VP9 (AVC to VP9) to transcode video into MKV =========  \e[0m"
-${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp9enc ! matroskamux ! filesink location=sample_output_vp9.mkv -e > /tmp/gst_vp9.log
+gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp9enc ! matroskamux ! filesink location=sample_output_vp9.mkv -e > /tmp/gst_vp9.log
 
 echo ''
 echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
