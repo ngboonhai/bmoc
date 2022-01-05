@@ -21,7 +21,7 @@ BUILD_DIRECTORY=${CUR_DIR}
 MODEL=$1
 if [ "${MODEL}" == "" ]; then
     echo -e "\e[0;31m [Error}: Model name is require for benchmarking !!! \e[0m"
-	exit 1
+    exit 1
 else
     MODEL=${MODEL}
 fi
@@ -61,22 +61,22 @@ IR_FILE_PATH=`sudo find ${MODEL_DIR} -name "*.xml" 2>/dev/null`
 if [ ! "${IR_FILE_PATH}" == "" ]; then
         for file_path in `echo $IR_FILE_PATH`
         do
-		if [[ $file_path =~ "${PRECISION}" ]]; then
+        if [[ $file_path =~ "${PRECISION}" ]]; then
                         MODEL_FILE_PATH=$file_path
-			#PRECISION="FP16-INT8"
+            #PRECISION="FP16-INT8"
                         FOUND="true"
-			break
-		elif [[ $file_path =~ "FP32-INT8" ]]; then
-			MODEL_FILE_PATH=$file_path
-			#PRECISION="FP32-INT8"
+            break
+        elif [[ $file_path =~ "FP32-INT8" ]]; then
+            MODEL_FILE_PATH=$file_path
+            #PRECISION="FP32-INT8"
                         FOUND="true"
-			break
+            break
                 fi
-		continue
-		
+        continue
+        
                 if [ ! $FOUND == "true" ]; then
                        echo -e "\e[0;31m Unable to find any of IR file for the ${MODEL} not detected or generated from Opensource before \e[0m"
-		       exit 1
+               exit 1
                 fi
         done
 
@@ -97,26 +97,26 @@ fi
 IFS=","
 for BATCH_VALUE in ${BATCH_SIZE}
 do
-	for benchmark_run in {1..3}
-	do
-		if [ ${DEVICE} != "MULTI" ]; then
+    for benchmark_run in {1..3}
+    do
+        if [ ${DEVICE} != "MULTI" ]; then
                         python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d ${DEVICE} -i ${CUR_DIR}/datasets/input_images -b ${BATCH_VALUE} -progress true
                 else
                         python3 /opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m ${MODEL_FILE_PATH} -d "MULTI:CPU,GPU" -i ${CUR_DIR}/datasets/input_images -b ${BATCH_VALUE} -progress true
                 fi
-		echo "Precision: $PRECISION"
-		echo "Batch Size: ${BATCH_VALUE}"
-		if [ $(($benchmark_run)) -lt 3 ]; then
-			echo ${SKIPS}
-			echo  -e "\033[33;5m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
-			echo  -e "\033[33;5m                ======   Next running will start in another 120 seconds   ====== \033[0m"
-			echo ${SKIPS}
-			sleep 120s
-		else
-			echo -e "\e[0;32m                =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
-			sleep 120s
-		fi
-	done
+        echo "Precision: $PRECISION"
+        echo "Batch Size: ${BATCH_VALUE}"
+        if [ $(($benchmark_run)) -lt 3 ]; then
+            echo ${SKIPS}
+            echo  -e "\033[33;5m                =============== Completed numner of run: $(($benchmark_run)) of 3 =============== \033[0m"
+            echo  -e "\033[33;5m                ======   Next running will start in another 120 seconds   ====== \033[0m"
+            echo ${SKIPS}
+            sleep 120s
+        else
+            echo -e "\e[0;32m                =============== Completed number of run: $(($benchmark_run)) of 3 =============== \e[0m"
+            sleep 120s
+        fi
+    done
 done
 echo -e "\e[0;32m                ====== Benchmark for ${MODEL} is completed ====== \e[0m"
 echo ${SKIPS}
