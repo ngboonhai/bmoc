@@ -45,7 +45,7 @@ do
 done
 #echo $gstreamer_cmd
 eval $gstreamer_cmd
-sleep 20
+sleep 10
 echo " ==== Thoughput ==== "
 for (( num=1; num <= $stream; num++))
 do
