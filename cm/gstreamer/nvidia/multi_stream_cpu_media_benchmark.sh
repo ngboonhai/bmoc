@@ -1,8 +1,11 @@
 #! /bin/bash
 
+declare stream=0
+
 echo -e "\e[0;34m ========= Downloading the video clip - bbb_sunflower_2160p_60fps_normal.mp4, please wait... ========= \e[0m"
 if [ ! -f ~/bbb_sunflower_2160p_60fps_normal_orig.mp4 ]; then
-        curl -k http://ftp.vim.org/ftp/ftp/pub/graphics/blender/demo/movies/BBB/bbb_sunflower_2160p_60fps_normal.mp4 -o ~/bbb_sunflower_2160p_60fps_normal_orig.mp4
+        curl -k http://ftp.vim.org/ftp/ftp/pub/graphics/blender/demo/movies/BBB/bbb_sunflower_2160p_60fps_normal.mp4 -o ~/bbb_sunfl
+ower_2160p_60fps_normal_orig.mp4
         cp ~/bbb_sunflower_2160p_60fps_normal_orig.mp4 ~/bbb_sunflower_2160p_60fps_normal.mp4
         echo -e "\e[0;34m =============== Vidoe Clip download Completed =============== \e[0m"
 else
@@ -11,17 +14,14 @@ else
         echo -e "\e[0;34m =============== Vidoe Clip Existed =============== \e[0m"
 fi
 
-echo " "
-TotalFrame=10000
-echo -e "\e[0;34m Total frame of video to measure : $TotalFrame \e[0m"
-
 if [ $1 == "" ]; then
-        $stream = 1
+        stream=1
 else
-        $stream = $1
+        stream=$1
 fi
-echo " "
-echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
+
+TotalFrame=100
+
 SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
@@ -29,6 +29,7 @@ fi
 
 cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! mp4mux ! filesink location=sample_output_h264.mp4 -e"
 log_filename="gst_v4l2_h264"
+#gstreamer_cmd=$cmd
 
 for (( num=1; num <= $stream; num++))
 do
@@ -40,6 +41,7 @@ do
                 gstreamer_log="$cmd > $log_filename-$num.log"
                 gstreamer_cmd="$gstreamer_cmd & $gstreamer_log"
         fi
+
 done
 #echo $gstreamer_cmd
 eval $gstreamer_cmd
