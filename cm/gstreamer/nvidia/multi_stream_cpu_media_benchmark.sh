@@ -12,11 +12,10 @@ else
 fi
 
 echo " "
-#TotalFrame=`ffmpeg -i ~/bbb_sunflower_2160p_60fps_normal.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $1}' | grep -o '[0-9]\+'`
 TotalFrame=10000
 echo -e "\e[0;34m Total frame of video to measure : $TotalFrame \e[0m"
 
-if if [ "$1" == "" ]; then
+if [ $1 == "" ]; then
         $stream = 1
 else
         $stream = $1
