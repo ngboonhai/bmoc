@@ -28,7 +28,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 fi
 
 cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! mp4mux ! filesink location=sample_output_h264.mp4 -e"
-log_filename="gst_v4l2_h264"
+log_filename="gst_h264"
 #gstreamer_cmd=$cmd
 
 for (( num=1; num <= $stream; num++))
@@ -51,15 +51,15 @@ for (( num=1; num <= $stream; num++))
 do
 
         if [ $num -lt 2 ]; then
-                TotalTime_v4l2_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-                Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h264")
-                echo Stream $num: $Throughput_v4l2_h264 fps
-                Total_throughput=$Throughput_v4l2_h264
+                TotalTime_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+                Throughput_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h264")
+                echo Stream $num: $Throughput_h264 fps
+                Total_throughput=$Throughput_h264
         else
-                TotalTime_v4l2_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-                Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h264")
-                echo Stream $num: $Throughput_v4l2_h264 fps
-                Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput_v4l2_h264")
+                TotalTime_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+                Throughput_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h264")
+                echo Stream $num: $Throughput_h264 fps
+                Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput_h264")
         fi
 done
 echo "============================="
