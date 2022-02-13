@@ -63,7 +63,7 @@ do
         fi
 done
 echo "============================="
-echo "Total of Throughtput: $Total_throughput" fps
+echo "Total Throughtput of $num Stream: $Total_throughput" fps
 echo "============================="
 
 rm *$log_filename*.log
