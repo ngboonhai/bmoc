@@ -20,7 +20,7 @@ else
         stream=$1
 fi
 
-TotalFrame=100
+TotalFrame=10000
 
 SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
