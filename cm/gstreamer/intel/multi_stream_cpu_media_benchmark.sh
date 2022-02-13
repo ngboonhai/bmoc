@@ -29,7 +29,7 @@ fi
 
 cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! x264enc ! mp4mux ! filesink location=sample_output_h264.mp4 -e"
 log_filename="gst_h264"
-#gstreamer_cmd=$cmd
+rm *$log_filename*.log
 
 for (( num=1; num <= $stream; num++))
 do
@@ -65,5 +65,3 @@ done
 echo "============================="
 echo "Total Throughtput of $num Stream: $Total_throughput" fps
 echo "============================="
-
-rm *$log_filename*.log
