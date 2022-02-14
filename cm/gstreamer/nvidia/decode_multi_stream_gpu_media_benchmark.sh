@@ -27,7 +27,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
 fi
 
-cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=1000 ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! fakesink -e"
+cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! fakesink -e"
 log_filename="gst_v4l2_h264"
 rm *$log_filename*.log
 
@@ -63,5 +63,5 @@ do
         fi
 done
 echo "============================="
-echo "Total Throughtput of $num Stream: $Total_throughput" fps
+echo "Total Throughtput of $stream Stream: $Total_throughput" fps
 echo "============================="
