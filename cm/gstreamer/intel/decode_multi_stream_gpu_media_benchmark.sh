@@ -28,7 +28,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
 fi
 
-cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! filesink location=sample_output_vaapi_h264_decode.mp4 -e"
+cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! fakesink -e"
 log_filename="gst_h264"
 rm *$log_filename*.log
 
