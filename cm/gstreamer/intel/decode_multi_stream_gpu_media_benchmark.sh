@@ -1,6 +1,7 @@
 #! /bin/bash
 
 declare stream=0
+export GST_VAAPI_ALL_DRIVERS=1
 
 echo -e "\e[0;34m ========= Downloading the video clip - bbb_sunflower_2160p_60fps_normal.mp4, please wait... ========= \e[0m"
 if [ ! -f ~/bbb_sunflower_2160p_60fps_normal_orig.mp4 ]; then
