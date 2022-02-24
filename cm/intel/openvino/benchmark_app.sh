@@ -8,7 +8,7 @@ do
 	for benchmark_run in {1..3}
 	do
 		if [ "${MODEL}" == "resnet-50-tf" ]; then
-			/opt/intel/openvino_2021/deployment_toolsark_tool/benchmark_app.py -m /home/iotg/public/r/tools/benchmesnet-50-tf/FP16-INT8/resnet-50-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
+			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/resnet-50-tf/FP16-INT8/resnet-50-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
 		if [ "${MODEL}" == "ssd-resnet34-1200-onnx" ]; then
