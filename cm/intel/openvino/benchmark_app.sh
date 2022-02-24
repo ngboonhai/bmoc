@@ -34,5 +34,6 @@ do
 		if [ "${MODEL}" == "yolo-v3-tf" ]; then
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tf/FP16/yolo-v3-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
+		sleep 60
 	done
 done
