@@ -43,13 +43,13 @@ do
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v4-tf/FP16/yolo-v4-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) >> yolo-v4-tf_${file_arg}.log
 	fi
 
-	if [ "${MODEL}" == "yolo-v3" ]; then
+	if [ "${MODEL}" == "yolo-v3-tiny" ]; then
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tiny-tf/FP16/yolo-v3-tiny-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) > yolo-v3-tiny-tf_${file_arg}.log
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tiny-tf/FP16/yolo-v3-tiny-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) >> yolo-v3-tiny-tf_${file_arg}.log
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tiny-tf/FP16/yolo-v3-tiny-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) >> yolo-v3-tiny-tf_${file_arg}.log
 	fi
 
-	if [ "${MODEL}" == "yolo-v3-tiny" ]; then
+	if [ "${MODEL}" == "yolo-v3" ]; then
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tf/FP16/yolo-v3-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) > yolo-v3-tf_${file_arg}.log
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tf/FP16/yolo-v3-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) >> yolo-v3-tf_${file_arg}.log
 		/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tf/FP16/yolo-v3-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc) >> yolo-v3-tf_${file_arg}.log
