@@ -7,15 +7,15 @@ for BATCH_VALUE in ${BATCH_SIZE}
 do
 	for benchmark_run in {1..3}
 	do
-		if [ "${MODEL}" == "resnet50" ]; then
+		if [ "${MODEL}" == "resnet-50-tf" ]; then
 			/opt/intel/openvino_2021/deployment_toolsark_tool/benchmark_app.py -m /home/iotg/public/r/tools/benchmesnet-50-tf/FP16-INT8/resnet-50-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
-		if [ "${MODEL}" == "ssd-resnet34" ]; then
+		if [ "${MODEL}" == "ssd-resnet34-1200-onnx" ]; then
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/ssd-resnet34-1200-onnx/FP16/ssd-resnet34-1200-onnx.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
-		if [ "${MODEL}" == "ssd-mobilenet" ]; then
+		if [ "${MODEL}" == "ssd_mobilenet_v1_coco" ]; then
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/ssd_mobilenet_v1_coco/FP16-INT8/ssd_mobilenet_v1_coco.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
@@ -23,15 +23,15 @@ do
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/ssd300/FP16/ssd300.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
-		if [ "${MODEL}" == "yolo-v4" ]; then
+		if [ "${MODEL}" == "yolo-v4-tf" ]; then
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v4-tf/FP16/yolo-v4-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
-		if [ "${MODEL}" == "yolo-v3-tiny" ]; then
+		if [ "${MODEL}" == "yolo-v3-tiny-tf" ]; then
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tiny-tf/FP16/yolo-v3-tiny-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 
-		if [ "${MODEL}" == "yolo-v3" ]; then
+		if [ "${MODEL}" == "yolo-v3-tf" ]; then
 			/opt/intel/openvino_2021/deployment_tools/tools/benchmark_tool/benchmark_app.py -m /home/iotg/public/yolo-v3-tf/FP16/yolo-v3-tf.xml -d "${DEVICE}" -i /home/iotg/datasets/input_images -b ${BATCH_VALUE} -nthreads $(nproc)
 		fi
 	done
