@@ -48,18 +48,21 @@ done
 #echo $gstreamer_cmd
 eval $gstreamer_cmd
 sleep 10
+
+TotalFrameEncoded=`ffmpeg -i ~/sample_output_vaapi_h264_encode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $1}' | grep -o '[0-9]\+'`
+
 echo " ==== Thoughput ==== "
 for (( num=1; num <= $stream; num++))
 do
 
         if [ $num -lt 2 ]; then
                 TotalTime_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-                Throughput_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h264")
+                Throughput_h264=$(bc <<< "scale=2; $TotalFrameEncoded / $TotalTime_h264")
                 echo Stream $num: $Throughput_h264 fps
                 Total_throughput=$Throughput_h264
         else
                 TotalTime_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-                Throughput_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h264")
+                Throughput_h264=$(bc <<< "scale=2; $TotalFrameEncoded / $TotalTime_h264")
                 echo Stream $num: $Throughput_h264 fps
                 Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput_h264")
         fi
