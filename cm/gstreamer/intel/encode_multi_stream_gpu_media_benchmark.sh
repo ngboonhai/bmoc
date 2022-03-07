@@ -29,7 +29,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 fi
 
 
-cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! videoparse width=3810 format=i420 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr ! h264parse ! queue ! qtmux ! filesink location=sample_output_vaapi_h264_encode.mp4 -e"
+cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! videoparse width=3810 format=nv12 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr ! h264parse ! queue ! qtmux ! filesink location=sample_output_vaapi_h264_encode.mp4 -e"
 log_filename="gst_h264"
 rm *$log_filename*.log
 
