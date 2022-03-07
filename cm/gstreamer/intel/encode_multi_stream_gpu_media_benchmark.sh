@@ -49,7 +49,7 @@ done
 eval $gstreamer_cmd
 sleep 10
 
-TotalFrameEncoded=`ffmpeg -i ~/sample_output_vaapi_h264_encode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $1}' | grep -o '[0-9]\+'`
+TotalFrameEncoded=`ffmpeg -i ~/sample_output_vaapi_h264_encode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
 
 echo " ==== Thoughput ==== "
 for (( num=1; num <= $stream; num++))
