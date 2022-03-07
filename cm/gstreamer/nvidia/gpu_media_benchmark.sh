@@ -26,7 +26,10 @@ fi
 echo -e "\e[0;34m Total frame of video to use for decode and encode is set $TotalFrame as workload buffer. \e[0m"
 echo " "
 echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
+
+VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
+
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
         VIDEO_CONVERTOR="nvvidconv"
