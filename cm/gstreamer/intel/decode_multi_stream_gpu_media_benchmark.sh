@@ -28,7 +28,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
 fi
 
-cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! fakesink -e"
+cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! qtmux ! filesink location=sample_output_vaapi_h264_decode.mp4 -e"
 log_filename="gst_h264"
 rm *$log_filename*.log
 
@@ -47,6 +47,9 @@ done
 #echo $gstreamer_cmd
 eval $gstreamer_cmd
 sleep 10
+
+TotalFrameEncoded=`ffmpeg -i ~/sample_output_vaapi_h264_decode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
+
 echo " ==== Thoughput ==== "
 for (( num=1; num <= $stream; num++))
 do
