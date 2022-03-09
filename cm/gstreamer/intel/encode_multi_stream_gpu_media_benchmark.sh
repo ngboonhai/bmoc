@@ -15,10 +15,12 @@ else
         echo -e "\e[0;34m =============== Vidoe Clip Existed =============== \e[0m"
 fi
 
-if [ $1 == "" ]; then
+if [ $1 =="" ]; then
+        
+if [ $2 == "" ]; then
         stream=1
 else
-        stream=$1
+        stream=$2
 fi
 
 TotalFrame=10000
