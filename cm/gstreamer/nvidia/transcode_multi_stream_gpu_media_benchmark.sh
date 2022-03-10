@@ -20,7 +20,7 @@ else
         stream=$1
 fi
 
-TotalFrame=10000
+TotalFrame=1000
 
 VIDEO_CONVERTOR="nvvideoconvert"
 
