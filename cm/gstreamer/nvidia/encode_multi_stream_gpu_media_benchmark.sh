@@ -25,7 +25,7 @@ VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
-		VIDEO_CONVERTOR="nvvidconv"
+	VIDEO_CONVERTOR="nvvidconv"
 fi
 
 
