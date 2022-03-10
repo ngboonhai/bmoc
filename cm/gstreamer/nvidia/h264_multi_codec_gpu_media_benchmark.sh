@@ -35,7 +35,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
         VIDEO_CONVERTOR="nvvidconv"
 fi
-${SUDO} sample_output* transcode_gst*
+${SUDO} rm ~/sample_output* ~/transcode_gst*
 
         echo ''
         echo -e "\e[0;34m ========= Running codec H264 (AVC to AVC) to transcode video into MP4 ========  \e[0m"
