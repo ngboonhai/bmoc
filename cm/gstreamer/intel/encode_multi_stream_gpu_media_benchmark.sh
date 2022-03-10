@@ -30,7 +30,7 @@ fi
 
 
 cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 ! videoparse width=3810 format=nv12 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr ! h264parse ! queue ! qtmux ! perf ! filesink location=sample_output_vaapi_h264_encode.mp4 -e"
-log_filename="gst_h264"
+log_filename="encode_gst_h264"
 rm *$log_filename*.log
 
 for (( num=1; num <= $stream; num++))
