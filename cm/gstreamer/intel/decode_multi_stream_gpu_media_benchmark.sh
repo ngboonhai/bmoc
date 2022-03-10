@@ -29,7 +29,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 fi
 
 cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! qtmux ! perf ! filesink location=sample_output_vaapi_h264_decode.mp4 -e"
-log_filename="gst_h264"
+log_filename="decode_gst_h264"
 rm *$log_filename*.log
 
 for (( num=1; num <= $stream; num++))
