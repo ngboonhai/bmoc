@@ -21,16 +21,19 @@ else
 fi
 
 TotalFrame=500
+VIDEO_CONVERTOR="nvvideoconvert"
 
 SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
+        VIDEO_CONVERTOR="nvvidconv"
 fi
 
-cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! perf ! filesink location=sample_output_nvv4l2_h264_decode.mp4 -e"
+cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! nvvidconv ! queue ! qtmux ! perf !! filesink location=sample_output_nvv4l2_h264_decode.mp4 -e"
 
 log_filename="decode_gst_v4l2_h264"
 rm *$log_filename*.log
+${SUDO} ~/sample_output_nvv4l2_h264_decode.mp4
 
 for (( num=1; num <= $stream; num++))
 do
