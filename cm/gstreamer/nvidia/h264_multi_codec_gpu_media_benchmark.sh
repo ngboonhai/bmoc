@@ -75,9 +75,7 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 fi
 
 echo ''
-TotalFrameh264=`ffmpeg -i ~/sample_output_transcode_v4l2_h264.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
-TotalFrameh265=`ffmpeg -i ~/sample_output_transcode_v4l2_h265.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
-TotalFramevp9=`ffmpeg -i ~/sample_output_transcode_v4l2_vp9.mkv -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
+TotalFrame=`ffmpeg -i ~/sample_output_transcode_v4l2_h264.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
 
 #Throughput_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h264")
 #Throughput_h265=$(bc <<< "scale=2; $TotalFrame / $TotalTime_h265")
