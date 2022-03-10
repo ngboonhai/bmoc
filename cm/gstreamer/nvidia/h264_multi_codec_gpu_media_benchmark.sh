@@ -43,7 +43,7 @@ ${SUDO} rm ~/sample_output* ~/transcode_gst*
         sleep 10
         echo ''
         echo -e "\e[0;34m ========= Running codec H265 (AVC to HEVC) to transcode video into MP4  =========  \e[0m"
-        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2h265enc ! perf ! filesink location=sample_transcode_output_v4l2_h265.mp4 -e > transcode_gst_v4l2_h265.log
+        ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2h265enc ! perf ! filesink location=sample_output_transcode_v4l2_h265.mp4 -e > transcode_gst_v4l2_h265.log
 
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then        
         #sleep 10
