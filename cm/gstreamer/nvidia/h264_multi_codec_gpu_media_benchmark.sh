@@ -63,17 +63,17 @@ if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 
 echo ''
 echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
-TotalTime_v4l2_h264=$(grep "Execution ended" "/tmp/gst_v4l2_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+TotalTime_v4l2_h264=$(grep "Execution ended" "/tmp/transcode_gst_v4l2_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on v4l2 h264 (AVC) codec: $TotalTime_v4l2_h264 sec \e[0m"
 
-TotalTime_v4l2_h265=$(grep "Execution ended" "/tmp/gst_v4l2_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+TotalTime_v4l2_h265=$(grep "Execution ended" "/tmp/transcode_gst_v4l2_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on v4l2 h265 (HEVC) codec: $TotalTime_v4l2_h265 sec \e[0m"
 
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        #TotalTime_v4l2_vp8=$(grep "Execution ended" "/tmp/gst_v4l2_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+        #TotalTime_v4l2_vp8=$(grep "Execution ended" "/tmp/transcode_gst_v4l2_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
         #echo -e "\e[0;32m Total time to run on v4l2 VP8 codec: $TotalTime_v4l2_vp8 sec \e[0m"
 
-        TotalTime_v4l2_vp9=$(grep "Execution ended" "/tmp/gst_v4l2_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+        TotalTime_v4l2_vp9=$(grep "Execution ended" "/tmp/transcode_gst_v4l2_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
         echo -e "\e[0;32m Total time to run on v4l2 VP9 codec: $TotalTime_v4l2_vp9 sec \e[0m"
 fi
 
