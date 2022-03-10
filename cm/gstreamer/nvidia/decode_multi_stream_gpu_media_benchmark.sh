@@ -21,15 +21,16 @@ else
 fi
 
 TotalFrame=500
+VIDEO_CONVERTOR="nvvideoconvert"
 
 SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
 fi
 
-cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! perf ! filesink location=sample_output_nvv4l2_h264_decode.mp4 -e"
+cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! ${VIDEO_CONVERTOR} ! perf ! filesink location=sample_output_nvv4l2_h264_decode.mp4 -e"
 
-log_filename="gst_v4l2_h264"
+log_filename="decode_gst_v4l2_h264"
 rm *$log_filename*.log
 
 for (( num=1; num <= $stream; num++))
@@ -48,7 +49,7 @@ done
 eval $gstreamer_cmd
 sleep 10
 
-TotalFrameEncoded=`ffmpeg -i ~/sample_output_nvv4l2_h264_decode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
+TotalFrameDecoded=`ffmpeg -i ~/sample_output_nvv4l2_h264_decode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
 
 echo " ==== Thoughput ==== "
 for (( num=1; num <= $stream; num++))
@@ -56,16 +57,16 @@ do
 
         if [ $num -lt 2 ]; then
                 TotalTime_v4l2_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-                Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h264")
+                Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrameDecoded / $TotalTime_v4l2_h264")
                 echo Stream $num: $Throughput_v4l2_h264 fps
                 Total_throughput=$Throughput_v4l2_h264
         else
                 TotalTime_v4l2_h264=$(grep "Execution ended" "$log_filename-$num.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-                Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrame / $TotalTime_v4l2_h264")
+                Throughput_v4l2_h264=$(bc <<< "scale=2; $TotalFrameDecoded / $TotalTime_v4l2_h264")
                 echo Stream $num: $Throughput_v4l2_h264 fps
                 Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput_v4l2_h264")
         fi
 done
 echo "============================="
-echo "Total Throughtput of $stream Stream: $Total_throughput" fps
+echo "Total Throughtput of $stream Stream: $Total_throughput fps"
 echo "============================="
