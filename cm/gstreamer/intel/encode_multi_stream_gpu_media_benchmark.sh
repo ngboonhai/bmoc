@@ -15,19 +15,11 @@ else
         echo -e "\e[0;34m =============== Vidoe Clip Existed =============== \e[0m"
 fi
 
-if [ $1 =="" ]; then
-        
-if [ $2 == "" ]; then
+if [ $1 == "" ]; then
         stream=1
 else
-        stream=$2
+        stream=$1
 fi
-
-SYSTEM_ARCH=`uname -p`
-if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
-        SUDO="sudo"
-fi
-
 
 cmd="gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 ! videoparse width=3810 format=nv12 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr ! h264parse ! queue ! qtmux ! perf ! filesink location=sample_output_vaapi_h264_encode.mp4 -e"
 log_filename="encode_gst_h264"
