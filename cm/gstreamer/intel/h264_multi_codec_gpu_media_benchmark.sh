@@ -45,16 +45,16 @@ sleep 10
 
 echo ''
 echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
-TotalTime_vaapi_h264=$(grep "Execution ended" "/tmp/transcode_gst_vaapi_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+TotalTime_vaapi_h264=$(grep "Execution ended" "~/transcode_gst_vaapi_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on H264 (AVC) codec: $TotalTime_vaapi_h264 sec \e[0m"
 
-TotalTime_vaapi_h265=$(grep "Execution ended" "/tmp/transcode_gst_vaapi_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+TotalTime_vaapi_h265=$(grep "Execution ended" "~/transcode_gst_vaapi_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on H265 (HEVC) codec: $TotalTime_vaapi_h265 sec \e[0m"
 
-#TotalTime_vaapi_vp8=$(grep "Execution ended" "/tmp/transcode_gst_vaapi_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+#TotalTime_vaapi_vp8=$(grep "Execution ended" "~/transcode_gst_vaapi_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 #echo -e "\e[0;32m Total time to run on VP8 codec: $TotalTime_vaapi_vp8 sec \e[0m"
 
-#TotalTime_vaapi_vp9=$(grep "Execution ended" "/tmp/transcode_gst_vaapi_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+#TotalTime_vaapi_vp9=$(grep "Execution ended" "~/transcode_gst_vaapi_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 #echo -e "\e[0;32m Total time to run on VP9 codec: $TotalTime_vaapi_vp9 sec \e[0m"
 
 echo ''
