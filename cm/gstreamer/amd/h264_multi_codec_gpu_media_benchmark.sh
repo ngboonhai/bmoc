@@ -16,14 +16,8 @@ echo " "
 TotalFrame=`ffmpeg -i ~/bbb_sunflower_2160p_60fps_normal.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $1}' | grep -o '[0-9]\+'`
 echo -e "\e[0;34m Total frame of video detect : $TotalFrame \e[0m"
 
+TotalFrame=10000
 
-if [ "$1" == "" ]; then
-        if [ $TotalFrame -gt 10000 ]; then
-                TotalFrame=10000
-        fi
-else
-        TotalFrame=$1
-fi
 echo -e "\e[0;34m Total frame of video to use for decode and encode is set $TotalFrame as workload buffer. \e[0m"
 echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
 
