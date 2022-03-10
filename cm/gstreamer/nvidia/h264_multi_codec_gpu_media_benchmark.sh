@@ -30,10 +30,13 @@ echo -e "\e[0;34m       Start run video transcode and calculating performance, p
 VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
 
+
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
         VIDEO_CONVERTOR="nvvidconv"
 fi
+${SUDO} sample_output* transcode_gst*
+
         echo ''
         echo -e "\e[0;34m ========= Running codec H264 (AVC to AVC) to transcode video into MP4 ========  \e[0m"
         ${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2h264enc ! perf ! filesink location=sample_output_transcode_v4l2_h264.mp4 -e > transcode_gst_v4l2_h264.log
