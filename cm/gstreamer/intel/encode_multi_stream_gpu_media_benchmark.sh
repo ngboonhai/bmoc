@@ -69,5 +69,5 @@ do
         fi
 done
 echo "============================="
-echo "Total Throughtput of $stream Stream: $Total_throughput" fps
+echo "Total Throughtput of $stream Stream: $Total_throughput fps"
 echo "============================="
