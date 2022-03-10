@@ -30,7 +30,7 @@ fi
 
 
 cmd="${SUDO} gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 ! videoparse width=3180 height=2160 format=nv12 framerate=60/1 ! ${VIDEO_CONVERTOR} ! nvv4l2h264enc ! h264parse ! queue ! qtmux ! filesink location=sample_output_v4l2_h264_encode.mp4 -e"
-log_filename="gst_v4l2_h264"
+log_filename="encoded_gst_v4l2_h264"
 rm *$log_filename*.log
 
 for (( num=1; num <= $stream; num++))
@@ -68,5 +68,5 @@ do
         fi
 done
 echo "============================="
-echo "Total Throughtput of $stream Stream: $Total_throughput" fps
+echo "Total Throughtput of $stream Stream: $Total_throughput fps"
 echo "============================="
