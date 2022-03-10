@@ -51,7 +51,7 @@ sleep 10
 TotalFrameDecoded=`ffmpeg -i ~/sample_output_vaapi_h264_decode.mp4 -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | sed 's/^.*\r/\r/' | awk '{print $2}' | grep -o '[0-9]\+'`
 
 echo " ==== Thoughput ==== "
-echo Total of Frame decoded file: $TotalFrameDecoded"
+echo "Total of Frame decoded file: $TotalFrameDecoded"
 for (( num=1; num <= $stream; num++))
 do
 
