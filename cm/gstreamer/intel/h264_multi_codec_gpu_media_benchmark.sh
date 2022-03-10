@@ -18,44 +18,44 @@ echo -e "\e[0;34m Total frame of video detect : $TotalFrame \e[0m"
 
 
 TotalFrame=1000
-rm ~/sample_output* ~/transcode_gst*
+rm ~/sample_output* ~/gst_vaapi_*
 
 echo -e "\e[0;34m Total frame of video to use for decode and encode is set $TotalFrame as workload buffer. \e[0m"
 echo -e "\e[0;34m       Start run video transcode and calculating performance, please wait....  \e[0m"
 
 echo ''
 echo -e "\e[0;34m ========= Running codec H264 (AVC to AVC) to transcode video into MP4 ========  \e[0m"
-gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! vaapih264enc bitrate=8000 ! mp4mux ! perf ! filesink location=sample_output_transcode_vaapi_h264.mp4 -e > ~/transcode_gst_vaapi_h264.log
+gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! vaapih264enc bitrate=8000 ! mp4mux ! perf ! filesink location=sample_output_transcode_vaapi_h264.mp4 -e > ~/gst_vaapi_transcode_h264.log
 sleep 10
 
 echo ''
 echo -e "\e[0;34m ========= Running codec H265 (AVC to HEVC) to transcode video into MP4  =========  \e[0m"
-gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! vaapih265enc bitrate=8000 ! mp4mux ! perf ! filesink location=sample_output_transcode_vaapi_h265.mp4 -e > ~/transcode_gst_vaapi_h265.log      
+gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! vaapih264dec ! queue ! vaapih265enc bitrate=8000 ! mp4mux ! perf ! filesink location=sample_output_transcode_vaapi_h265.mp4 -e > ~/gst_vaapi_transcode_h265.log      
 sleep 10
 
 ## Found VP8 & VP9 not support for GPU
 #echo ''
 #echo -e "\e[0;34m ========= Running codec VP8 (AVC to VP8) transcode video into MKV =========  \e[0m"
-#gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp8enc ! matroskamux ! perf ! filesink location=sample_output_transcode_vp8.mkv -e > ~/transcode_gst_vaapi_vp8.log
+#gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp8enc ! matroskamux ! perf ! filesink location=sample_output_transcode_vp8.mkv -e > ~/gst_vaapi_transcode_vp8.log
 #sleep 10
 
 #echo ''
 #echo -e "\e[0;34m ========= Running codec VP9 (AVC to VP9) to transcode video into MKV =========  \e[0m"
-#gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp9enc ! matroskamux ! perf ! filesink location=sample_output_transcode_vp9.mkv -e > ~/transcode_gst_vaapi_vp9.log
+#gst-launch-1.0 filesrc location=~/bbb_sunflower_2160p_60fps_normal.mp4 num-buffers=$TotalFrame ! qtdemux ! queue ! h264parse ! queue ! avdec_h264 ! queue ! vp9enc ! matroskamux ! perf ! filesink location=sample_output_transcode_vp9.mkv -e > ~/gst_vaapi_transcode_vp9.log
 
 echo ''
 echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
-TotalTime_vaapi_h264=$(grep "Execution ended" "transcode_gst_vaapi_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+TotalTime_vaapi_h264=$(grep "Execution ended" "gst_vaapi_transcode_h264.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on H264 (AVC) codec: $TotalTime_vaapi_h264 sec \e[0m"
 
-TotalTime_vaapi_h265=$(grep "Execution ended" "transcode_gst_vaapi_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+TotalTime_vaapi_h265=$(grep "Execution ended" "gst_vaapi_transcode_h265.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 echo -e "\e[0;32m Total time to run on H265 (HEVC) codec: $TotalTime_vaapi_h265 sec \e[0m"
 
-#TotalTime_vaapi_vp8=$(grep "Execution ended" "transcode_gst_vaapi_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+#TotalTime_vaapi_vp8=$(grep "Execution ended" "gst_vaapi_transcode_vp8.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
 #echo -e "\e[0;32m Total time to run on VP8 codec: $TotalTime_vaapi_vp8 sec \e[0m"
 
-#TotalTime_vaapi_vp9=$(grep "Execution ended" "transcode_gst_vaapi_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
-#echo -e "\e[0;32m Total time to run on VP9 codec: $TotalTime_vaapi_vp9 sec \e[0m"
+#TotalTime_vaapi_vp9=$(grep "Execution ended" "gst_vaapi_vp9.log" | awk '{print $4}' | awk -F: '{print ($1 * 3600) + ($2 * 60) + $3}' )
+#echo -e "\e[0;32m Total time to run on VP9 codec: $TotalTime_vaapi_transcode_vp9 sec \e[0m"
 
 echo ''
 
