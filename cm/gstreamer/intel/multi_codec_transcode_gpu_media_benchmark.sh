@@ -9,7 +9,7 @@ else
 fi
 
 CODEC1="h264,h265"
-num-buffers=500
+TotalFrame=500
 for code1 in ${CODEC1//,/ };
 do
         if [ "$code1" == "h264" ]; then
