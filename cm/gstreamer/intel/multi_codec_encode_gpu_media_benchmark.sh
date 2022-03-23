@@ -14,7 +14,7 @@ for code1 in ${CODEC1//,/ };
 do
         if [ "$code1" == "h264" ]; then
                 video_src="bbb_sunflower_2160p_60fps_normal.mp4"
-                encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4960 format=nv12 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr tune=high-compression ! queue ! perf ! fakesink -e"
+                encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 format=nv12 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr tune=high-compression ! queue ! perf ! fakesink -e"
         elif [ "$code1" == "h265" ]; then
                 video_src="bbb_sunflower_2160p_60fps_normal.mkv"
                 encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 format=nv12 framerate=60 height=2160 ! vaapih265enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
