@@ -21,11 +21,11 @@ fi
 for code1 in ${CODEC1//,/ };
 do
         if [ "$code1" == "h264" ]; then
-                encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src}  ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
+                encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
         elif [ "$code1" == "h265" ]; then
-                encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src}  ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
+                encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
         else
-                encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
+                encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
         fi
 
         log_filename="encode_gst_${code1}"
