@@ -20,7 +20,7 @@ do
                 transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec  ! queue ! vaapi${code1}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
         fi
 
-        log_filename="decode_gst_${code1}"
+        log_filename="transcode_gst_${code1}"
         rm *$log_filename*.log
 
         for (( num=1; num <= $stream; num++))
