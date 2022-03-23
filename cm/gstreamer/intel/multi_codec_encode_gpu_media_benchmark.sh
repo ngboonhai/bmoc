@@ -13,9 +13,9 @@ video_src="Netflix_Aerial_4096x2160_60fps_10bit_420.y4m"
 for code1 in ${CODEC1//,/ };
 do
         if [ "$code1" == "h264" ]; then
-                encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 format=nv12 framerate=60 height=2160 ! vaapih264enc bitrate=8000 rate-control=cbr tune=high-compression ! queue ! perf ! fakesink -e"
+                encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 format=nv12 framerate=60 height=2160 ! vaapi${code1}enc bitrate=8000 rate-control=cbr tune=high-compression ! queue ! perf ! fakesink -e"
         elif [ "$code1" == "h265" ]; then
-                encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 format=nv12 framerate=60 height=2160 ! vaapih265enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
+                encode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 format=nv12 framerate=60 height=2160 ! vaapi${code1}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
         fi
 
         log_filename="decode_gst_${code1}"
