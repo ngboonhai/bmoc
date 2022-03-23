@@ -45,7 +45,7 @@ do
         eval $gstreamer_decode_multi_cmd
         sleep 10
         echo ''
-        echo -e "\e[0;32m ========== Performance of transcode the video in diff codec ============= \e[0m"
+        echo -e "\e[0;32m ========== Performance of decode the video in diff codec ============= \e[0m"
         for (( num=1; num <= $stream; num++))
         do
 
