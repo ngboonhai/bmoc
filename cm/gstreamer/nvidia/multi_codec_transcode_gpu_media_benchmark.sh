@@ -29,7 +29,7 @@ do
                 transcode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
         else
                 video_src="bbb_sunflower_2160p_60fps_normal_${code1}.webm"
-                transcode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFram ! matroskademux ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
+                transcode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! matroskademux ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
         fi
 
         log_filename="transcode_gst_${code1}"
