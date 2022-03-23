@@ -37,7 +37,7 @@ do
 
         echo ''
         echo -e "\e[0;34m ========= Running codec ${code1} to transcode the video stream ========  \e[0m"
-        echo $gstreamer_transcode_multi_cmd
+        #echo $gstreamer_transcode_multi_cmd
         eval $gstreamer_transcode_multi_cmd
         sleep 10
         echo ''
