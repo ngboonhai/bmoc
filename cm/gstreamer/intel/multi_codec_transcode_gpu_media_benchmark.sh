@@ -17,7 +17,7 @@ do
                 transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec ! queue ! vaapi${code1}enc bitrate=8000 rate-control=cbr tune=high-compression ! queue ! perf ! fakesink -e"
         elif [ "$code1" == "h265" ]; then
                 video_src="bbb_sunflower_2160p_60fps_normal.mkv"
-                transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec  ! queue ! vaapi${code1}dec ! queue ! vaapi${code1}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
+                transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec  ! queue ! vaapi${code1}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
         fi
 
         log_filename="decode_gst_${code1}"
