@@ -16,6 +16,7 @@ SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
         SUDO="sudo"
         VIDEO_CONVERTOR="nvvidconv"
+        CODEC1="h264,h265,vp9"
 fi
 
 for code1 in ${CODEC1//,/ };
