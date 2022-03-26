@@ -21,7 +21,7 @@ do
         elif [ "$code1" == "h264_265" ]; then
                 decode="h264"
                 encode="h265"
-                video_src="bbb_sunflower_2160p_60fps_normal.mkv"
+                video_src="bbb_sunflower_2160p_60fps_normal.mp4"
                 transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${decode}parse ! queue ! vaapi${decode}dec  ! queue ! vaapi${encode}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
         fi
 
