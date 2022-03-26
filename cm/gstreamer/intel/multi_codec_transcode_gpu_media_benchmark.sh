@@ -8,7 +8,7 @@ else
         stream=$1
 fi
 
-CODEC1="h264,h265"
+CODEC1="h264,h265,h264_265"
 TotalFrame=500
 for code1 in ${CODEC1//,/ };
 do
@@ -18,6 +18,11 @@ do
         elif [ "$code1" == "h265" ]; then
                 video_src="bbb_sunflower_2160p_60fps_normal.mkv"
                 transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec  ! queue ! vaapi${code1}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
+        elif [ "$code1" == "h264_265" ]; then
+                decode="h264"
+                encode="h265"
+                video_src="bbb_sunflower_2160p_60fps_normal.mkv"
+                transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${decode}parse ! queue ! vaapi${decode}dec  ! queue ! vaapi${encode}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
         fi
 
         log_filename="transcode_gst_${code1}"
