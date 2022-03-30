@@ -32,7 +32,7 @@ do
         elif [ "$code1" == "h264_vp9" ]; then
                 code=h264
                 video_src="bbb_sunflower_2160p_60fps_normal.mp4"
-                transcode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code}parse ! queue ! vv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2vp9enc ! queue ! perf ! fakesink -e"
+                transcode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code}parse ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2vp9enc ! queue ! perf ! fakesink -e"
         elif [ "$code1" == "h265" ]; then
                 video_src="bbb_sunflower_2160p_60fps_normal.mkv"
                 transcode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! nvv4l2decoder ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
