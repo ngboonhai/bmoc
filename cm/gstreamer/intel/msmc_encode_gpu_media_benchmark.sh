@@ -20,7 +20,7 @@ do
 		fi
 done
 echo ''
-echo -e "\e[0;34m ========= Running multi-codec + multi-stream to video stream ========	\e[0m"
+echo -e "\e[0;34m ========= Running multi-codec + multi-stream to encode the video stream ========	\e[0m"
 #echo $gstreamer_encode_multi_cmd
 eval $gstreamer_encode_multi_cmd
 
@@ -34,7 +34,7 @@ do
 		# done
 done
 		echo -e "\e[0;32m ==================================================================== \e[0m"
-		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) for Encode is :	$Total_throughput fps \e[0m"
+		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) for Encode is : $Total_throughput fps \e[0m"
 		echo -e "\e[0;32m ==================================================================== \e[0m"
 		echo ''
 
