@@ -1,13 +1,6 @@
 #! /bin/bash
 
 export GST_VAAPI_ALL_DRIVERS=1
-declare stream=1
-if [ $1 == "" ]; then
-		stream=1
-else
-		stream=$1
-fi
-
 CODEC1="h264,h265,vp8,vp9"
 TotalFrame=500
 log_filename="decode_gst"
@@ -37,23 +30,14 @@ echo -e "\e[0;34m ========= Running multi-codec + multi-stream to video stream =
 #echo $gstreamer_decode_multi_cmd
 eval $gstreamer_decode_multi_cmd
 
+echo ''
+echo -e "\e[0;32m ========== Performance of decode the video in diff codec ============= \e[0m"
 for code1 in ${CODEC1//,/ };
 do
-		sleep 10
-		echo ''
-		echo -e "\e[0;32m ========== Performance of decode the video in diff codec ============= \e[0m"
-		# for (( num=1; num <= $stream; num++))
-		# do
-
-				# if [ $num -lt 2 ]; then
-						Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
-						echo " Stream of ${code1} throughput: $Throughput fps"
-						Total_throughput=$Throughput
-				# else
-						# Throughput=$(grep "mean_fps" "$log_filename-$num.log" | tail -1 | awk '{print $12}')
-						# echo " Stream $num: $Throughput fps"
-						Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
-				# fi
+	Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
+	echo " Result of ${code1} throughput: $Throughput fps"
+	Total_throughput=$Throughput
+	Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
 		# done
 done
 		echo -e "\e[0;32m ====================================================== \e[0m"
