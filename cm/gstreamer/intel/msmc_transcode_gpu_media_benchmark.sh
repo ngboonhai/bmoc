@@ -19,9 +19,9 @@ do
 				gstreamer_transcode_cmd="$transcode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_transcode_multi_cmd="$gstreamer_transcode_multi_cmd & $gstreamer_transcode_cmd"
 		elif [ "$code1" == "h264_265" ]; then
-				video_src="bbb_sunflower_2160p_60fps_normal.mp4"
-				decode="264"
-				encode="265"
+				decode="h264"
+                		encode="h265"
+                		video_src="bbb_sunflower_2160p_60fps_normal.mp4"
 				transcode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${decode}parse ! queue ! vaapi${decode}dec  ! queue ! vaapi${encode}enc bitrate=8000 tune=low-power low-delay-b=1 ! queue ! perf ! fakesink -e"
 				gstreamer_transcode_cmd="$transcode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_transcode_multi_cmd="$gstreamer_transcode_multi_cmd & $gstreamer_transcode_cmd"
