@@ -13,8 +13,8 @@ TotalFrame=500
 log_filename="decode_gst_"
 rm *$log_filename*.log
 
-# for code1 in ${CODEC1//,/ };
-# do
+for code1 in ${CODEC1//,/ };
+do
 		if [ "$code1" == "h264" ]; then
 				video_src="bbb_sunflower_2160p_60fps_normal.mp4"
 				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec ! queue ! perf ! fakesink -e"
@@ -37,7 +37,7 @@ rm *$log_filename*.log
 		echo -e "\e[0;34m ========= Running codec ${code1} to decode the video stream ========	\e[0m"
 		#echo $gstreamer_decode_multi_cmd
 		eval $gstreamer_decode_multi_cmd
-# done
+done
 
 for code1 in ${CODEC1//,/ };
 do
