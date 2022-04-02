@@ -39,7 +39,6 @@ for code1 in ${CODEC1//,/ };
 do
 	Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
 	echo " Result of ${code1} throughput: $Throughput fps"
-	Total_throughput=$Throughput
 	Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
 		# done
 done
