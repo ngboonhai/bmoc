@@ -18,17 +18,17 @@ do
 		if [ "$code1" == "h264" ]; then
 				video_src="bbb_sunflower_2160p_60fps_normal.mp4"
 				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec ! queue ! perf ! fakesink -e"
-				gstreamer_decode_cmd="$decode_cmd > $log_filename_${code1}.log"
+				gstreamer_decode_cmd="$decode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_cmd"
 		elif [ "$code1" == "h265" ]; then
 				video_src="bbb_sunflower_2160p_60fps_normal.mkv"
 				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! vaapi${code1}dec ! queue ! perf ! fakesink -e"
-				gstreamer_decode_cmd="$decode_cmd > $log_filename_${code1}.log"
+				gstreamer_decode_cmd="$decode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_multi_cmd & $gstreamer_decode_cmd"
 		else
 				video_src="bbb_sunflower_2160p_60fps_normal_${code1}.webm"
 				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! matroskademux ! vaapi${code1}dec ! queue ! perf ! fakesink -e"
-				gstreamer_decode_cmd="$decode_cmd > $log_filename_${code1}.log"
+				gstreamer_decode_cmd="$decode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_multi_cmd & $gstreamer_decode_cmd"
 		fi
 done
@@ -46,7 +46,7 @@ echo $gstreamer_decode_multi_cmd
 		# # do
 
 				# # if [ $num -lt 2 ]; then
-						# Throughput=$(grep "mean_fps" "$log_filename-$code1.log" | tail -1 | awk '{print $12}')
+						# Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
 						# echo " Stream $num: $Throughput fps"
 						# Total_throughput=$Throughput
 				# # else
