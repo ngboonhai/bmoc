@@ -1,7 +1,7 @@
 #! /bin/bash
 
 declare Total_throughput=0
-CODEC1="h264,h264_265,h265"
+CODEC1="h264,h264_h265,h265"
 #CODEC1="h264,h264_h265,h264_vp9,h265,h265_vp9,vp9"
 TotalFrame=500
 VIDEO_CONVERTOR="nvvideoconvert"
