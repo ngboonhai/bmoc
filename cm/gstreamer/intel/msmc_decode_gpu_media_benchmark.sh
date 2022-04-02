@@ -27,7 +27,7 @@ do
 		fi
 done
 echo ''
-echo -e "\e[0;34m ========= Running multi-codec + multi-stream to video stream ========	\e[0m"
+echo -e "\e[0;34m ========= Running multi-codec + multi-stream to decode the video stream ========	\e[0m"
 #echo $gstreamer_decode_multi_cmd
 eval $gstreamer_decode_multi_cmd
 
@@ -39,9 +39,9 @@ do
 	echo " Result of ${code1} throughput: $Throughput fps"
 	Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
 done
-		echo -e "\e[0;32m ====================================================== \e[0m"
-		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) is :	$Total_throughput fps \e[0m"
-		echo -e "\e[0;32m ====================================================== \e[0m"
+		echo -e "\e[0;32m ==================================================================== \e[0m"
+		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) for decode is : $Total_throughput fps \e[0m"
+		echo -e "\e[0;32m ==================================================================== \e[0m"
 		echo ''
 
 echo -e "\e[0;34m =============== Media becnhamrk Completed =============== \e[0m"
