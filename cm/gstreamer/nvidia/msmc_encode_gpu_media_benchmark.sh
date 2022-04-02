@@ -1,7 +1,7 @@
 #! /bin/bash
 
 declare Total_throughput=0
-CODEC1="h264,h265,vp8,vp9"
+CODEC1="h264,h265,vp9"
 video_src="Netflix_Aerial_4096x2160_60fps_10bit_420.y4m"
 VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
