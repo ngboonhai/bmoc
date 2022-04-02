@@ -34,31 +34,31 @@ do
 done
 echo ''
 echo -e "\e[0;34m ========= Running codec ${code1} to decode the video stream ========	\e[0m"
-echo $gstreamer_decode_multi_cmd
-#eval $gstreamer_decode_multi_cmd
+#echo $gstreamer_decode_multi_cmd
+eval $gstreamer_decode_multi_cmd
 
-# for code1 in ${CODEC1//,/ };
-# do
-		# sleep 10
-		# echo ''
-		# echo -e "\e[0;32m ========== Performance of decode the video in diff codec ============= \e[0m"
-		# # for (( num=1; num <= $stream; num++))
-		# # do
+for code1 in ${CODEC1//,/ };
+do
+		sleep 10
+		echo ''
+		echo -e "\e[0;32m ========== Performance of decode the video in diff codec ============= \e[0m"
+		# for (( num=1; num <= $stream; num++))
+		# do
 
-				# # if [ $num -lt 2 ]; then
-						# Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
+				# if [ $num -lt 2 ]; then
+						Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
+						echo " Stream $num: $Throughput fps"
+						Total_throughput=$Throughput
+				# else
+						# Throughput=$(grep "mean_fps" "$log_filename-$num.log" | tail -1 | awk '{print $12}')
 						# echo " Stream $num: $Throughput fps"
-						# Total_throughput=$Throughput
-				# # else
-						# # Throughput=$(grep "mean_fps" "$log_filename-$num.log" | tail -1 | awk '{print $12}')
-						# # echo " Stream $num: $Throughput fps"
-						# # Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
-				# # fi
-		# # done
-# done
-		# echo -e "\e[0;32m ====================================================== \e[0m"
-		# echo -e "\e[0;32m Throughput of codec in ${code1} is :	$Total_throughput fps \e[0m"
-		# echo -e "\e[0;32m ====================================================== \e[0m"
-		# echo ''
+						# Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
+				# fi
+		# done
+done
+		echo -e "\e[0;32m ====================================================== \e[0m"
+		echo -e "\e[0;32m Throughput of codec in ${code1} is :	$Total_throughput fps \e[0m"
+		echo -e "\e[0;32m ====================================================== \e[0m"
+		echo ''
 
-# echo -e "\e[0;34m =============== Media becnhamrk Completed =============== \e[0m"
+echo -e "\e[0;34m =============== Media becnhamrk Completed =============== \e[0m"
