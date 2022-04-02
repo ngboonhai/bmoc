@@ -6,7 +6,7 @@ CODEC1="h264,h264_265,h265"
 TotalFrame=500
 VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
-log_filename="transcode_gst_${code1}"
+log_filename="transcode_gst"
 rm *$log_filename*.log
 
 ## Check system Arch version - x86 or aarch64
