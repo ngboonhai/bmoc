@@ -1,6 +1,7 @@
 #! /bin/bash
 
 export GST_VAAPI_ALL_DRIVERS=1
+declare Total_throughput=0
 CODEC1="h264,h264_265,h265"
 TotalFrame=500
 log_filename="transcode_gst"
