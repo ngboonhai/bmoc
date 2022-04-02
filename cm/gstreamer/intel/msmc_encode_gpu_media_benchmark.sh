@@ -33,9 +33,9 @@ do
 	Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
 		# done
 done
-		echo -e "\e[0;32m ====================================================== \e[0m"
-		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) is :	$Total_throughput fps \e[0m"
-		echo -e "\e[0;32m ====================================================== \e[0m"
+		echo -e "\e[0;32m ==================================================================== \e[0m"
+		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) for Encode is :	$Total_throughput fps \e[0m"
+		echo -e "\e[0;32m ==================================================================== \e[0m"
 		echo ''
 
 echo -e "\e[0;34m =============== Media becnhamrk Completed =============== \e[0m"
