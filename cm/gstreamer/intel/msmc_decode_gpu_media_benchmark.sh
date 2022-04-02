@@ -10,7 +10,7 @@ fi
 
 CODEC1="h264,h265,vp8,vp9"
 TotalFrame=500
-log_filename="decode_gst_"
+log_filename="decode_gst"
 rm *$log_filename*.log
 
 for code1 in ${CODEC1//,/ };
