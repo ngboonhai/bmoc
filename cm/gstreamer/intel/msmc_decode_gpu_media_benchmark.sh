@@ -1,6 +1,7 @@
 #! /bin/bash
 
 export GST_VAAPI_ALL_DRIVERS=1
+declare Total_throughput=0
 CODEC1="h264,h265,vp8,vp9"
 TotalFrame=500
 log_filename="decode_gst"
@@ -36,9 +37,8 @@ for code1 in ${CODEC1//,/ };
 do
 	Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
 	echo " Result of ${code1} throughput: $Throughput fps"
-	Total_throughput=$Throughput
+	#Total_throughput=$Throughput
 	Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
-		# done
 done
 		echo -e "\e[0;32m ====================================================== \e[0m"
 		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) is :	$Total_throughput fps \e[0m"
