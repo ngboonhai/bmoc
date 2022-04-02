@@ -1,7 +1,8 @@
 #! /bin/bash
 
 declare Total_throughput=0
-CODEC1="h264,h265,vp9"
+CODEC1="h264,h265"
+#CODEC1="h264,h265,vp9"
 video_src="Netflix_Aerial_4096x2160_60fps_10bit_420.y4m"
 VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
@@ -25,10 +26,10 @@ do
 		encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
 		gstreamer_encode_cmd="$encode_cmd > ${log_filename}_${code1}.log"
 		gstreamer_encode_multi_cmd="$gstreamer_encode_multi_cmd & $gstreamer_encode_cmd"
-	#else
-	#	encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
-	#	gstreamer_encode_cmd="$encode_cmd > ${log_filename}_${code1}.log"
-	#	gstreamer_encode_multi_cmd="$gstreamer_encode_multi_cmd & $gstreamer_encode_cmd"
+	else
+		encode_cmd="${SUDO} gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! ${VIDEO_CONVERTOR} ! queue ! nvv4l2${code1}enc ! queue ! perf ! fakesink -e"
+		gstreamer_encode_cmd="$encode_cmd > ${log_filename}_${code1}.log"
+		gstreamer_encode_multi_cmd="$gstreamer_encode_multi_cmd & $gstreamer_encode_cmd"
 	fi
 done
 echo ''
