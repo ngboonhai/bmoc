@@ -7,7 +7,7 @@ else
 		stream=$1
 fi
 
-CODEC1="h264,h265,vp8,vp9"
+CODEC1="h264,h264_h265,h264_vp9,h265,h265_vp9,vp9"
 TotalFrame=500
 VIDEO_CONVERTOR="nvvideoconvert"
 SYSTEM_ARCH=`uname -p`
@@ -16,8 +16,6 @@ SYSTEM_ARCH=`uname -p`
 if [ "${SYSTEM_ARCH}" == "aarch64" ]; then
 		SUDO="sudo"
 		VIDEO_CONVERTOR="nvvidconv"
-		#CODEC1="h264,h265,vp9"
-		CODEC1="h264,h264_h265,h264_vp9,h265,h265_vp9,vp9"
 fi
 
 for code1 in ${CODEC1//,/ };
