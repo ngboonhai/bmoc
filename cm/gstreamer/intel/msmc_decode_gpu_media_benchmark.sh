@@ -33,7 +33,7 @@ do
 		fi
 done
 echo ''
-echo -e "\e[0;34m ========= Running codec ${code1} to decode the video stream ========	\e[0m"
+echo -e "\e[0;34m ========= Running multi-codec + multi-stream to video stream ========	\e[0m"
 #echo $gstreamer_decode_multi_cmd
 eval $gstreamer_decode_multi_cmd
 
@@ -47,17 +47,17 @@ do
 
 				# if [ $num -lt 2 ]; then
 						Throughput=$(grep "mean_fps" "${log_filename}_${code1}.log" | tail -1 | awk '{print $12}')
-						echo " Stream $num: $Throughput fps"
+						echo " Stream of ${code1} throughput: $Throughput fps"
 						Total_throughput=$Throughput
 				# else
 						# Throughput=$(grep "mean_fps" "$log_filename-$num.log" | tail -1 | awk '{print $12}')
 						# echo " Stream $num: $Throughput fps"
-						# Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
+						Total_throughput=$(bc <<< "scale=2; $Total_throughput + $Throughput")
 				# fi
 		# done
 done
 		echo -e "\e[0;32m ====================================================== \e[0m"
-		echo -e "\e[0;32m Throughput of codec in ${code1} is :	$Total_throughput fps \e[0m"
+		echo -e "\e[0;32m Total of MSMC (MutliStream + MultiCodec) is :	$Total_throughput fps \e[0m"
 		echo -e "\e[0;32m ====================================================== \e[0m"
 		echo ''
 
