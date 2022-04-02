@@ -31,13 +31,11 @@ do
 				gstreamer_decode_cmd="$decode_cmd > $log_filename_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_multi_cmd & $gstreamer_decode_cmd"
 		fi
-
-
-		echo ''
-		echo -e "\e[0;34m ========= Running codec ${code1} to decode the video stream ========	\e[0m"
-		#echo $gstreamer_decode_multi_cmd
-		eval $gstreamer_decode_multi_cmd
 done
+echo ''
+echo -e "\e[0;34m ========= Running codec ${code1} to decode the video stream ========	\e[0m"
+#echo $gstreamer_decode_multi_cmd
+eval $gstreamer_decode_multi_cmd
 
 for code1 in ${CODEC1//,/ };
 do
