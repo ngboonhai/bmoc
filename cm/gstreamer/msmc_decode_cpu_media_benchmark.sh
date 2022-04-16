@@ -2,7 +2,7 @@
 
 declare Total_throughput=0
 CODEC1="h264,h265,vp8,vp9"
-TotalFrame=500
+TotalFrame=10000
 log_filename="decode_gst"
 rm *$log_filename*.log
 
@@ -10,17 +10,17 @@ for code1 in ${CODEC1//,/ };
 do
 		if [ "$code1" == "h264" ]; then
 				video_src="bbb_sunflower_2160p_60fps_normal.mp4"
-				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code1}parse ! queue ! avdec_${code1} ! queue ! perf ! fakesink -e"
+				decode_cmd="taskset -c 0-$(nproc) gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! qtdemux ! queue ! ${code1}parse ! queue ! avdec_${code1} ! queue ! perf ! fakesink -e"
 				gstreamer_decode_cmd="$decode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_cmd"
 		elif [ "$code1" == "h265" ]; then
 				video_src="bbb_sunflower_2160p_60fps_normal.mkv"
-				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! avdec_${code1} ! queue ! perf ! fakesink -e"
+				decode_cmd="taskset -c 0-$(nproc) gst-launch-1.0 filesrc location=~/${video_src} num-buffers=$TotalFrame ! matroskademux ! queue ! ${code1}parse ! queue ! avdec_${code1} ! queue ! perf ! fakesink -e"
 				gstreamer_decode_cmd="$decode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_multi_cmd & $gstreamer_decode_cmd"
 		else
 				video_src="bbb_sunflower_2160p_60fps_normal_${code1}.webm"
-				decode_cmd="gst-launch-1.0 filesrc location=~/${video_src} ! matroskademux ! avdec_${code1} ! queue ! perf ! fakesink -e"
+				decode_cmd="taskset -c 0-$(nproc) gst-launch-1.0 filesrc location=~/${video_src} ! matroskademux ! avdec_${code1} ! queue ! perf ! fakesink -e"
 				gstreamer_decode_cmd="$decode_cmd > ${log_filename}_${code1}.log"
 				gstreamer_decode_multi_cmd="$gstreamer_decode_multi_cmd & $gstreamer_decode_cmd"
 		fi
