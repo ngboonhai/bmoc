@@ -24,7 +24,7 @@ do
         elif [ "$code1" == "h265" ]; then
                 encode_cmd="${SUDO} taskset -c 0-$(nproc) gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! videoconvert ! queue ! x265enc ! queue ! perf ! fakesink -e"
         else
-                encode_cmd="${SUDO} taskset -c 0-$(nproc) gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! videoconvert ! queue ! {code1}enc ! queue ! perf ! fakesink -e"
+                encode_cmd="${SUDO} taskset -c 0-$(nproc) gst-launch-1.0 filesrc location=~/${video_src} ! videoparse width=4096 height=2160 format=nv12 framerate=60/1 ! queue ! videoconvert ! queue ! ${code1}enc ! queue ! perf ! fakesink -e"
         fi
 
         log_filename="encode_gst_${code1}"
