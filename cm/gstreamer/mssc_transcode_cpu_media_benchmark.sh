@@ -8,7 +8,7 @@ else
 fi
 
 CODEC1="h264,h264_h265,h264_vp8,h264_vp9,h265,h265_vp8,h265_vp9,vp8,vp9"
-TotalFrame=5000
+TotalFrame=3000
 VIDEO_CONVERTOR="videoconvert"
 SYSTEM_ARCH=`uname -p`
 
