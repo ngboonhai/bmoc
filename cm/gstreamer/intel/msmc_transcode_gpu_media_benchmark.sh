@@ -1,5 +1,7 @@
 #! /bin/bash
 
+export LIBVA_DRIVERS_PATH=/usr/local/lib/dri
+export LIBVA_DRIVER_NAME=iHD
 export GST_VAAPI_ALL_DRIVERS=1
 declare Total_throughput=0
 CODEC1="h264,h264_265,h265"
