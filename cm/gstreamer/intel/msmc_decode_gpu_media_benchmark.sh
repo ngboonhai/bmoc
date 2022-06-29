@@ -5,7 +5,7 @@ export LIBVA_DRIVER_NAME=iHD
 export GST_VAAPI_ALL_DRIVERS=1
 declare Total_throughput=0
 CODEC1="h264,h265,vp8,vp9"
-TotalFrame=500
+TotalFrame=3000
 log_filename="decode_gst"
 rm *$log_filename*.log
 
