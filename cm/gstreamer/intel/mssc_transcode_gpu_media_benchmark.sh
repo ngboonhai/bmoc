@@ -11,7 +11,7 @@ else
 fi
 
 CODEC1="h264,h264_265,h265"
-TotalFrame=500
+TotalFrame=3000
 for code1 in ${CODEC1//,/ };
 do
         if [ "$code1" == "h264" ]; then
