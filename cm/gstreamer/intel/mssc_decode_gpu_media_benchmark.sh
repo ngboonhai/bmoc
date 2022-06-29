@@ -11,7 +11,7 @@ else
 fi
 
 CODEC1="h264,h265,vp8,vp9"
-TotalFrame=500
+TotalFrame=3000
 
 for code1 in ${CODEC1//,/ };
 do
